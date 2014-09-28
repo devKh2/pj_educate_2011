@@ -1,0 +1,73 @@
+
+
+#sectionMain_Movie{width:980px;}
+	#sectionMain_Movie .movieNews{position:relative; margin:0px 20px 0 0; width:740px; height:160px; float:left; overflow:hidden;}
+	#sectionMain_Movie .movieNews p{border-bottom:1px solid #d3d3d3; padding:0 0 5px 12px;}
+	#sectionMain_Movie .movieNews ul.newsTab{position:absolute; top:2px; right:-10px;}
+	#sectionMain_Movie .movieNews ul.newsTab li{float:left; background:url(http://localhost/peach/images/main/bg_bar1.gif) no-repeat right 3px; padding:0 10px; list-style-type: none;}
+	#sectionMain_Movie .movieNews ul.newsList{_margin:0 0 0 -13px;}
+	#sectionMain_Movie .movieNews ul.newsList li{float:left; width:108px; margin:10px 0 0 13px; list-style-type: none;}
+	#sectionMain_Movie .movieNews ul.newsList li img{width:108px; height:72px;}
+	#sectionMain_Movie .movieNews ul.newsList li span{display:block; margin:8px 0 2px 0; font-weight:bold; line-height:15px;}
+	#sectionMain_Movie .movieNews ul.newsList li em{display:block; color:#9d9d9d; font-size:11px; line-height:15px;}
+	#sectionMain_Movie .movieBanner{margin:20px 0 0 0; float:left;}
+	#sectionMain_Movie .movieBigBanner{position:relative; margin:10px 20px 0 0; width:740px; height:160px; float:left;}
+	#sectionMain_Movie .movieTop5{clear:both; float:left; margin:20px 10px 0 0; width:365px; height:356px; padding:0 0 5px 0; overflow:hidden; position:relative; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/rrbox.gif) no-repeat left bottom;}
+	#sectionMain_Movie .movieTop5 .inbox{padding:12px 12px 0 12px; background:url(http://localhost/peach/images/main/rrbox.gif) no-repeat left top; height:340px; overflow:hidden;}
+	#sectionMain_Movie .movieTop5 p{border-bottom:1px solid #d3d3d3; padding:0 0 5px 0; margin:0;}
+	#sectionMain_Movie .movieTop5 ul.topLiTab{position:absolute; top:10px; right:-1px;}
+	#sectionMain_Movie .movieTop5 ul.topLiTab li{float:left; background:url(http://localhost/peach/images/main/bg_bar1.gif) no-repeat right 3px; padding:0 10px; list-style-type: none;}
+	#sectionMain_Movie .movieTop5 ul.topList{margin:5px 0 0 0;}
+	#sectionMain_Movie .movieTop5 ul.topList li{width:340px; border-top:1px solid #e9e9e9; height:63px;*height:59px; list-style-type: none;}
+	#sectionMain_Movie .movieTop5 ul.topList li.first-child{border-top:none;}
+	#sectionMain_Movie .movieTop5 ul#topList1 li.first-child,
+	#sectionMain_Movie .movieTop5 ul#topList2 li.first-child{border-top:none;}
+	#sectionMain_Movie .movieTop5 ul.topList li span,
+	#sectionMain_Movie .movieTop5 ul.topList li strong,
+	#sectionMain_Movie .movieTop5 ul.topList li em{display:block; float:left;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.num{width:12px; margin:25px 0 0 2px; text-align:center;}
+/* 2010-12-21 수정*/
+	#sectionMain_Movie .movieTop5 ul.topList li span.state{width:40px; margin:25px 0 0 2px; text-align:center;text-indent:-20000px;}
+	#sectionMain_Movie .movieTop5 ul#topList2 li span.state{width:22px; margin:25px 0 0 2px; color:#9d9d9d; font-weight:bold ; font-size:11px; padding: 0 0 0 18px; text-align:left; text-indent:0px;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.new{ background:url(http://localhost/peach/images/main/icon_rankingNew.gif) no-repeat center 5px;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.up{background:url(http://localhost/peach/images/main/icon_rankingUp.gif) no-repeat center 5px;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.down{background:url(http://localhost/peach/images/main/icon_rankingDown.gif) no-repeat center 5px;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.keep{background:url(http://localhost/peach/images/main/icon_rankingKeep.gif) no-repeat center 5px;}
+
+	#sectionMain_Movie .movieTop5 ul#topList2 li span.new,
+	#sectionMain_Movie .movieTop5 ul#topList2 li span.up,
+	#sectionMain_Movie .movieTop5 ul#topList2 li span.down,
+	#sectionMain_Movie .movieTop5 ul#topList2 li span.keep{background-position: 8px 6px;}
+/* 2010-12-21 수정*/
+	#sectionMain_Movie .movieTop5 ul.topList li span.thumImg{width:55px; margin:5px 0 0 8px;*margin:4px 0 0 8px;}
+	#sectionMain_Movie .movieTop5 ul.topList li span.thumImg img{width:55px; height:55px;}
+	#sectionMain_Movie .movieTop5 ul.topList li strong{width:65px; margin:25px 0 0 15px;}
+	#sectionMain_Movie .movieTop5 ul.topList li strong a:hover{color:#de1a22;}
+	#sectionMain_Movie .movieTop5 ul.topList li em.runningTime{width:80px; margin:25px 0 0 0; text-align:center; color:#6d6d6d; font-size:11px;}
+	#sectionMain_Movie .movieTop5 ul.topList li em.grade{width:50px; margin:25px 0 0 0; text-align:right; color:#fd8900; font-size:11px; font-weight:bold;}
+	#sectionMain_Movie .movieCnt{float:left; width:365px; margin:20px 10px 0 0;}
+	#sectionMain_Movie .movieVod{width:365px; height:232px; padding:0 0 5px 0; background:url(http://localhost/peach/images/main/rrbox.gif) no-repeat left bottom; overflow:hidden;}
+	#sectionMain_Movie .movieVod .inbox{width:341px; height:220px; padding:12px 12px 0 12px; background:url(http://localhost/peach/images/main/rrbox.gif) no-repeat left top;}
+	#sectionMain_Movie .movieVod p{border-bottom:1px solid #d3d3d3; padding:0 0 5px 0; margin:0;}
+	#sectionMain_Movie .movieVod dl{width:340px; height:122px; margin:10px 0; border-bottom:1px solid #e9e9e9;}
+	#sectionMain_Movie .movieVod dl dt{width:225px; float:right; font-weight:bold; line-height:16px;}
+	#sectionMain_Movie .movieVod dl dd.thumImg{width:115px; float:left;}
+	#sectionMain_Movie .movieVod dl dd.thumImg img{width:100px; height:110px;}
+	#sectionMain_Movie .movieVod dl dd.grade{vertical-align:middle;}
+	#sectionMain_Movie .movieVod dl dd.grade img{vertical-align:middle; margin:-2px 0 0 0;}
+	#sectionMain_Movie .movieVod dl dd.grade em{font-size:11px; color:#fd8900; font-weight:bold;}
+	#sectionMain_Movie .movieVod dl dd.desc{font-size:11px; color:#9d9d9d; line-height:15px;}
+	#sectionMain_Movie .movieVod ul{white-space:pre;}
+	#sectionMain_Movie .movieVod ul li{float:left; background:url(http://localhost/peach/images/main/ic_dot4.gif) no-repeat left 7px; padding:0 5px 0 8px;}
+	#sectionMain_Movie .movieVod ul li img{float:left; vertical-align:middle; margin:0;}
+	#sectionMain_Movie .movieVod ul li em{float:left; width:35px; text-align:center; font-size:11px; color:#fd8900; font-weight:bold;}
+	#sectionMain_Movie .movieVod ul li span.desc{font-size:11px; color:#6d6d6d; line-height:15px;}
+	#sectionMain_Movie .movieDownload{float:left; width:365px; margin:10px 0 0 0; height:109px; padding:0 0 5px 0; background:url(http://localhost/peach/images/main/rrbox.gif) no-repeat left bottom; overflow:hidden;}
+	#sectionMain_Movie .movieDownload .inbox{width:341px; height:97px; padding:12px 12px 0 12px; background:url(http://localhost/peach/images/main/rrbox.gif) no-repeat left top;}
+	#sectionMain_Movie .movieDownload p{border-bottom:1px solid #d3d3d3; padding:0 0 5px 0; margin:0;}
+	#sectionMain_Movie .movieDownload ul{margin:5px 0 0 0;}
+	#sectionMain_Movie .movieDownload ul li{list-style-type: none; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline.gif) repeat-x left top; padding:8px 0 0 0; line-height:16px;}
+	#sectionMain_Movie .movieDownload ul li.first-chlid{background:none;}
+	#sectionMain_Movie .movieCine21{float:right; width:220px; height:361px; margin:20px 0 0 0;}
+	#sectionMain_Movie .movieLogin{float:right; width:200px; height:151px; margin:10px 0 0 0;}
+

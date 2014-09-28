@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- bean 생성 -->
+
+	<bean id="blogController" class="controller.BlogController">
+		<property name="storeService" ref="storeService" />
+	</bean>
+	
+	<bean id="searchController" class="controller.SearchController">
+		<property name="storeService" ref="storeService"/>
+		<property name="menuService" ref="menuService" />
+	</bean>
+
+	<bean id="masterController" class="controller.MasterController">
+		<property name="masterService" ref="masterService" />
+	</bean>
+
+	<bean id="masterMenuController" class="controller.MasterMenuController">
+		<property name="menuService" ref="menuService" />
+		<property name="storeService" ref="storeService"/>
+		<property name="fileService" ref="fileService"/>
+	</bean>
+	
+	<bean id="masterStoreController" class="controller.MasterStoreController">
+		<property name="storeService" ref="storeService"/>
+		<property name="fileService" ref="fileService"/>
+		<property name="emailAddrListService" ref = "emailAddrListService"/>
+	</bean>
+
+	<bean id="orderController" class="controller.OrderController">
+		<property name="menuService" ref="menuService" />
+		<property name="orderService" ref="orderService" />
+	</bean>	
+	
+	<bean id="postController" class="controller.PostController">
+		<property name="postService" ref="postService" />
+	</bean>
+	
+	<!-- 현호 controller-->
+	<bean id = "joinController" class = "controller.JoinController">
+		<property name="joinService" ref="joinService" />
+	</bean>
+	
+	<bean id = "iDController" class = "controller.IDController">
+		<property name="joinService" ref = "joinService"/>
+	</bean>
+	
+	<bean id = "idSearchController" class = "controller.IdSearchController">
+		<property name="idpwSearchService" ref = "idpwSearchService"/>
+	</bean>
+	
+	<bean id = "pwSearchController" class = "controller.PwSearchController">
+		<property name="idpwSearchService" ref = "idpwSearchService"/>
+	</bean>
+	
+	<bean id = "joinAuthController" class= "controller.JoinAuthController">
+		<property name="joinAuthService" ref = "joinAuthService"/>
+	</bean>
+	
+	<bean id = "memberModifiedController" class = "controller.MemberModifiedController">
+		<property name="joinService" ref="joinService" />
+	</bean>
+	
+	<bean id = "loginController" class = "controller.LoginController">
+		<property name = "joinService" ref = "joinService"/>
+	</bean>
+	
+	<!-- 연휴동안 한거 ㅋㅋ -->
+	<bean id = "masterSaleContorller" class = "controller.MasterSaleController">
+		<property name="statsService" ref = "statsService"/>
+	</bean>
+	
+	<bean id = "popup_bannerController" class = "controller.Popup_BannerController">	
+		<property name="popupService" ref = "popupService"/>
+		<property name="fileService" ref = "fileService"/>
+		<property name="bannerService" ref = "bannerService"/>
+	</bean>
+	
+	<bean id = "masterCustomerController" class = "controller.MasterCustomerController">
+		<property name="emailAddrListService" ref = "emailAddrListService"/>
+	</bean>
+	
+	<bean id = "mainController" class = "controller.MainController">
+		<property name = "bannerService" ref = "bannerService"/>
+		<property name = "popupService" ref = "popupService"/>
+	</bean>
+	<!-- bean 끝 -->
+
+<<<<<<< .mine
+
+=======
+
+
+>>>>>>> .r202
+	<!-- 서비스 객체에 dao,dataSource setter injection -->
+	<!--서비스 시작 -->
+	<bean id="storeService" class="service.StoreServiceImpl">
+		<property name="storeDao" ref="storeDao" />    
+	</bean>
+	
+	<bean id="masterService" class="service.MasterServiceImpl">
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+
+	<bean id="menuService" class="service.MenuServiceImpl">
+		<property name="menuDao" ref="menuDao" />
+	</bean>
+	
+	<bean id="orderService" class="service.OrderServiceImpl">
+		<property name="orderDao" ref="orderDao" />
+	</bean>
+	
+	<bean id="fileService" class="service.FileServiceImpl">
+		<property name="pictureDao" ref="pictureDao" />
+	</bean>
+	
+	<bean id="postService" class="service.PostServiceImpl">
+		<property name="postDao" ref="postDao" />
+	</bean>
+
+	<!-- 현호 service -->
+	
+	<bean id="joinService" class="service.JoinServiceImpl">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+	
+	<bean id = "idpwSearchService" class = "service.IdPwSearchServiceImpl">
+		<property name="memberDao" ref = "memberDao"/>
+	</bean>
+
+	<bean id = "joinAuthService" class = "service.JoinAuthServiceImpl">
+		<property name="joinAuthDao" ref = "joinAuthDao"/>
+	</bean>
+	
+	<!-- 연휴동안 내가한거 ㅋㅋ -->
+	<bean id="statsService" class="service.StatsServiceImpl">
+		<property name="statsDao" ref="statsDao"/>
+	</bean>
+	
+	<bean id = "emailAddrListService" class = "service.EmailAddrListServiceImpl">
+		<property name="emailAddrListDao" ref = "emailAddrListDao"/>
+	</bean>
+	
+	<bean id = "popupService" class = "service.PopupServiceImpl">
+		<property name="popupDao" ref = "popupDao"/>
+	</bean>
+	<bean id = "bannerService" class = "service.BannerServiceImpl">
+		<property name="bannerDao" ref = "bannerDao"/>
+	</bean>
+	
+	
+	<!--서비스 끝 -->
+
+
+
+	<!-- dao -->
+	<bean id="storeDao" class="dao.StoreDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="adminDao" class="dao.AdminDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="menuDao" class="dao.MenuDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="orderDao" class="dao.OrderDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="pictureDao" class="dao.PictureDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="postDao" class="dao.PostDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 현호Dao -->
+	
+	<bean id="memberDao" class="dao.MemberDaoImpl" >
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+			
+	<bean id = "joinAuthDao" class= "dao.JoinAuthDaoImpl">
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<!-- 연휴동안 내가 한거 ㅋㅋ -->
+	<bean id = "statsDao" class = "dao.StatsDaoImpl">
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "emailAddrListDao" class= "dao.EmailAddrListDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "popupDao" class = "dao.PopupDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "bannerDao" class = "dao.BannerDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<!-- dao 끝-->
+	
+	
+	
+	<!-- multipart -->
+	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- <property name="maxUploadSize" value = "102400"></property> -->
+	</bean>
+	<!-- multipart 끝 -->
+	
+	<!-- ibatis 등록 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="WEB-INF/config/SqlMapConfig.xml" />
+	</bean>
+	<context:property-placeholder location="classpath:/database.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${database.driverClass}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+	<!-- ibatis 설정 끝 -->
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" /> <!-- /WEB-INF/view/ 이 경로에 자원이있음 -->
+		<property name="suffix" value=".jsp" />  <!-- sayWhat(suffix).jsp 가 응답을 처리할 애다 -->
+	</bean>
+	<!-- 벨리데이션 메시지 설정 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages.masterMenu</value>
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,14 @@
+package dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.Cart;
+import model.OrderModel;
+
+public interface OrderDao {
+	public int orderInsert(String userid,ArrayList<OrderModel> modellist) throws SQLException;
+	public int insertCart(String userid,ArrayList<OrderModel> modellist) throws SQLException;
+	public ArrayList<Cart> getCartList(String userid) throws SQLException;
+	public int deleteCart(String userid,ArrayList<OrderModel> modellist)throws SQLException;
+}

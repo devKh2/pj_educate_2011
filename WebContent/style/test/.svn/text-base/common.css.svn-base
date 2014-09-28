@@ -1,0 +1,1094 @@
+	/*
+	KTH 플랫폼디자인팀 UI개발
+	올레 인터넷 존 - 공통
+*/
+/* Reset */
+body,form,div,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,ul,ol,li,fieldset,input,th,td,select,textarea{font-family:돋움,Dotum,sans-serif;font-size:12px;margin:0;padding:0;}
+body{line-height:18px;}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;}
+ol,ul,dl{list-style:none;}
+img{border:0;vertical-align:top;}
+select {font-size:12px;}
+fieldset {border:0;margin:0px;padding:0px;}
+table{border-collapse:collapse;border-spacing:0;}
+.clearfx{zoom:1;}
+.clearfx:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+caption{display:none;}
+/* Common Style */
+body{color:#3d3d3d;text-align:left;}/*2010-11-16수정*/
+input,textarea,select{color:#646464;}/*2010-11-16수정*/
+/* 0911 통합 수정 */
+a { color:#474747;text-decoration:none;} a:hover {color:#474747; text-decoration:underline;}/*2010-11-16수정*/
+
+/* 2010-11-24 olleh_common.css*/
+body {background-color:#FFF; background-image:url(''); background-position: left top; background-repeat: repeat-x;}
+#headerWrapper img{vertical-align:top}
+
+
+/* Grid 0911 통합 수정*/
+#container{position:relative;width:980px;margin:0 auto;text-align:left;}
+#headerWrapper{*position:relative;margin-bottom:10px;z-index:1000;}
+
+/* Utility Area*/
+#utility_area{padding-right:7px;height:41px;}
+#utility_area .lt{float:left;}
+#utility_area .lt li{float:left;}
+#utility_area .lt li a span{display:none;}
+#utility_area .lt li a{display:block;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_ut01_100712.gif);background-position:0 0;background-repeat:no-repeat;width:66px;height:16px;}/* 100410 이미지수정 */
+#utility_area .lt li.l2 a{background-position:-66px 0;width:66px;} /*100712 좌표수정 및 이미지 수정*/
+#utility_area .lt li.l3 a{background-position:-123px 0;width:64px;} /*100916 이미지 추가 및 좌표추가*/
+#utility_area .rt{float:right;position:relative;z-index:999;margin-top:4px;}
+#utility_area .rt .mnu li{float:left;}
+#utility_area .rt .mnu li a span{display:none;}
+#utility_area .rt .mnu li a{float:left;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_ut04_101103.gif);background-repeat:no-repeat;height:15px;}/* 101103 이미지수정 */
+#utility_area .rt .mnu li.r1{margin-right:8px;}
+#utility_area .rt .mnu li.r1 a{background-position:0 4px;width:11px;}
+#utility_area .rt .mnu li.r2{margin-right:9px;}
+#utility_area .rt .mnu li.r2 a{background-position:-19px 4px;width:52px;}
+#utility_area .rt .mnu li.r3{margin-right:11px;}
+#utility_area .rt .mnu li.r3 a{background-position:-80px 4px;width:29px;} /* 101103 width값 수정 */
+#utility_area .rt .mnu li.r4{margin-right:9px;}
+#utility_area .rt .mnu li.r4 a{background-position:-176px 4px;width:19px;}
+#utility_area .rt .mnu li.r5{margin-right:11px;}
+#utility_area .rt .mnu li.r5 a{background-position:-128px 4px;width:37px;}
+#utility_area .rt .mnu li.r6{margin-right:11px;}
+#utility_area .rt .mnu li.r6 a{background-position:-206px 4px;width:28px;}
+#utility_area .rt .mnu li.r7 a{background-position:-244px 4px;width:37px;} /* 101103 width값 수정 */
+#utility_area .rt .mnu li.r8{margin-right:11px;}/* 100310 추가 */
+#utility_area .rt .mnu li.r8 a{background-position:-314px 4px;width:27px;}/* 100310 추가 */
+#utility_area .rt .mnu li.r9{margin-right:11px;display:none;}
+#utility_area .rt .mnu li.r9 a{background-position:-352px 4px;width:28px;}
+#utility_area .rt .mnu li.r10{margin-right:11px;}/* 100526 추가 */
+#utility_area .rt .mnu li.r10 a{background-position:-389px 4px;width:19px;}/* 100526 추가 */
+
+#utility_area .rt .mnu li.member{margin-right:12px;}
+#utility_area .rt .mnu li.member a{background:none;}
+#utility_area .showlayer{position:absolute;top:17px;background:#fff url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_ut_layer01.gif) no-repeat;padding-top:6px;}
+#utility_area .showlayer ul{background-color:#fff;border:2px solid #8f8f8f;border-top:none;padding:8px 0 1px 11px;zoom:1;}
+#utility_area .showlayer ul:after{content:".";clear:both;display:block;height:0;visibility:hidden;}
+#utility_area .showlayer li{float:left;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ut_dot01.gif) no-repeat 0 4px;padding:0 0 4px 7px;line-height:14px;}/* 행간추가 */
+#utility_area .showlayer ul.m1 li{width:50px;}
+#utility_area .showlayer ul.m1 li.s{width:74px;}
+
+/*Search area*/
+#search_area{margin-bottom:9px;padding-right:7px;_padding-right:0;height:35px;}
+#search_area h1{float:left;padding:0 0 0 9px;width:81px;}
+#search_area h1 a{display:block;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/logo_qook01.gif) no-repeat 3px 7px;width:81px;height:35px;}
+#search_area h1 a strong{display:none;}
+#search_area h2{float:left;}
+#search_area h2 a{float:left;padding:6px 4px 0 4px;height:29px;}
+#search_area .put_srh{float:right;position:relative;_width:332px;height:35px;}
+#search_area .put_srh fieldset{border:none;}
+#search_area .check_radio{float:left;margin-right:7px;_margin-right:8px;padding-top:5px;}
+#search_area .check_radio input{float:left;margin-top:4px;*margin-top:0;}
+#search_area .check_radio label{float:left;}
+#search_area .check_radio label span{float:left;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_radio01.gif);background-position:0 1px;background-repeat:no-repeat;margin:5px 7px 0 0;*margin:5px 1px 0 0;text-indent:-5000px;overflow:hidden;width:31px;height:12px;}
+#search_area .check_radio label span.google{background-position:0 -18px;margin-right:0;}
+#search_area .check_search{float:left;}
+#search_area .check_search .s_srh{float:left;border:4px solid #ed1c24;margin-right:3px;width:166px;}
+#search_area .check_search .s_srh input{float:left;border:0 none;border-top:1px solid #eee;border-left:1px solid #eee;font-family:돋움,Dotum,sans-serif;font-size:12px;color:#666;line-height:12px;padding:5px 0 1px 4px;width:161px;}
+#search_area .s_btn{float:left;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_ut_search.gif) no-repeat;border:none;cursor:pointer;margin:0;padding:0;text-indent:-500px;width:36px;height:29px;overflow:hidden;}
+#search_area .check_search .auto_search{position:absolute;right:49px;_right:55px;top:7px;}
+#search_area .check_search .auto_search a{cursor:pointer;}
+
+#mFlashMenu{position:relative;z-index:100;}
+#mFlashMenu .QookLayer{display:none;position:absolute;right:0;top:33px;z-index:100;background-color:#fff;border:2px solid #595959;width:319px;height:469px;}
+
+#incoGnbmenu {position:relative;z-index:100;height:50px;}
+#incoGnbmenu .flash_area{position:absolute;left:0;top:0px;z-index:100;}
+
+#bodyWrapper{position:relative;zoom:1;width:980px;}
+#bodyWrapper:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#secondaryBlock{position:relative;float:left;margin:0 20px 0 0;width:190px;_display:inline;_margin:0 10px 0 0}/* IE6 */
+#sidecontents{width:190px;}
+#mainBlock{position:relative;float:left;width:701px;}
+#mainBlock2{position:relative;float:left;width:770px;} /* 091216 추가 */
+.lnbOver{z-index:3!important;}
+
+/* PRN V1 : 2010.04.02 혜택존 부분개편 추가 by 이미정 - */
+#prn{position:relative;overflow:hidden;width:980px;height:62px;background:#FFFFFF url(http://mzimg.megapass.net/images/contentszone/common_zone/gnb/bg_prn_v01.gif) no-repeat 0 0;z-index:1;}
+#prn:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#prn h3{display:none;}
+#prn img{vertical-align:top;}
+#prn ol,#prn ul,#prn li{float:left;}
+#prn .icN{float:left;width:9px;height:9px;margin:11px 14px 0 -10px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/gnb/bg_prn_v01.gif) 0 -69px;text-indent:-3000px;overflow:hidden;_display:inline;}
+#prn .qookNv{float:left;height:38px;position:relative;z-index:1;}
+#prn .qookNv ol{padding:2px 0 0 7px;}
+#prn .qookNv li{position:relative;padding-left:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/gnb/bg_prn_v01.gif) no-repeat 0 -119px;}
+#prn .qookNv li .ti{float:left;}
+#prn .qookNv li .ti a{float:left;}
+#prn .qookNv li.m1{padding-left:0;background:none;}
+#prn .qookNv li div{display:none;position:absolute;left:7px;top:32px;width:980px;height:25px;overflow:hidden;}
+#prn .qookNv ul{position:absolute;left:0;top:0;height:25px;}
+#prn .qookNv ul li{padding:4px 4px 0;background:none;}
+/* 100429 수정 by 이미정 */
+.myNv{float:right;padding:0 10px 0 0;position:relative;z-index:2;}
+.myNv ul{float:left;margin:7px 0 0;}
+.myNv li{padding:0 0 0 2px;}
+.myNv li a{display:block;height:21px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/gnb/bg_prn_v01_100930.gif) 100% -88px;text-indent:-3000px;overflow:hidden;} /* 100930 수정 */
+.myNv li.s1 div{position:relative;}
+.myNv li.s1 div em{display:none;}
+.myNv li.s1 a{width:74px;} /* 100930 수정 */
+.myNv li.s1 em{position:absolute;right:0;top:21px;display:block;width:115px;height:27px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/gnb/bg_prn_v01_100429.gif) 100% -114px;text-indent:-3000px;}
+/* end 100429 수정 by 이미정 */
+/* - PRN V1 : 2010.04.02 혜택존 부분개편 추가 by 이미정 */
+
+
+/* footer_olleh 2010-11-24
+#footerWrapper {clear:both;  width:980px; height:75px; border-top:2px solid #2d2d2d;position:relative; margin:56px 0 0 0}
+#footerWrapper .footerArea {float:left; padding:0 0 11px 0; vertical-align:top; _padding:0 0 7px 0;}
+#footerWrapper .footerArea li {float:left; display:inline; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/footer/footer_bar.gif) left 20px no-repeat; width:auto; height:10px; padding:20px 10px 0 10px;}
+#footerWrapper .footerArea li.noLine {float:left; background:none; width:auto; height:10px; padding:20px 7px 0 0;}
+#footerWrapper address {float:left;}
+#footerWrapper .ncsi {float:right; margin-top:-3px;}
+*/
+/* submain footer - 11.03 추가-2010-12-14 샘플추가사항으로 수정 */
+#footerWrapper {clear:both; width:980px; height:70px; border-top:2px solid #2d2d2d; margin-top:55px; padding-bottom:20px; position:relative;}
+#footerWrapper .footerArea {float:left; padding:0 0 11px 0; vertical-align:top; _padding:0 0 7px 0;}
+#footerWrapper .footerArea li {float:left; display:inline; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/footer/footer_bar.gif) left 20px no-repeat; width:auto; height:10px; padding:20px 7px 0 8px;}
+#footerWrapper .footerArea li.noLine {float:left; background:none; width:auto; height:10px; padding:20px 7px 0 0;}
+#footerWrapper .footerSiteMap {position:absolute; top:17px; right:0;}
+#footerWrapper address {float:left;}
+#footerWrapper .ncsi {float:right; margin-top:-3px;}
+
+#quickmenu{position:absolute;}
+#quickmenu .showBan{margin-top:10px;} /* 100412 KTshow 배너 추가 */
+
+/* LNB V1 : 2010.04.02 혜택존 부분개편 추가 by 이미정 - */
+#lnb{padding-top:20px;zoom:1;}
+#lnb:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#lnb h2{float:left;padding:0 0 2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/lnb/bg_lnb_v01.gif) repeat-x 0 100%;}
+#lnb img{vertical-align:top;}
+#lnb ol{margin:0 0 30px;float:left;}
+#lnb ol li{padding:0;border-bottom:1px solid #D6D6D6;vertical-align:top;line-height:0;word-spacing:0;zoom:1;}
+#lnb ol li a{display:block;width:190px;height:33px;text-decoration:none;}
+#lnb ol li a img{margin:10px 0 0 12px;}
+#lnb ol li a .new{margin:12px 0 0 6px;}
+#lnb ol li.cate{position:relative;}
+#lnb ol li.cate .icn{position:absolute;right:10px;top:1px;}
+#lnb ol li div{overflow:hidden;width:190px;} /*20101028 수정*/
+#lnb ol ul{padding:8px 0 7px;border:1px solid #D6D6D6;border-bottom:none;background:#FFF;zoom:1;}
+#lnb ol ul li{padding:0 0 0 11px;border:none;zoom:1;}
+#lnb ol ul li a{width:166px;height:16px;}
+#lnb ol ul li a img{margin:2px 0 0 0;}
+#lnb ol ul ul{padding:5px 0 3px;border:0;}
+#lnb ol ul ul li{padding:0 0 1px;}
+#lnb ol ul ul li a{height:15px;}
+#lnb ol ul ul li a img{margin:2px 0 0 5px;}
+/* - LNB V1 : 2010.04.02 혜택존 부분개편 추가 by 이미정 */
+
+.lnb2, .lnb_flash{margin-bottom:20px;}/*091216 추가*/
+.lnb2 li a{display:block;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_sub_lnb_1.gif) no-repeat;}/*091216 이미지수정*/
+.lnb2 li span{display:block;width:190px;height:44px;margin-top:3px;}/*091218 수정*/
+.lnb2 li span a{display:block;width:190px;height:44px;text-indent:-1000em;overflow:hidden;}
+.lnb2 .i0 span a{background-position:0 0;}
+.lnb2 .i1 span a{background-position:0 -47px;}
+.lnb2 .i2 span a{background-position:0 -94px;}
+.lnb2 .i3 span a{background-position:0 -141px;}
+.lnb2 ul{margin:3px 0 5px 0;}
+.lnb2 ul li a{display:block;width:190px;height:26px;text-indent:-1000em;overflow:hidden;}
+.lnb2 ul .s0 a{background-position:0 -190px;height:27px;}#lnb ul .s1 a{background-position:0 -217px;}
+.lnb2 ul .s2 a{background-position:0 -244px;}.lnb2 ul .s3 a{background-position:0 -269px;}
+.lnb2 ul .s4 a{background-position:0 -295px;}.lnb2 ul .s5 a{background-position:0 -321px;}
+.lnb2 ul .s6 a{background-position:0 -347px;}.lnb2 ul .s7 a{background-position:0 -373px;}
+.lnb2 ul .s8 a{background-position:0 -399px;}
+
+/* 2010.03.31 혜택존 부분개편 추가 by 이미정 - */
+.mQcs{margin:0 0 20px;padding:10px 11px 3px;border:1px solid #E7E7E7;background-color:#FFF;zoom:1;}/* 100316 수정 by 이미정 */
+.mQcs h4 span{display:none;}
+.mQcs .bar{color:#9F9F9F;}
+.mQcs .t1{margin:0 0 8px;padding:0 0 2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lin_3.gif) repeat-x 0 100%;zoom:1;}
+.mQcs .t1 h4{width:77px;height:11px;margin:0 0 4px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ti_cs2_1.gif);}
+.mQcs .t2 h4{width:100px;height:27px;margin:0 0 4px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ti_cs2_2.gif);}
+.mQcs p{padding:0 0 3px;color:#9E9E9E;font-size:11px;line-height:15px;}
+.mQcs p .bar{margin:0 1px;}
+/* - 2010.03.31 혜택존 부분개편 추가 by 이미정 */
+
+.cEng{font-size:11px!important;font-family:tahoma,sans-serif!important;}
+.cC0{color:#666;}
+.cC1{color:#000;}
+.cC2{color:#f15753;}
+.cC3{color:#858585;}
+.cSm{font-size:11px;}
+.cCu{cursor:pointer;}
+.cCud{text-decoration:underline;}
+
+.cAL{text-align:left!important;}
+.cAC{text-align:center!important;}
+.cAR{text-align:right!important;}
+
+.cPng24{tmp:expression(setPng24(this));}
+
+.cChip{padding-left:15px;font:bold 11px tahoma,sans-serif;color:#f17c00;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_q_chip.gif) no-repeat 0 1px;}
+.cChipBt a{display:block;width:92px;height:23px;padding-top:27px;font:bold 11px tahoma,sans-serif;color:#fffd43;text-align:center;line-height:13px;}
+.cChipBt a:hover{text-decoration:none;color:#fffd43;}
+.cChipBt span{padding-left:17px;}
+.cChipBtF a{display:block;width:92px;height:27px;padding-top:23px;_height:25px;_padding-top:25px;text-align:center;}
+.cChipBtF span{padding-left:17px;}
+.cChipBtF img{padding-top:2px;vertical-align:middle;}
+.cChipBt1 a{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_chip_1.gif) no-repeat;}
+.cChipBt2 a{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_chip_2.gif) no-repeat;}
+.cChipBt3 a{width:115px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_chip_3.gif) no-repeat;color:#fff;}
+.cChipBt3 a:hover{color:#fff;}
+.cChipBt1 a span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_q_chip_m1.gif) no-repeat 0 2px;}
+.cChipBt2 a span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_q_chip_m2.gif) no-repeat 0 2px;}
+.cChipBt3 a span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_q_chip_m3.gif) no-repeat 0 2px;}
+
+.cStar{width:100px;height:15px;overflow:hidden;}
+.cStar img{float:left;}
+.cStar strong{float:left;width:29px;text-align:right;font-family:tahoma,sans-serif;color:#f17c00;font-size:11px;line-height:14px;}
+
+.cInput{height:17px;padding:1px 0 0 1px;*padding:4px 0 0 3px;color:#474747;border:1px solid #cdcdcd;}
+/* 2010-12-23 수정 추가
+.cInput{
+padding:1px 0 0 1px;color:#474747;
+border-top:none;
+border-bottom:none;
+border-left:1px solid #717171;
+border-right:1px solid #dddddd;
+height:19px;
+background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat -1px top}
+
+.inputWrap{display:inline-block; padding: 0 0 0 2px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat left top}
+.inputWrap .cInput{border:none; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat right top;*margin-top:-1px; height:19px;}
+*/
+
+.selInlin .cInput{border:none; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat right top; height:19px;*height:16px; vertical-align:top;}
+/* 2010-12-23 수정 추가 */
+
+.cRadio{width:14px;height:14px;border:none;}
+
+.cTitle{position:relative;height:35px;padding:0;margin-bottom:20px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/etc/location_bg.gif) repeat-x left bottom;}
+.cTitleB{position:relative;height:50px;padding:12px 0 0 15px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_title_b.gif) no-repeat;}
+.cTitle h2{height:28px;padding:7px 0 0 7px; width:694px;}
+
+.cVisual{height:85px;padding-left:30px;}
+.cVisual .cT1{float:left;width:149px;}
+.cVisual .cT1 img{width:139px;height:70px;}
+.cVisual .cT2{float:left;width:500px;color:#858585;}
+.cVisual .cT3{display:block;padding-bottom:5px;}
+.cVisual .cT4{padding-bottom:3px;font-size:14px;font-weight:bold;color:#666666;}
+.cVisual .cT5{margin-top:4px;}
+.cVisual .cT6{color:#666;font-size:14px;line-height:22px;}
+.cVisual .mic{display:inline-block;padding:0 6px 0 0;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_arrow2_qook2.gif) no-repeat 100% 5px;color:#333;font-size:11px;text-decoration:underline;letter-spacing:-1px;vertical-align:1px;}
+
+.cSearch{display:none;position:absolute;height:22px;top:1px;right:0;}
+.cSearch .cT1{float:left;padding:5px 10px 0 0;}
+.cSearch .cT2{float:left;width:150px;height:18px;padding:2px 0 0 5px;border:1px solid #c5c7c8;color:#858585;}
+.cSearch .cT3{float:left;padding-left:6px;}
+
+.cTabSort{position:relative;width:701px;height:27px;margin-bottom:25px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab_sort.gif) no-repeat;}
+.cTabSort .cT1 li{float:left;}
+.cTabSort .cT1 a{float:left;height:20px;padding:5px 15px 0 15px;color:#858585;font-weight:bold;border-right:1px solid #cdcdcd;}
+.cTabSort .cT1 a:hover{text-decoration:none;}
+.cTabSort .cT1 a.cTon{color:#fff;background:#666;border-right:1px solid #666;}
+.cTabSort .cT2{position:absolute;top:6px;right:15px;}
+.cTabSort .cT2 li{float:left;}
+
+/*2010-11-10 수정 시스템폰트용 tab*/
+.cTab{margin-bottom:15px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab.gif) no-repeat left bottom;overflow:hidden}
+.cTab .cT1 li{float:left;}
+.cTab .cT1 li a{float:left;color:#858585;font-weight:bold;margin-right:0;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab_off_1.gif) no-repeat;}
+.cTab .cT1 li a:hover{text-decoration:none;}
+.cTab .cT1 li a span{float:left;height:22px;padding:5px 15px 0 15px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab_off_2.gif) no-repeat right top;cursor:pointer; font-size:11px;}
+.cTab .cT1 li a.cTon{color:#00213e;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab_on_1.gif) no-repeat;}
+.cTab .cT1 li a.cTon span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab_on_2.gif) no-repeat right top;}
+
+.cTabImg{width:701px; margin-bottom:15px;}/*2010-11-16수정*/
+.cTabImg ul{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab.gif) repeat-x left bottom; overflow:hidden; height:27px} /*2010-11-18수정*/
+.cTabImg li{float:left;margin-right:0;}
+.cTabImg li img{display:block;}
+.cTabImg .ba{position:absolute;z-index:1;right:0;}
+.cTabImg .cT2 {background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_tab.gif) no-repeat left 23px;overflow:hidden} /*2010-11-12:추가*/
+
+
+/* 2010-11-04 올레닷컴 마이그레이션 추가 및 수정 */
+.cTblList{}
+.cTblList table{width:100%;border-bottom:1px solid #3d3d3d;margin-bottom:25px;}
+.cTblList th{height:26px;text-align:center; background:#f5f5f5; border-top:1px solid #3b3b3b; border-bottom:1px solid #d3d3d3; font-size:11px;}
+.cTblList th.bar{background:#f5f5f5 url(http://mzimg.megapass.net/images/contentszone/common_zone/th_bar.gif) no-repeat right 45%; }
+
+.cTblList td{border-top:1px solid #e9e9e9;padding:5px 0 4px 0;text-align:center; color:#6d6d6d}
+.cTblList td.cAL{padding-left:10px;}
+.cTblList td.num{font-weight:bold; color: #3b3b3b; }
+.cTblList td.subject{font-weight:bold; text-align:left; padding: 2px 0 2px 10px ;}
+.cTblList td.date{color:#9d9d9d}
+.cTblList td.count{color:#9d9d9d}
+.cTblList td.subtitle{text-align:left; padding:0 10px;}
+.cTblList td.musicInfo{text-align:left;padding:9px 0 4px 0;}
+.cTblList td.musicInfo dt{float:left;padding-right:15px;}
+.cTblList td.musicInfo dt img{width:120px;height:72px;border:1px solid #ddd;}
+.cTblList td.musicInfo dd{font-size:12px;height:20px; zoom:1;}
+.cTblList td.musicInfo dd span{font-size:11px;color:#97a1ae;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_dotorg.gif) no-repeat 1px 7px;padding-left:10px;display:block;float:left;width:45px;}
+.cTblList td em{color:#de1c24; font-style:normal}
+.cTblList td img{vertical-align:middle; display:inline-block; margin-bottom:2px}
+/* 2010-11-04 올레닷컴 마이그레이션 수정 */
+
+/* 2010-11-04 올레닷컴 마이그레이션 수정 */
+.cPaging{margin-top:1px;margin-bottom:22px;text-align:center;}
+.cPaging img{vertical-align:middle}
+.cPaging strong,
+.cPaging a {padding:0 7px 0 11px;display:inline-block; font-size:11px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_n2.gif) no-repeat left 11px; font-family:Tahoma; font-weight:bold; color:#9d9d9d}
+.cPaging strong{color:#3d3d3d}
+.cPaging a.next,
+.cPaging a.prev{background:none; padding:0 0 0 0}
+.cPaging a.first-child, .cPaging a:first-child, .cPaging strong.first-child{background:none; padding-left:7px} /*strong*/
+p.pageCount{text-align:right; font-size:11px; margin:0 0 -20px; _margin-bottom:-18px;font-family:Tahoma;color:#9d9d9d;}
+p.pageCount strong.this{color:#3d3d3d }
+/* 2010-11-04 올레닷컴 마이그레이션 수정 */
+
+
+.cHelp{zoom:1;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_box_help_3.gif) no-repeat left bottom;padding-bottom:11px;}
+.cHelp .hpbox{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_box_help_1.gif) no-repeat left top;padding:13px 20px 0 42px;font-size:11px;color:#858585;} /*2010-12-02 penta수정*/
+.cHelp .hpbox ul li{font-size:11px;color:#858585; background:url(http://mzimg.megapass.net/images/contentszone/common/ic_dot.gif) no-repeat left 5px; padding:0 0 0 10px;}/*2010-12-02 penta수정*/
+.cHelp .hpbox ul li strong{font-size:11px; color:#474747;}/*2010-12-02 penta수정*/
+.cHelp .hpbox ul li img{vertical-align:middle}/*2010-12-02 penta수정*/
+.cHelp .hpbox dt{font-weight:bold;padding-bottom:3px;font-size:12px;}/* 2010.02 혜택존 부분개편 수정 by 이미정 */
+.cHelp .hpbox dd{color:#858585;line-height:16px;padding-bottom:4px;font-size:11px;}/* 2010.02 혜택존 부분개편 수정 by 이미정 */
+.cHelp .hpbox dd strong{color:#858585;}/* 2010.02 혜택존 부분개편 수정 by 이미정 */
+
+.cResp{}
+.cResp .cRTitle{height:28px;padding:0 15px;}
+.cResp .cRTitle .cR1{float:left;padding-top:3px;}
+.cResp .cRTitle .cR2{float:right;padding-top:2px;}
+.cResp .cRTitle .cR2 img{vertical-align:-4px;}
+.cResp .cRTitle .cR3{padding-right:5px;}
+.cResp .cRSum{height:42px;margin-bottom:15px;border:1px solid #858585;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_com_20090220.gif) repeat-x;}
+.cResp .cRSum .cR1{float:left;padding:13px 0 0 21px;}
+.cResp .cRSum .cR2{float:left;height:29px;padding:13px 0 0 30px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_com_bar_20090220.gif) no-repeat;}
+.cResp .cRSum .cR3{float:left;padding:1px 10px 0 0;}
+.cResp .cRSum .cStar{float:left;padding-right:19px;}
+.cResp .cRSum .cR4{padding-right:0;}
+.cResp .cRTab{height:24px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_com_fix_20090220.gif) repeat-x left bottom;}
+.cResp .cRTab li,.cResp .cRTab img{float:left;}
+.cResp .cRBody{zoom:1;padding:14px 0 7px 0;border:1px solid #d7dce4;background:#fff;}
+.cResp .cRBody .cPaging{margin:0;}
+.cResp .cRBody .cRT1{zoom:1;padding-bottom:12px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_5.gif) repeat-x left bottom;}
+.cResp .cRBody .cRT2{clear:both;padding:0 15px 7px 15px;margin-top:-2px;overflow:hidden;word-break:break-all;}
+.cResp .cRBody .cRT3{height:28px;padding:0 15px;}
+.cResp .cRBody .cRT4{float:left;height:28px;color:#858585;}
+.cResp .cRBody .cRT5{float:right;padding-top:1px;text-align:right;color:#858585;}
+.cResp .cRBody .cRT5 img{vertical-align:middle;}
+.cResp .cRBody .cRT6{font-size:10px;padding:0 9px 0 17px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_6.gif) no-repeat 0 3px;}
+.cResp .cRBody .cRT7{float:left;}
+.cResp .cRBody .cRT8{float:left;padding:1px 0 0 7px;}
+.cResp .cRBody .cRT9{zoom:1;padding-top:12px;background:#f5f7fa url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_7.gif) repeat-x;}ㅍ
+.cResp .cRBody .cRT9 .cRT2{padding-left:39px;overflow:hidden;}
+.cResp .cRBody .cRT9 .cRT3{padding:0 14px;}
+.cResp .cRBody .cRT9 .cRT4{padding-left:25px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_8.gif) no-repeat 3px 0;}
+.cResp .cRBody .cRT10{padding:0 15px 2px 15px;}
+/* 100621 삭제
+.cResp .cRT11{float:left;padding-left:15px;}
+.cResp .cRT12{float:right;}*/
+.cResp .cRBody .cRT10 table{clear:both;width:100%;}
+.cResp .cRBody .cRT10 td{line-height:12px;padding-top:4px;}
+.cResp .cRBody .cRT13{text-align:right;color:#858585;}
+.cResp .cRBody .cRT13 .cRT6{padding-right:0;}
+.cResp .cRBody .cRT14 img{float:left;margin-right:3px;}
+.cResp .cRBody .cRT15{padding-top:1px;}
+/* 100621 삭제
+.cResp .cRT16{height:24px;}*/
+.cResp .cRFix{border-top:0;}
+/*.cRespLp1{padding-top:20px;} 2010-12-02 penta 수정*/
+.cRespLp1 .cLMsg{padding-bottom:5px;}
+/*.cRespLp2{padding:20px 0 0 0;} 2010-12-02 penta 수정*/
+.cRespLp2 ul.cLNotice{padding:0;margin:0;background:none;}
+.cRespLp2 .cRT1{width:260px;}
+.cRespLp2 .cRT2{height:22px;padding-top:4px;}
+.cRespLp2 .cRT3{width:244px;height:40px;padding:9px 0 0 19px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_9.gif) no-repeat;}
+.cRespLp2 .cRT4{float:left;width:14px;margin-right:7px;text-align:center;color:#686f79;font-family:tahoma,sans-serif;font-size:11px;}
+.cRespLp2 .cRT4 input{display:block;margin-bottom:3px;}
+.cRespLp2 .cRT5{width:260px;height:98px;}
+.cRespLp2 .cRT6{width:260px;height:68px;}
+.cRespLp2 .cRT7{float:left;font-weight:bold;font-size:11px;}
+.cRespLp2 .cRT7 input{margin-right:3px;}
+.cRespLp2 .cRT8{float:right;}
+.cRespLp2 .cRT9 li{float:left; margin-right:1px;}/*2010-11-16수정*/
+.cRespLp2 .cRT9 img{float:left;}
+.cRespLp2 .cRT10{width:247px;height:80px;overflow-y:scroll;border:1px solid #d7dce4;border-top:0;margin-bottom:2px;}
+.cRespLp2 .cRT10 li{float:left;width:24px;height:23px;}
+.cRespLp2 .cRT10 img{display:block;}
+.cRespLp2 .cRT11{padding:11px 0 0 10px;}
+.cRespLp2 .cRT12{width:22px;height:23px; padding:5px 3px 0 3px; margin-top:6px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_resp_11.gif) no-repeat;margin-left:11px;}
+
+
+/* Layered Popup Common Style */
+/* 2010-11-04 올레닷컴 마이그레이션 수정 추가*/
+.cAlphaBox{position:absolute;z-index:50;top:0;left:0;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_alpha.png);_filter:alpha(opacity=30);}
+.cLayer{position:absolute;z-index:100;display:none;background:#2d2d2d no-repeat right top; padding:5px}
+.cLayer .cLH{height:25px;padding:13px 0 0 40px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_blt3.gif) no-repeat left top ; margin:-5px 0 0 -5px}
+.cLayer .cLH div{position:absolute;top:13px;right:13px;}
+.cLayer .cLH div a{display:block;width:14px;height:14px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_lp_cl.gif) no-repeat;}
+.cLayer .cLH div a span{display:none;}
+.cLayer .cLF{text-align:center;padding:10px 20px 20px 20px;line-height:5px; background:#fff; }
+.cLayer .cLC{padding:20px 20px 1px 20px; background:#fff; }
+.cLayer1{width:260px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_1t.gif);}
+.cLayer2{width:340px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_2t.gif);}
+.cLayer3{width:500px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_3t.gif);}
+.cLayer4{width:400px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_4t.gif);}
+.cLayer5{width:170px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_5t.gif);}
+.cLayer6{width:522px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_6t.gif);}
+.cLayer7{width:500px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_3t.gif);}
+.cLayer8{width:701px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_8t.gif);}
+.cLayer9{width:981px;background-image:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_10t.gif);}
+
+.cLayer2 .c3i1{text-align:center}/*20100412 추가 송기중*/
+.cLayer2 .c3i2{text-align:center;padding-bottom:20px;}/*20100412 추가 송기중*/
+.cLayer3 .cLbox{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp3_box_2.gif) no-repeat bottom;padding-bottom:17px;margin-bottom:10px;}
+.cLayer3 .cLbox .cC2{letter-spacing:-1px;}
+.cLayer3 .cLbox .lbox{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp3_box_1.gif) no-repeat top;padding:18px 10px 0 15px;}
+.cLbox .lbox input{vertical-align:middle;margin-top:-1px;}
+.cLbox .bSMsg{font-size:11px;color:#858585;}
+.cLbox .lfblk{padding-left:17px;}
+
+/* 2010-12-06 추가 */
+.mainPop{width:741px;}
+.mainPop h3{margin:0 0 20px  0;}
+.mainPop .cLC{height:473px;}
+.mainPop .cLF{padding-bottom:10px;}
+.mainPop .cSchB{margin: 0 0 5px 0}
+.mainPop .cSchB .sc1{margin: 0 10px 0 60px}
+.mainPop .cSchB .sc1 {margin: 0 10px 0 60px}
+.mainPop .cSchB .sc2{width:265px;}
+.mainPop .cSchB .sc2 input{width:90%;}
+.mainPop .cSchB .sc3{margin-right:0;}
+.mainPop .cSchB .sc4{margin:-1px 5px 0 0;}
+.mainPop .cSchB .sc4 select{width:100px;}
+.mainPop .cPaging{margin-top:-10px}
+.mainPop ul.guide{}
+.mainPop ul.guide li{padding: 0 0 0 10px; font-size:11px; color:#999898; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/qook_top_dot2.gif) no-repeat left center}
+.mainPop ul.guide strong{display:inline-block; margin: 0 0 0 15px; font-weight:normal}
+.mainPop div.bbsView{height:340px;padding:0 }
+.mainPop div.bbsView .bbsViewArea{height:240px; padding:25px 18px; overflow:auto; border-bottom:1px solid #e1e1e3; font-size:11px; color:#656565}
+.mainPop div.bbsView .subject2{height:18px; background:#f9f9f9; border-bottom:2px solid #e1e1e3;border-top:2px solid #e1e1e3;padding:3px 18px; font-weight:bold; position:relative; font-size:11px; color:#656565; margin:0}
+.mainPop div.bbsView .subject span{position:absolute; right:180px}
+.mainPop div.bbsView ul li{border-bottom:1px solid #e1e1e3; padding: 3px 18px; line-height:18px; font-size:11px; color:#656565}
+.mainPop div.bbsView ul li img{vertical-align:middle; margin: 0 8px 0 0}
+.mainPop div.btnArea{text-align:center; margin: 0 0 28px 0}
+
+
+/*2010-11-16추가*/
+.cLtbl{}
+.cLtbl table{border-top:2px solid #e0e1e3; border-bottom:2px solid #e0e2e1; margin-bottom:10px;}
+.cLtbl table th{background:#f9f9f9; font-size:11px; font-weight:bold; padding:5px 15px; border-bottom:1px solid #e1e1e2; border-right:1px solid #e0e2e1;}
+.cLtbl table td{border-bottom:1px solid #e1e1e2; padding:5px 0 5px 15px; text-align:left;}
+
+
+.cLtblList{margin:0 0 7px 0;border-bottom:1px solid #97a1ad;padding-bottom:5px;}
+.cLtblList table{width:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_pl_tbl.gif) repeat-x top;}
+.cLtblList th{text-align:center;border-bottom:1px solid #ddd;padding-top:3px;height:25px;background:none;}
+.cLtblList td{text-align:center;padding:2px 0 1px 0;background:none;}
+.cLtblList .listScroll{margin-top:3px;height:165px;overflow:auto;}
+.cLtblList .listScroll table{width:93%;background:none;}
+:root .cLtblList .listScroll table{width:100%;}
+.cLtblList .tblTit{text-align:center;padding-bottom:8px;}
+.cLtblList .tblEtc{font-size:11px;color:#858585;padding-bottom:2px;}
+.cLayer .cLC .cPaging{margin-bottom:11px;}
+/* 100618 추가 */
+.cLayer .tbView{margin:-5px 0 7px 0;}
+.cLayer .tbView table{width:100%;border-top:1px solid #ddd;}
+.cLayer .tbView th,.cLayer .tbView td{border-bottom:1px solid #ddd;}
+.cLayer .tbView th{background:#f7f7f7;}
+.cLayer .tbView td{text-align:left;padding:6px 0 6px 12px;}
+.cLayer .tbView .w1{width:244px;}
+/* 100618 추가 end.*/
+.popBox2{padding:18px 0 0;}/* 2010.02 부분개편 관련 추가 by 이미정 */
+.cLTxt{text-align:center;padding:1px 0 6px 0;}
+.cLMsg{text-align:center;padding:1px 0 15px 0;}
+.cLMsg strong{color:#f25753;}
+.cLMsg .cLSmsg{font-size:11px;}
+.cLMsg .cLNotice{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline.gif) repeat-x top;padding:8px 0 0 0;margin-top:7px;}
+.cLMsg .cLNotice a{text-decoration:underline;color:#000;}
+.cLMsg .cLNotice a.f1{color:#858585;font-weight:bold;letter-spacing:-1px;}
+.cLMsg .cLNotice .bar{color:#cdcdcd;}
+.cLNotice{clear:both;text-align:left;padding-bottom:10px;}
+.cLNotice li{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ptmark.gif) no-repeat 0 3px;padding-left:16px;font-size:11px;color:#858585;}
+/* common - secondaryBlock */
+.sLgL1{padding-top:15px;}
+.sLgL2{padding:43px 0 36px 0;text-align:center;}
+.sLgL3{padding-top:15px;}
+.sLgL3 .cRadio{vertical-align:middle;}
+.sLgL3 .cChk{margin:-4px 3px -2px 0;}
+.sLgL3 .i1{text-align:center;}
+.sLgL3 .i1 img{padding-bottom:8px;}
+.sLgL3 .i2{margin:7px 0 14px 0;text-align:center;}
+.sLgL3 .i3{padding:0 0 10px 47px;}
+.sLgL3 .i4{border-top:1px solid #9fa6af;border-bottom:1px solid #9fa6af;margin-bottom:5px;}
+.sLgL3 .i4 table{width:100%;}
+.sLgL3 .i4 th{text-align:left;padding-left:25px;background:#f5f7fa;border-bottom:1px solid #e7e9ec;height:27px;}
+.sLgL3 .i4 td{color:#666666;padding-left:15px;border-bottom:1px solid #e7e9ec;height:27px;}
+.sLgL3 .i4 label{margin-right:15px;}
+.sLgL3 .i5{width:103px;font-family:tahoma,sans-serif;font-size:11px;}
+.sLgL3 .i6{width:62px;font-family:tahoma,sans-serif;font-size:11px;}
+.sLgL3 .i7{padding-top:2px;font-size:11px;color:#666666;letter-spacing:-1px;}
+.sLgL3 .i7 a{text-decoration:underline;}
+.sLgL3 .i8{height:36px;padding-left:14px;font-size:11px;}
+.sLgL3 .i9{padding-top:5px;}
+.sLgL3 .i10{padding-top:7px;font-size:11px;}
+.sLgL3 .i10 label{cursor:pointer;}
+.sLgL4{padding-top:25px;}
+.sLgL4 .i1{height:70px;text-align:center;}
+.sLgL4 .i2{width:421px;height:109px;padding:25px 0 0 15px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_lp_l_2.gif) no-repeat;margin-left:18px;}
+.sLgL4 .i2 img{display:block;}
+.sLgL5{padding-top:15px;}
+.sLgL5 .cRadio{vertical-align:middle;margin:-5px 3px -4px 0;}
+.sLgL5 .cChk{vertical-align:middle;margin:-4px 3px -4px 0;}
+.sLgL5 .cSm{font-size:11px;color:#858585;}
+.sLgL5 .p1{border-top:1px solid #9fa6af;border-bottom:1px solid #9fa6af;}
+.sLgL5 .p1 table{width:100%;}
+.sLgL5 .p1 th{vertical-align:top;text-align:left;padding:8px 0 0 11px;background:#f5f7fa;border-bottom:1px solid #e7e9ec;height:47px;}
+.sLgL5 .p1 td{color:#666666;padding-left:15px;border-bottom:1px solid #e7e9ec;height:27px;}
+.sLgL5 .p2{height:30px;padding:11px 0 0 5px;}
+.sLgL5 .p2 .cChk{margin-top:-6px;}
+.sLgL5 .p3{margin-right:15px;}
+.sLgL6{padding-top:15px;}
+.sLgL6 .cLMsg{padding:0;}
+.sLgL6 .cChk{vertical-align:middle;margin:-6px 3px -4px 0;}
+.sLgL6 .i1{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline.gif) repeat-x top;padding:8px 0 0 0;margin:7px 0 18px 0;font-size:11px;text-align:center;color:#858585;}
+.sLgL6 .i2{margin-right:20px;}
+
+.sLnb{position:relative;z-index:1;padding-bottom:15px;}
+.sBox{width:180px;padding-bottom:10px;}
+
+.sHelp{width:180px;margin-bottom:10px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_b.gif) no-repeat left bottom;}
+.sHelp .sT1{height:31px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_t.gif) no-repeat;}
+.sHelp .sT2{float:left;padding:11px 0 0 11px;}
+.sHelp .sT3{float:right;padding:10px 7px 0 0;}
+.sHelp .sT4{padding:5px 0;margin:0 11px;}
+.sHelp .sT4 div{font-size:11px;line-height:16px;padding-left:7px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_dot.gif) no-repeat 0 6px;}
+.sHelp .sT4 a{color:#828b97;}
+.sHelp .sT4 a:hover{color:#e67803;text-decoration:none;}
+.sHelp .sT4 strong{font-weight:bold;color:#e67803;}
+.sHelp .sT5{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_d.gif) repeat-x left bottom;}
+
+.sNotice{width:180px;margin-bottom:10px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_b.gif) no-repeat left bottom;}
+.sNotice .sT1{height:35px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_t2.gif) no-repeat;}
+.sNotice .sT2{padding:12px 0 0 12px;}
+.sNotice .sT3{padding:0 12px 8px 12px;}
+.sNotice .sT3 li{padding-left:8px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_n2.gif) no-repeat 0 7px;}
+.sNotice .sT3 li a{font-size:11px;color:#828b97;}
+.sNotice .sT3 li a:hover{color:#e67803;text-decoration:none;}
+.sNotice .sT3 li strong{padding-right:7px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_s_n1.gif) no-repeat right top;}
+
+/* my menu */
+.cMyM{z-index:999;display:none;position:absolute;top:39px;left:10px;width:370px;height:171px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_q_1.gif) no-repeat;}
+.cMyM .cT1{height:25px;padding:15px 14px 0 18px;}
+.cMyM .cT2{float:left;color:#96a2b0;font-size:11px;}
+.cMyM .cT2 strong{color:#f15753;}
+.cMyM .cT2 img{vertical-align:middle;}
+.cMyM .cT3{float:right;}
+.cMyM .cT4{width:370px;height:128px;overflow:hidden;}
+.cMyM .cT4 li{float:left;width:155px;height:20px;font-size:11px;padding:5px 0 0 25px;overflow:hidden;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_mm.gif) no-repeat 18px 12px;}
+.cMyM .cT4 li span{color:#cb1f36;padding-right:8px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_mm2.gif) no-repeat right top;}
+.cMyM .cT4 li a{font-weight:bold;}
+
+/* 올레 통합 관련 추가 */
+.c5th1{height:48px;padding:1px 0 0 6px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_5t_1.gif) no-repeat;}
+.c5th1 li{float:left;padding-right:5px;}
+.c5th1 img{float:left;}
+.c5th2{height:72px;padding:6px 0 0 6px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_5t_2.gif) no-repeat;}
+.c5th2 li{float:left;padding:0 5px 2px 0;}
+.c5th2 img{float:left;}
+.c6th1{height:47px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_6t_1.gif) repeat-x;}
+.c6th1 img{float:left;}
+.c6th1 .g1 li{float:left;}
+.c6th1 .g2{float:right;padding-top:4px;}
+.c6th1 .g2 li{float:left;}
+.c6th2{height:47px;padding-left:1px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_6t_1.gif) repeat-x;}
+.c6th2 img{float:left;}
+.c6th2 .g1{float:left;zoom:1;_border-left:2px solid #d6d6d6;_margin-left:-1px;}
+.c6th2 .g1 li{float:left;}
+.c6th2 .g1 a{float:left;border:1px solid #d6d6d6;border-bottom:0;padding:5px 24px 0 24px;height:20px;font-weight:bold;color:#858585;margin-left:-1px;text-decoration:none;background:#f5f5f5 url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_6t_2.gif) repeat-x;}
+.c6th2 .g1 .on a{height:21px;background:#fff;}
+.c6th2 .g2{float:right;width:150px;padding-top:4px;}
+.c6th2 .g2 li{float:left;}
+
+
+/* 2010-11-04 올레닷컴 마이그레이션 수정 *//*2010-11-16수정*/
+.cSchB{height:29px; padding:8px 20px 0 20px; margin: 20px 0 20px 0;  background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_1.gif) no-repeat left top;zoom:1;overflow:hidden;}
+.cSchB img{display:block; vertical-align:middle}
+.cSchB .sc1{float:left;_display:inline; margin-right:10px;}
+.cSchB .sc1 img{margin-top:4px}
+.cSchB .sc2{float:left;width:550px;height:22px;padding: 0;_display:inline;background: url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat right center;*background: url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat right top; /*2010-12-01penta수정*/
+background: url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat right center\;overflow:hidden;}
+.cSchB .sc2 input{width:95%;height:19px;padding:2px 10px 0 10px;*padding:5px 10px 0 10px; /*2010-12-01penta수정*/
+background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat left bottom;*background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat left top; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_2.gif) no-repeat left bottom\;font-size:11px; border:0;margin:0 0 1px 0;*margin:-1px 0 1px 0;margin:0 0 1px 0\; vertical-align:top ;} /*2010-12-01penta수정*/
+.cSchB .sc3{float:left; margin:0 0 0 5px ;_display:inline}
+.cSchB .sc4{float:left; padding:3px 0 0 0;font-size:11px;color:#666;_display:inline}
+.cSchB .sc4 input{margin: 0 3px 0 0 ;  vertical-align:middle }
+.cSchB .sc4 label{padding-right:6px; line-height:100%}
+.cSchB .ba{float:left;margin:23px 0 0 7px;}
+.Btype{height:32px; padding:11px 20px 0 20px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_qsch_3.gif) no-repeat left top;zoom:1;overflow:hidden;}
+/* 2010-11-04 올레닷컴 마이그레이션 수정 */
+
+
+.cqAth1{height:20px;font-size:11px;color:#000;padding:9px 0 0 16px;}
+.cqAth1 a{color:#000;}
+.cqAth1 a strong{color:#f15753;}
+.cqAth4{height:29px;font-size:11px;color:#000;padding:0 0 0 16px;}
+.cqAth4 .i1{float:left;font-size:11px;padding-top:9px;}
+.cqAth4 .i2{float:right;padding-right:15px;font-size:11px;padding-top:7px;}
+.cqAth4 .i2 strong{font-size:13px;font-family:tahoma,sans-serif;color:#f15753;margin-right:1px;}
+
+.cPath{clear:both; position:absolute;top:155px;right:69px; font-size:11px} /* 2010-11-25 수정 */
+.cPath a, .cPath strong{font-size:11px; color:#9d9d9d; font-weight:normal}/* 2010-11-25 추가 */
+.cPath img{vertical-align:top;margin-top:3px;*margin-top:0px;}
+.cPath a{color:#858585;}
+
+/* 올레 탭메뉴 개편 */
+.c5dep{position:relative;overflow:hidden;height:26px;margin:0 0 30px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_5t2_1.gif) repeat-x 0 100%;zoom:1;}
+.c5dep ul{overflow:hidden;height:26px;zoom:1;}/*2010-11-16수정*/
+.c5dep li{float:left;margin-right:1px;}/*2010-11-16수정*/
+.c5dep li img{display:block;} /*2010-11-23 수정:a태그와 img 사이 여백이 있을때 공백처리*/
+.mCmWt .c5dep li{float:left;margin:0;} /*웹툰(월~금) 탭 여백x*//*2010-11-16수정*/
+.c5dep .rbn{position:absolute;right:0;top:7px;}
+.c5dep .rbn_201019{position:absolute;right:74px;top:0;} /* 101019 추가 */
+.c6dep{overflow:hidden;height:30px;margin:-30px 0 30px;background-color:#F4F4F4;zoom:1;}
+.c6dep ul{float:right;margin-right:-1px;padding:7px 0 0;}
+.c6dep li{float:left;padding:0 10px 0 9px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_6t2_1.gif) no-repeat 100% 3px;}
+.c6dep a{color:#858585;font-size:11px;letter-spacing:-1px;}
+.c6dep a:hover{color:#000;}
+.c6dep a.on{color:#F15753;font-weight:bold;letter-spacing:-1px;}
+
+/* 크로스배너 */
+.crossBnr{position:relative;width:701px;height:34px;margin:0 0 20px 0;background:url(http://mzimg.megapass.net/images/contentszone/common/bg_cross_1.gif) no-repeat;}
+.crossBnr label{display:block;float:left;padding:7px 0 0 16px;}
+.crossBnr ul{display:block;float:left;height:23px;padding:10px 0 0 9px;overflow:hidden;}
+.crossBnr ul li{display:block;margin-bottom:3px;}
+.crossView{position:relative;display:none;width:701px;height:92px;margin:-23px 0 20px 0;padding-top:14px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_cross_2.gif) no-repeat;zoom:1;}
+.crossView .i1{float:left;width:264px;padding:0 0 0 21px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dot4.gif) repeat-y right top;}
+.crossView .i1 dl{float:left;width:122px;}
+.crossView .i1 dd,.crossView .i1 dd img{width:110px;height:60px;vertical-align:top;}
+.crossView .i1 dd{border:1px solid #dddddd;}
+.crossView .i1 dt{width:112px;padding-top:4px;text-align:center;}/*091023 수정*/
+.crossView .i2{float:left;padding:0 0 0 20px;}
+.crossView .i2 li{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_dot2.gif) no-repeat left center;padding-left:7px;line-height:20px;}
+.crossBnr .bt,.crossView .bt{clear:both;position:absolute;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bt_cross.gif) no-repeat;width:39px;height:10px;}
+.crossBnr .bt a,.crossView .bt a{display:block;width:39px;height:10px;text-indent:-1000em;overflow:hidden;}
+.crossBnr .bt{top:31px;left:331px;background-position:0 0;}
+.crossView .bt{top:103px;left:331px;background-position:0 -14px;}
+
+/* 100519 크로스배너 추가 */
+.crossBnr2{position:relative;width:701px;height:34px;margin:0 0 20px 0;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_cross_3.gif) no-repeat;}
+.crossBnr2 label{display:block;float:left;padding:7px 0 0 16px;}
+.crossBnr2 ul{display:block;float:left;height:23px;padding:9px 0 0 9px;overflow:hidden;}
+.crossBnr2 ul li{display:block;margin-bottom:3px;}
+
+/* 091119 올레 통합 : 로그인영역 */
+#loginBox div{line-height:0;}
+#loginBox img{vertical-align:top;}
+#loginBox{width:188px;background:#ffffff;border:1px solid #b4b4b4;}
+#loginBox fieldset{width:182px;border:3px solid #eaeaea;}
+#loginBox .lh1{height:144px;}
+#loginBox .lh2{height:163px;}
+#loginBox .lh3{height:168px;}
+#loginBox .lh4{height:144px;} /* 100727 추가 */
+#loginBox .lhshow{height:144px;}/* 100618 추가 */
+#loginBox h2{height:19px;padding-top:3px;_height:18px;_padding-top:4px;background:#f51e1b;color:#fff;font-size:11px;font-weight:normal;text-align:center;}
+html>/**/body #loginBox h2{height:18px;padding-top:4px;}
+:root #loginBox h2{height:18px;padding-top:4px;}
+#loginBox h2 img{margin-right:4px;vertical-align:-2px;}
+#loginBox .lh3 h2{background:#888888;}
+
+/* #loginBox .lh3 h2.qip{height:19px;padding:3px 0 0 38px;background:#888888 url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ip_2.gif) no-repeat 24px 5px;color:#FFF;font-size:11px;letter-spacing:-1px;text-align:left;}100316 삭제 by 이미정 */
+#loginBox .lh3 .ipRoll{position:relative;width:182px;height:22px;overflow:hidden;background:#888888;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll div{position:relative;text-align:center;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll p{height:22px;text-align:center;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll p em{display:inline-block;padding:3px 0 0 15px;color:#FFF;font-size:11px;letter-spacing:-1px;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll .ipA{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ip_5.gif) no-repeat 0 6px;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll .ipB{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ip_3.gif) no-repeat 0 6px;} /* 100316 추가 by 이미정 */
+#loginBox .lh3 .ipRoll .ipC{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ip_4.gif) no-repeat 0 6px;} /* 100316 추가 by 이미정 */
+
+#loginBox .mT0{position:relative;height:84px;margin:0 6px;}
+#loginBox .mT0 .ipt{width:89px;height:18px;padding:1px 6px 0 6px;border:1px solid #cdcdcd;color:#666666;font-size:11px;vertical-align:top;}
+:root #loginBox .mT0 .ipt{height:17px;padding-top:2px;}
+#loginBox label{font-size:11px;cursor:pointer;}
+#loginBox .lid label,#loginBox .lpw label{display:none;}
+#loginBox .lid{position:absolute;top:10px;_top:9px;}
+#loginBox .lpw{position:absolute;top:36px;_top:35px;}
+#loginBox .mT0 .login{position:absolute;top:14px;right:0;width:61px;}
+#loginBox .mT0 .login span{font-size:11px;letter-spacing:-1px;}
+#loginBox .mT0 .sbm{position:absolute;top:24px;right:0;}/*091216 수정*/
+#loginBox .mT0 .chk{margin:0 5px 0 0;vertical-align:-2px;*margin:-4px 1px -1px -4px;*vertical-align:-1px;color:#666666;}
+#loginBox .mT0 .lbtm{position:absolute;top:66px;}
+#loginBox .mT0 .lbtm span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_bar1.gif) no-repeat 0 1px;margin-left:10px;padding-left:10px;letter-spacing:-1px;}
+#loginBox .mT0 .lbtm span.x{background:none;margin:0;padding:0;}
+#loginBox .mT0 .lbtm a{font:normal 11px 돋움,dotum,sans-serif;color:#666666;}
+#loginBox .mT0 .ipCK{margin-top:6px;padding:6px 0 7px;border:1px solid #EEE;background-color:#F9F9F9;zoom:1;}
+#loginBox .mT0 .ipCK .c1{padding:0 0 0 25px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_ip.gif) no-repeat 10px 2px;letter-spacing:-1px;}
+#loginBox .mT0 .ipCK .c1 em{color:#F15753;}
+#loginBox .mT0 .ipCK .c2{text-align:center;}
+#loginBox .mT1{width:170px;height:60px;margin:0 6px;padding:7px 0 0;} /* 091214 수정 */
+#loginBox .mT3{text-align:center; margin:15px 0; line-height:14px; font-size:11px; color:#858585;} /* 100727 추가 */
+#loginBox .mT3 strong{color:#444444;} /* 100727 추가 */
+#loginBox .mT2{width:170px;margin:0 6px;padding:7px 0 0;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline2.gif) repeat-x left top;} /* 091214 수정 */
+#loginBox .lnews{padding:2px 0 0 2px;}:root #loginBox .lnews{padding-top:1px;} /* 091214 수정 */
+#loginBox .lnews li{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_blt1.gif) no-repeat 0 6px;padding-left:7px;line-height:16px;}
+#loginBox .lnews li a{color:#858585;font-size:11px;}
+#loginBox .lnews li strong{color:#f15753;}
+#loginBox .lhshow .mT1{height:25px;} /* 2010-08-10 수정 */
+#loginBox .lhshow .lnews{margin-bottom:15px;} /* 2010-08-10 수정 */
+#loginBox .linfo{padding:0 0 0 2px;zoom:1;} /* 091214 수정 */
+#loginBox .linfo:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#loginBox .linfo li{display:block;float:left;width:164px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_blt2.gif) no-repeat 0 7px;padding-left:6px;font-size:11px;line-height:19px;zoom:1;}
+#loginBox .linfo li:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#loginBox .linfo li strong,#loginBox .linfo li span{display:block;float:left;}
+#loginBox .linfo li strong{width:80px;font-size:12px;}
+#loginBox .linfo li span{width:84px;text-align:right;}
+#loginBox .linfo li a{color:#f15753;font-weight:bold;letter-spacing:-1px;}
+#loginBox .linfo li a.num{font-family:Tahoma, sans-serif;letter-spacing:0;}
+#loginBox .linfo li a.lnk1{color:#666666;font-weight:normal;}
+#loginBox .tx{margin:0 0 4px 0;padding:3px 0 0 0;}
+#loginBox .tx a{color:#858585;font:normal 11px 돋움,dotum,sans-serif;}
+#loginBox .tx b{font-weight:bold;}
+#loginBox .lsv{height:19px;padding:2px 0 0 0;text-align:center;} /* 091214 수정 */
+#loginBox .lsv span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_bar1.gif) no-repeat 0 1px;margin-left:7px;padding-left:7px;letter-spacing:-1px;}
+#loginBox .lsv span.x{background:none;margin:0;padding:0;}
+#loginBox .lsv a{font:bold 11px 돋움,dotum,sans-serif;color:#858585;}
+#loginBox .mT1 .lbtns{margin:0 0 0 0;line-height:1.3;zoom:1;}
+#loginBox .mT1 .lbtns:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+#loginBox .mT1 .lbtns a{display:block;float:left;width:82px;height:14px;padding-top:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_btn3.gif) no-repeat;color:#fff;font-size:11px;text-align:center;text-decoration:none;letter-spacing:-1px;}
+#loginBox .mT1 .lbtns .b2{display:inline;background-position:0 -16px;margin-left:6px;}
+#loginBox .mT1 .lbtns .b3{width:170px;background-position:0 -32px;}
+#loginBox .mT1 .lbtns .ml{margin-left:6px;}/* 100618 수정 */
+#loginBox .mT2 .lbtns{margin-bottom:6px;}
+#loginBox .lsv2{height:19px;text-align:center;}
+#loginBox .lsv2 span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_bar2.gif) no-repeat 0 1px;margin-left:13px;padding-left:13px;letter-spacing:-1px;}
+#loginBox .lsv2 span.x{background:none;margin:0;padding:0;}
+#loginBox .lsv2 a{font:normal 11px 돋움,dotum,sans-serif;color:#858585;text-decoration:underline;}
+#loginBox .lsv2 .phn{color:#F15753;font-weight:bold;}
+
+.pCont .cLMsg{}
+.pCont .box{margin-top:5px;padding:6px 0 3px 0;background:#f4f4f4;border:1px solid #e9e9e9;line-height:17px;}
+.pCont .tline{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline.gif) repeat-x top;padding:15px 0 0 0;margin-top:10px;}/*091224 추가*/
+
+
+/* 091127 올레통합: 등급별안내 Layer */
+.pGrade{padding:25px 5px 14px;}
+.pGrade img{vertical-align:top;}
+.pGrade .cStar{width:215px;height:25px;margin:0 0 18px 0;}
+.pGrade .cStar img{display:block;padding-top:6px;}
+.pGrade .cStar strong{display:block;margin-top:-5px;font:bold 30px Verdana,sans-serif;letter-spacing:-1px;}
+.pGrade .pT0{height:249px;padding:0 9px;zoom:1;}
+.pGrade .pT0:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+.pGrade .pT1{float:left;width:472px}
+.pGrade .pT1 h2{margin-bottom:13px;color:#666666;font:normal 18px 돋움,dotum,sans-serif;}
+.pGrade .pT1 h2 span{color:#98999b;font-size:11px;}
+.pGrade .pT1 .p1,.pGrade .pT1 .p2{float:left;}
+.pGrade .pT1 .p1{width:183px;}
+.pGrade .pT1 .w1 img{display:block;width:160px;height:232px;}
+.pGrade .pT1 .w2 img{display:block;width:160px;height:160px;}
+.pGrade .pT1 .w3 img{display:block;width:160px;height:190px;}/* 091201 수정*/
+.pGrade .pT1 .p2{width:289px;}
+.pGrade .pT1 .cTblList{width:267px;}.pGrade .pT1 .cTblList table{margin:0;}
+.pGrade .pT1 .cTblList th span{display:block;font-size:11px;padding-top:5px;}
+.pGrade .pT1 .cTblList td img{margin-right:7px;vertical-align:middle;}
+.pGrade .pT1 .cTblList td span{font:normal 9px Verdana,sans-serif;}
+.pGrade .pT1 .cTblList td span img{margin-right:3px;}
+.pGrade .pT1 .i0{margin-bottom:3px;color:#f17c00;}
+.pGrade .pT1 .i1{width:275px;zoom:1;}
+.pGrade .pT1 .i1:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+.pGrade .pT1 .i1 li{display:block;float:left;width:264px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_dot.gif) no-repeat 0 7px;padding-left:11px;zoom:1;}
+.pGrade .pT1 .i1 li:after{content: ".";clear:both;display:block;height:0;visibility:hidden;}
+.pGrade .pT1 .i1 li strong,.pGrade .pT1 .i1 li span{display:block;float:left;}
+.pGrade .pT1 .i1 li strong{width:60px;color:#858585;font-weight:normal;}
+.pGrade .pT1 .i1 li span{width:204px;}
+.pGrade .pT1 .t1 li strong{width:76px;}.pGrade .pT1 .t1 li span{width:188px;}
+.pGrade .pT1 .bt{padding-top:30px;}
+.pGrade .pT1 .shop{width:462px;border-top:1px solid #dbdbdb;}
+.pGrade .pT1 .shop .bg{height:209px;padding:20px 0 0 40px;background:#f2f2f2;margin-top:1px;}
+.pGrade .pT1 .shop .t1{margin-bottom:22px;font-size:16px;font-weight:bold;line-height:20px;}
+.pGrade .pT2{float:left;width:137px;height:232px;padding:0 0 0 23px;border-left:1px solid #e6e6e6;}
+.pGrade .pT2 h2{height:22px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_arrow.gif) no-repeat 0 5px;margin:-2px 0 0 1px;padding-left:10px;color:#858585;}
+.pGrade .pT2 ul{margin-top:-11px;}
+.pGrade .pT2 li{display:block;margin-top:8px;}
+.pGrade .pT2 li a{display:block;width:134px;color:#858585;text-decoration:none;}
+.pGrade .pT2 li img{display:block;width:134px;height:81px;}
+.pGrade .pT2 .shop li img{display:block;width:132px;height:79px;border:1px solid #dddddd;}
+.pGrade .pT2 li span{display:block;padding-top:5px;*padding-top:0;}
+.pGrade .pT3{clear:both;height:26px;margin:0 9px 12px;padding:9px 0 0 0;_height:23px;_padding-top:12px;background:#f8f8f8;border:1px solid #e4e3e3;}
+.pGrade .pT3 .tx{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/ic_noti.gif) no-repeat 124px 4px;_background-position:124px 1px;padding-left:137px;font-size:11px;color:#858585;}
+.pGrade .pT3 img{vertical-align:middle;}
+.pGrade .cAR{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_dotline.gif) repeat-x left top;padding-top:11px;}
+
+/* Sub Left Module1 - 100519 수정 */
+.left_banner{margin:0 0 10px;zoom:1;}
+.left_banner img{vertical-align:top;}
+.left_banner li{margin:0 0 10px;}
+
+/* Sub Left Module2 */
+.mLn2{overflow:hidden;padding:0 0 0 10px;border:1px solid #e7e7e7;background:#FAFAFA url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_bar3.gif) no-repeat 10px 4px;zoom:1;}
+.mLn2 p{float:left;padding:0 0 1px 1px;}
+/* Sub Left Module3(SHOW) 100618 추가 */
+.mLn3{width:174px;height:63px;padding:0 7px;border:1px solid #d6d6d6;}/* 2010-08-05 margin-top:20px 제거*/
+.mLn3 li{border-top:1px solid #d6d6d6;}
+.mLn3 li.i0{border-top:none;}
+.mLn3 li a{display:block;width:160px;padding:5px 0 4px 14px;}
+.mLn3 li img{vertical-align:top;}
+
+
+/* 공통 이벤트 롤링 100512 수정 by 이미정 */
+.commBan_mod1{position:relative;width:228px;height:125px;}
+.commBan_mod1 .bar_con{position:absolute;top:0;left:0;}
+.commBan_mod1 .bar_btn{position:absolute;top:106px;left:0;width:222px;padding:0 6px 0 0;text-align:right;overflow:hidden;z-index: 2;}
+.commBan_mod1 .bar_btn img{margin-left:1px;cursor:pointer;}
+
+/* 2010-11-16추가 메인 Default 레이어 Style */
+.mainLayer{padding:20px 23px 15px;}
+.mainLayer img{vertical-align:top;}
+
+.mainLayer .layer_typeA img, .mainLayer .layer_typeB  img, .mainLayer .layer_typeC img{border:1px solid #dddddd;}
+.mainLayer .layer_typeB li{float:left;}
+.mainLayer .layer_typeB li p{margin-right:13px; padding-right:13px; border-right:1px dotted #c7ced7;}
+.mainLayer .layer_typeC li{float:left;}
+.mainLayer .layer_typeC li.cnt1{margin-bottom:11px}
+.mainLayer .layer_typeC li.cnt2{margin-right:8px}
+
+.mainLayer .btnArea{margin-top:20px; text-align:center;}
+.mainLayer .btnArea img{border:none;}
+.mainLayer .closeArea{text-align:right; margin-top:15px; padding-top:10px; border-top:1px dotted #c7ced7;}
+.mainLayer .closeArea a{font-size:0.9em; color:#6c6d71;}
+.mainLayer .closeArea input{vertical-align:-2px;}
+
+
+/*2010-11-05 올레닷컴 마이그레이션 수정*/
+.bul2dep{background:url(http://mzimg.megapass.net/images/contentszone/common/bul_2dep.gif) no-repeat left 4px; padding:0 0 0 13px; font-weight:bold; color:#3d3d3d; vertical-align:middle; display:block; margin-right:5px;} /*2010-11-22 penta 수정*/
+p.charge{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_charge.gif) no-repeat right bottom; height:25px; padding:0 5px 0 0; float:left; _width:60px;}
+p.charge a{color:#fff; font-weight:bold;}
+p.charge span{background:url(http://mzimg.megapass.net/images/contentszone/common_zone/bg_charge.gif) no-repeat left top; padding:5px 0 0 5px; height:20px; display:inline-block; text-align:center}
+a.download{background:url(http://mzimg.megapass.net/images/contentszone/common/bg_download.gif) no-repeat right bottom; height:30px; padding:0 40px 0 0; color:#fff; font-weight:bold;} /*2010-11-22 penta수정*/
+a.download span{background:url(http://mzimg.megapass.net/images/contentszone/common/bg_download.gif) no-repeat left top; height:23px; padding:7px 0 0 85px; display:inline-block;} /*2010-11-22 penta수정*/
+a:link.download, a:hover .download, a:visited .download, a:focus .download {text-decoration:none; cursor:pointer}
+
+/*게시판_일반컨텐츠view*/
+.bbsview1 table{width:100%; border-collapse:collapse; border-top:2px solid #e0e1e3; border-bottom:2px solid #e0e1e3;}
+.bbsview1 table thead th{background:#f9f9f9; font-weight:bold; color:#3d3d3d; text-align:center; border-bottom:1px solid #dee2e1; border-left:1px solid #e0e2e1; padding:5px 0; font-size:11px;}
+.bbsview1 table thead th.first-child{border-left:none;}
+.bbsview1 table tbody th{font-weight:bold; color:#3d3d3d; text-align:center; padding:5px 0; border-right:1px solid #e0e2e1; border-bottom:1px solid #dee2e1; font-size:11px;}
+.bbsview1 table tbody td{color:#6d6d6d; text-align:left; padding:5px 0 5px 15px; border-bottom:1px solid #dee2e1;}
+
+/*게시판_write*/
+.bbswrite1{}
+.bbswrite1 table{width:100%;border-collapse:collapse; border-top:2px solid #e0e1e3; border-bottom:2px solid #e0e1e3; margin-bottom:15px;}
+.bbswrite1 table th{background:#f9f9f9; padding:7px 10px 7px 15px; border-bottom:1px solid #e0e1e3; border-right:1px solid #e0e1e3; font-weight:bold; font-size:11px; text-align:center;}
+.bbswrite1 table td{padding:5px 0 5px 15px; border-bottom:1px solid #e0e1e3;}
+
+
+
+/*olleh_common.css*/
+
+/* 상단 */
+#cfmOllehGnb {width:980px; height:115px; margin-bottom:25px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/topBg.gif) no-repeat;}
+
+#cfmOllehGnb #serviceLink {width:210px; height:25px; float:left;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab01 {width:197px; height:25px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/sv_tab_bg01.gif) 3px top no-repeat;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab01 li {margin:0 0 0 1px;padding:0;float:left;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab01 li.ltbg {width:2px; height:25px;margin:0;padding:0;float:left;}
+
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab02 {width:197px; height:25px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/sv_tab_bg02.gif) 3px top no-repeat;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab02 li {margin:0 0 0 1px;padding:0;float:left;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab02 li.ltbg {width:2px; height:25px;margin:0;padding:0;float:left;}
+
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab03 {width:197px; height:25px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/sv_tab_bg03.gif) 3px top no-repeat;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab03 li {margin:0 0 0 1px;padding:0;float:left;}
+#cfmOllehGnb #serviceLink ul.cfmOllehTopTab03 li.ltbg {width:2px; height:25px;margin:0;padding:0;float:left;}
+
+#cfmOllehGnb #oneDepthGNB {width:auto; float:right; margin-top:7px;} /* 11.04 수정 */
+#cfmOllehGnb #oneDepthGNB .gnbLink {margin:3px 0 0 9px;}   /* 11.12 수정 */
+#cfmOllehGnb #oneDepthGNB .bar {margin:3px 2px 0 9px;} /* 11.12 수정 */
+#cfmOllehGnb #oneDepthGNB .txtLogin {margin:0 0 0 10px;}   /* 11.12 추가 */
+
+#cfmOllehGnb #logo {clear:both; width:auto; height:22px; padding:22px 0 11px 20px;}
+#cfmOllehGnb #logo h1, #cfmOllehGnb #logo h2, #cfmOllehGnb #logo h3 {float:left;}
+#cfmOllehGnb #logo span {float:left;}
+#cfmOllehGnb #logo img {float:left;}
+
+/* search *//*2010-12-13*/
+#cfmOllehGnb .search {float:right; height:24px; margin-top:-33px; margin-bottom:9px;line-height:110%; overflow:hidden; }
+#cfmOllehGnb .search input {
+	vertical-align:middle; border-top:2px solid #ec1d25; border-bottom:2px solid #ec1d25; border-left:none; border-right:none; height:14px; margin:0 0 0 -5px; padding:3px 0 0 10px; color:#6d6d6d; /* 101012 변경 */
+	background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/select_bar.gif) 5px -2px no-repeat;  /* 11.12 수정 */
+}
+#cfmOllehGnb .search input.searchFind{vertical-align:middle; border:none; margin:0; padding:0; width:45px; height:21px;}
+#cfmOllehGnb .search input.searchFindAll{vertical-align:middle; border:none; margin:0 0 0 4px; padding:0; width:67px; height:21px;}
+#headerWrapper .searchBtn0607{vertical-align:middle;}
+/*.searchBtn0607{*margin-top:2px;}*/ /*  *margin-top:1px; _margin-top:1px;margin-top:0\; */
+
+/* select box title  : 101012 변경 */
+select.submainSearch {background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/select_bg.gif) left top no-repeat; width:66px; padding:3px 47px 1px 2px; height:17px; }
+span.cfmOllehSelect_title {
+	font-family:'Dotum' !important; display:inline-block; font-size:11px !important; text-align:left; padding:3px 16px 1px 2px; height:17px;
+	background:#fff url("http://mzimg.megapass.net/images/contentszone/common_zone/top/select_bg01.gif") no-repeat 100% center; overflow:hidden; width:64px;
+}
+span.cfmOllehSelect_title strong{ width:95%; height:1em; font-weight:normal; font-size:11px; color:#6d6d6d; line-height:1.2em; display:block; overflow:hidden; padding:2px 0 0 4px; height:20px;*height:auto;}
+span.cfmOllehSelect_title_focus { border:none; }
+span.cfmOllehSelect_title_focus strong{ color:#6d6d6d; }
+
+div.cfmOllehSelect_option{
+	width:95%; border-left:1px solid #c3c3c3; border-right:1px solid #c3c3c3; border-bottom:1px solid #c3c3c3; border-top:1px solid #ffffff; color:#6d6d6d;
+	background:#FFF; overflow:hidden; margin-left:2px; *margin-left:4px;
+} /* 11.12 수정 */
+div.cfmOllehSelect_option div.scroll{ overflow:auto; }
+div.cfmOllehSelect_option li{ list-style:none; }
+div.cfmOllehSelect_option a{ height:1.1em; font-size:11px; color:#6d6d6d; line-height:1.2em; text-decoration:none; padding:3px 3px 2px 4px; display:block; overflow:hidden; border:1px solid #fff;} /* 11.12 수정 */
+div.cfmOllehSelect_option a:hover{ color:#6d6d6d; background:#f2f2f2; border:1px solid #fff; text-decoration:none;} /* 11.12 수정 */
+
+
+/* 2010-12-01  select Box type 추가
+.dropDownListWrap{padding:0 0 0 2px; background:#fff url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat left center; display:inline-block}
+select.dropDownList {background:url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) left top no-repeat; padding:3px 0 1px 3px; height:17px; border:none ; overflow:hidden}
+span.dropDownList_title {
+	font-family:'Dotum' !important; display:inline-block; font-size:11px !important; text-align:left; padding:3px 16px 1px 2px; height:16px;
+	background:#fff url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat 100% center; overflow:hidden; width:64px;
+	margin:0 0 1px 0; vertical-align:top ;
+}
+:root span.dropDownList_title{margin:0}
+
+span.dropDownList_title strong{ width:95%; height:1em; font-weight:normal; font-size:11px; color:#6d6d6d; line-height:1.2em; display:block; overflow:hidden; padding:2px 0 0 4px;}
+span.dropDownList_title_focus { border:none; }
+span.dropDownList_title_focus strong{ color:#6d6d6d; }
+
+div.dropDownList_option{width:95%; border:1px solid #c3c3c3; color:#6d6d6d;background:#FFF; overflow:hidden; margin-left:-2px;}
+div.dropDownList_option div.scroll{ overflow:auto; }
+div.dropDownList_option li{ list-style:none; }
+div.dropDownList_option a{ height:1.1em; font-size:11px; color:#6d6d6d; line-height:1.2em; text-decoration:none; padding:3px 3px 2px 4px; display:block; overflow:hidden; border:1px solid #fff;}
+div.dropDownList_option a:hover{ color:#6d6d6d; background:#f2f2f2; border:1px solid #fff; text-decoration:none;}
+*/
+/* 2010-12-01  select Box type 추가 */
+/* select */
+.selInlin{display:inline-block;  margin:0 5px 0 0; padding:0 0 0 2px ; vertical-align:middle; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat left center;}
+
+div.selectbox-wrapper { position:absolute;  background-color:white; border:1px solid #d9d9d9; margin:-2px 0 0 -2px; padding:0 1px; font-size:11px; text-align:left; height:60;  *height:60; /*IE6 fix */  overflow: auto; }
+div.selectbox-wrapper ul { list-style-type:none; margin:0; padding:0; }
+div.selectbox-wrapper ul li.selected {  background-color: #ddd; }
+div.selectbox-wrapper ul li.current {  background-color: #f4f4f4; }
+div.selectbox-wrapper ul li { list-style-type:none; display:block; margin:0; padding:2px; cursor:pointer; }
+
+/* look&fell of  select box*/
+.selectbox {padding:5px 16px 0 4px;  font-size:11px; font-family:돋움; width:100px;  display : block; text-align:left; height:15px; cursor: pointer; border:none;  color:#888; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat right center}
+
+/* 셀렉트 Boxtype
+.selectWrap{display:inline-block; padding:0 0 0 2px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat left center; height:20px; width:90px;}
+
+.selectBox {
+	position:absolute;
+	z-index:100;
+	border:none;
+	padding:2px 2px 2px 0; height:16px;
+	background:url(http://mzimg.megapass.net/images/contentszone/common_zone/select_bg.gif) no-repeat right center
+}
+.selectBoxOptionOver { background-color:#E6E6E6;}
+.selectBox ul li ul{border:1px solid #d9d9d9; margin:-1px 0 0 0 }
+.selectBox ul li{position:relative; height:18px;}
+*/
+
+
+
+
+/* 레이어 라운드박스 */
+div.cfmOllehMainRdBox {border:1px solid #dcdcdc; width:93px; height:auto; background:#fff;}
+div.cfmOllehMainRdBox .guide{position:relative;width:100%;}
+div.cfmOllehMainRdBox .tl{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) no-repeat;font-size:0}
+div.cfmOllehMainRdBox .tr{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 100% 0 no-repeat;font-size:0}
+div.cfmOllehMainRdBox .lb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGb.gif) 0 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBox .rb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGb.gif) 100% 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBox .cont {width:91px; padding:0; margin:1px; background:#fff; vertical-align:top;}
+div.cfmOllehMainRdBox .cont p {margin:0; padding:0;}
+
+/* ---------------- 11.18 추가 ---------------- */
+/* 레이어 라운드박스 */
+div.cfmOllehMainRdBoxLogin {border:1px solid #dcdcdc; width:354px; height:auto; background:#fff;} /* 11.18 수정 */
+div.cfmOllehMainRdBoxLogin .guide{position:relative;width:100%;}
+div.cfmOllehMainRdBoxLogin .tl{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) no-repeat;font-size:0}
+div.cfmOllehMainRdBoxLogin .tr{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 100% 0 no-repeat;font-size:0}
+div.cfmOllehMainRdBoxLogin .lb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 0 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBoxLogin .rb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 100% 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBoxLogin .cont {width:352px; padding:0; margin:1px; background:#fff; vertical-align:top;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox {width:auto; height:auto; padding:0; margin:0;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .ltBox {padding:7px 0 0 7px; margin:0 10px 0 0; width:63px; height:78px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/qookShowbg.gif) left top repeat-y; float:left;}/* 11.18 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .ltBox p.marBt09 {margin-bottom:9px;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .ltBox input.radio {width:13px; height:13px; vertical-align:middle;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .ltBox p img {vertical-align:middle; margin-left:3px;}
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox {margin:0 0 0 0; padding:7px 0 0 0; width:auto; height:auto; overflow:hidden;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.form {width:auto; padding-right:6px;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.form dd {float:left;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.form dt {float:left;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.form dt .marTpM20 {margin-top:-20px; position:relative;} /* 11.18 추가 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .inputLogin {
+	background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/loginIdInputBg.gif) left top no-repeat; width:171px; height:15px; border:none; margin:0 5px 0 0; color:#9d9d9d; padding:5px 0 0 4px; font-size:11px; /* 11.18 수정 */
+}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .inputPw {
+	background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/loginIdInputBg.gif) left top no-repeat; width:171px; height:15px; border:none; margin:5px 5px 0 0; color:#9d9d9d; padding:5px 0 0 4px; font-size:11px;  /* 11.18 수정 */
+}
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl {width:auto; vertical-align:top; padding-right:3px; margin:0 0 0 0; *margin:-5px 0 0 0; display:block;} /* 12.09 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl dd {float:left; margin-top:1px; vertical-align:middle;} /* 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl dt {float:left;}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl dd input.vMiddle {vertical-align:middle; margin:-2px 4px 0 0; width:13px; height:13px; line-height:21px;} /* 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl dd.text01 {padding:4px 0 0 0; _padding:7px 0 0 0; margin-right:-5px; line-height:19px; font-size:11px !important;}/* 12.09 수정 */
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox dl.checkDl dd label {color:#3d3d3d !important; font-size:11px !important; }/* 12.09 수정 */
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .idPwSearch {padding:4px 0 0 0; *padding:6px 4px 0 0; line-height:19px; margin-right:-8px;} /* 12.09 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .idPwSearch a {
+	color:#3d3d3d !important; font-size:11px !important; text-decoration:none;
+	padding:2px 3px 0 0; *padding:5px 0 0 0; line-height:19px; }
+/* 12.09 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .idPwSearch a:hover {
+	color:#3d3d3d !important; font-size:11px !important; text-decoration:none;
+	padding:2px 3px 0 0; *padding:5px 0 0 0; line-height:19px;
+}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .idPwSearch span.bar {padding:1px 2px 0 0; width:2px; color:#dddddd;}/* 12.09 수정 */
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .secuSpan {padding:4px 0 0 0; *padding:6px 4px 0 0; line-height:19px;} /* 12.09 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .secuSpan a {
+	color:#3d3d3d !important; font-size:11px !important; text-decoration:none;
+	padding:2px 3px 0 0; *padding:5px 0 0 0; line-height:19px; }
+/* 12.09 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .secuSpan a:hover {
+	color:#3d3d3d !important; font-size:11px !important; text-decoration:none;
+	padding:2px 3px 0 0; *padding:5px 0 0 0; line-height:19px;
+}
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .rtBox .secuSpan span.bar {padding:1px 2px 0 0; width:2px; color:#dddddd;}/* 12.09 수정 */
+
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .lineBox {clear:both; width:auto; height:auto; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/loginBtBg.gif) left top no-repeat; *margin-top:-5px;} /* 11.18 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .lineBox .line {background-color:#fff; width:261px; height:15px; border-top:1px solid #e9e9e9; color:#e9e9e9; line-height:13px; padding:9px 0 4px 0; margin:5px 0 0 78px;} /* 11.18 수정 */
+div.cfmOllehMainRdBoxLogin .cont div.loginBox .lineBox .line img {margin-right:10px;}
+
+/* ---------------- 11.18 수정 ---------------- */
+
+/* 레이어 라운드박스 */
+div.cfmOllehMainRdBoxQookShow {border:1px solid #dcdcdc; width:70px; height:auto; background:#fff;}
+div.cfmOllehMainRdBoxQookShow .guide{position:relative;width:100%;}
+div.cfmOllehMainRdBoxQookShow .tl{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) no-repeat;font-size:0}
+div.cfmOllehMainRdBoxQookShow .tr{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 100% 0 no-repeat;font-size:0}
+div.cfmOllehMainRdBoxQookShow .lb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 0 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBoxQookShow .rb{display:block;position:absolute;top:-1px;left:-1px;width:2px;height:2px;margin-left:100%;background:url(http://mzimg.megapass.net/images/contentszone/common_zone/top/cfmOllehRndboxGw.gif) 100% 100% no-repeat;font-size:0}
+div.cfmOllehMainRdBoxQookShow .cont {width:68px; padding:0; margin:1px; background:#fff; vertical-align:top;}
+div.cfmOllehMainRdBoxQookShow .cont p {margin:0; padding:0; color:#e9e9e9;}
+
+/* ETC */
+.marLRt10 {margin:5px 10px 0 10px;}
+
+
+
+/*select box / radio button / input text
+	2010-12-27 penta 수정
+*/
+	span.checkbox, span.checkboxchecked,
+	span.radio, span.radiochecked{display:inline-block; width:16px; height:15px; background:url(http://mzimg.megapass.net/images/contentszone/common_zone/etc/bg_input.gif) no-repeat; vertical-align:bottom; margin:-2px 0 0 0; overflow:hidden;}
+
+	span.checkbox{background-position: 0 0 }
+	span.checkboxchecked{background-position: right 0 }
+	span.radio{background-position: 0 -19px }
+	span.radiochecked{background-position: right -19px }
+
+	span.checkbox, span.radio{}
+	span.radio input, span.radiochecked input,
+	span.checkbox input, span.checkboxchecked input{
+		opacity: 0; filter: alpha(opacity:0);
+		vertical-align:bottom; display:block;
+		*margin:-4px 0 0 -4px;
+	}
+

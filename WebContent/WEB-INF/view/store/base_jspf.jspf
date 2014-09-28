@@ -1,0 +1,9 @@
+<%	
+	response.setHeader("Pragma", "No-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
+	response.setDateHeader("Expries", 1L);
+	request.setCharacterEncoding("euc-kr");
+%>
+
+<link rel="stylesheet" href="/peach/style/masterStyle.css" type="text/css" > 

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="sbbs">
+
+<select id="count" resultClass="int">
+  SELECT COUNT(sbbs_artid)
+  FROM (
+		  <isNotEmpty property="stnum" >
+		  	SELECT * FROM storebbs  WHERE st_num=#stnum#
+		  </isNotEmpty>
+		  <isEmpty property="stnum" >
+			SELECT * FROM storebbs
+		  </isEmpty>
+		)
+    <dynamic prepend="where">
+             <isEqual property="searchkind" compareValue="total_search">
+              sbbs_title like '%'||#search#||'%'
+              or cu_id like '%'||#search#||'%'
+              or sbbs_content like '%'||#search#||'%'
+             </isEqual>
+             <isEqual property="searchkind" compareValue="writer_search">
+              cu_id like '%'||#search#||'%'
+             </isEqual>
+             <isEqual property="searchkind" compareValue="content_search">
+              sbbs_content like '%'||#search#||'%'
+             </isEqual>
+             <isEqual property="searchkind" compareValue="title_search">
+              sbbs_title like '%'||#search#||'%'
+             </isEqual>
+             </dynamic>
+
+ </select>
+	
+	
+	<!-- 리스트를 가져오는 쿼리문 입니다. start-->	
+	
+	<resultMap id="listMap" class="model.SBBS_Article">
+		<result property="sbbs_artid" 				column="sbbs_artid"/>
+		<result property="sbbs_groupid" 			column="sbbs_groupid"/>
+		<result property="sbbs_regdate"	 			column="sbbs_regdate"/>
+		<result property="sbbs_count" 				column="sbbs_count"/>
+		<result property="sbbs_title"	 			column="sbbs_title"/>
+		<result property="cu_id" 					column="cu_id"/>
+		<result property="sbbs_arttype"				column="sbbs_arttype"/>
+		<result property="sbbs_picpath"				column="sbbs_picpath"/>
+		<result property="sbbs_picnum"				column="sbbs_picnum"/>
+		<result property="sbbs_SequenceNo" 			column="sbbs_sequenceno"/>
+		<result property="elpasedTime" 				column="is_new"/>
+	</resultMap>
+	
+	<select id="list" resultMap="listMap">
+		SELECT sbbs_artid                                                			 ,
+		       sbbs_groupid                                                	  	     ,
+		       sbbs_sequenceno                                               		 ,
+		       TO_CHAR(sbbs_regdate,'YYYY/MM/DD') sbbs_regdate						 ,
+		       sbbs_count                                                 			 ,
+		       cu_id                                                				 ,                                              			
+		       resize_title(sbbs_title)      AS sbbs_title                           ,
+		       fn_get_new(sbbs_regdate) AS is_new									 ,
+		       sbbs_arttype															 ,
+		       sbbs_picpath,
+		       sbbs_picnum
+		FROM   ( SELECT ROWNUM             RNUM,
+		               sbbs.sbbs_artid              ,
+		               sbbs.sbbs_groupid    		   ,
+		               sbbs.sbbs_sequenceno         ,
+		               sbbs.sbbs_regdate            ,
+		               sbbs.sbbs_count              ,
+		               sbbs.cu_id             	   ,
+		               sbbs.sbbs_title			   ,
+		               sbbs.sbbs_arttype			   ,
+		               pic.picpath as sbbs_picpath,
+		               sbbs.sbbs_picnum
+		       		FROM      (   
+		       					<isNotEmpty property="stnum" >
+								  	SELECT * FROM storebbs  WHERE st_num=#stnum#
+								</isNotEmpty>
+								<isEmpty property="stnum" >
+									SELECT * FROM storebbs
+								</isEmpty>
+							  )
+		               <dynamic prepend="where">
+		         		 <isEqual property="searchkind" compareValue="total_search">
+		         		 	sbbs_title like '%'||#search#||'%'
+		         		 	or cu_id like '%'||#search#||'%'
+		         		 	or sbbs_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="writer_search">
+		         		 	cu_id like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="content_search">
+		         		 	sbbs_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="title_search">
+		         		 	sbbs_title like '%'||#search#||'%'
+		         		 </isEqual>
+		         	  </dynamic>
+		               ORDER BY sbbs_sequenceno DESC
+		     			)sbbs, picture pic where sbbs.sbbs_picnum = pic.pic_seq
+		     			and ROWNUM <![CDATA[<=]]> #endRow#
+		     			 )
+						WHERE  RNUM  <![CDATA[>=]]> #firstRow#
+	 </select>
+	 
+	  <!-- groupid_sequence 에서 그룹 번호를 가져오는 쿼리문 start -->	
+ 
+	 <select id="selectIdSequence" resultClass="int">
+	 	SELECT	 next_value 
+	 	FROM	 groupid_sequence 
+		WHERE 	 sequence_name like '%'||#sequenceName#||'%'
+		FOR update
+	 </select>
+	 
+	 <!-- groupid_sequence 에서 그룹 번호를 변경시키는 쿼리문 start -->	
+	 <update id="updateIdSequence">
+	 	UPDATE groupid_sequence
+	 		SET next_value = #id#
+	 	WHERE sequence_name like '%'||#sequenceName#||'%'
+	 </update>
+	 
+	 <!-- Article을  입력시키는 쿼리문 start -->		
+ <insert id="insertArticle">
+<selectKey keyProperty="sbbs_artid" resultClass="int">
+   SELECT sbbs_artid.nextval From dual
+</selectKey> 	
+		insert into storebbs(  sbbs_artid
+		                    , sbbs_groupid
+		                    , sbbs_arttype
+		                    , sbbs_count
+		                    , sbbs_title
+		                    , sbbs_content
+		                    , sbbs_picnum
+		                    , sbbs_sequenceno
+		                    , cu_id
+		                    , st_type
+		                    , st_num)
+        values ( #sbbs_artid#
+                ,#sbbs_groupid#
+                ,#sbbs_arttype#
+                ,0
+                ,#sbbs_title#
+                ,#sbbs_content#
+                ,#sbbs_picnum#
+                ,#sbbs_SequenceNo#
+                ,#cu_id#
+                ,#st_type#
+                ,#st_num#)
+ </insert>
+ 
+ <!-- 레코드 1개를 가져오는 쿼리문 입니다. start-->	
+
+	<resultMap id = "selectByIdResultMap" class = "model.SBBS_Article">  
+	  	<result property ="sbbs_content"   		    column="sbbs_content"/>
+	 	<result property ="sbbs_artid" 				column="sbbs_artid"/>
+		<result property ="sbbs_groupid" 				column="sbbs_groupid"/>
+		<result property ="sbbs_regdate"	 			column="sbbs_regdate"/>
+		<result property ="sbbs_count" 				column="sbbs_count"/>
+		<result property ="sbbs_title"	 				column="sbbs_title"/>
+		<result property ="cu_id" 					column="cu_id"/>
+		<result property ="sbbs_picpath"			column="sbbs_picpath"/>
+		<result property ="sbbs_picnum"				column="sbbs_picnum"/>
+		<result property ="sbbs_SequenceNo" 		column="sbbs_sequenceno"/>
+		<result property ="st_num" 					column="st_num"/>
+ 	</resultMap>
+ 	
+ <select id = "selectById" resultMap = "selectByIdResultMap">
+     select  sbbs_artid , 
+		     sbbs_groupid ,
+		     sbbs_sequenceno, 
+		     to_char(sbbs.sbbs_regdate, 'YYYY/MM/DD HH24:mi:ss')  sbbs_regdate, 
+		     sbbs_count, 
+		     cu_id,
+		     sbbs_title, 
+		     sbbs_content,
+		     pic.picpath as sbbs_picpath,
+		     sbbs_picnum,
+		     st_num
+     from storebbs sbbs, picture pic
+     where sbbs.sbbs_artid= #artId# and sbbs.sbbs_picnum = pic.pic_seq
+ </select>
+ 
+ <!-- count를 1씩 증가시키는 쿼리문 start -->	
+ <update id="increaseReadCount">
+			update storebbs 
+			set sbbs_count = sbbs_count + 1
+			where sbbs_artid = #sbbs_artid#
+ </update>
+ 
+  <!-- selectLastSequenceNumber 쿼리문 start  -->
+ <select id ="selectLastSequenceNumber" resultClass="string">
+		select min(sbbs_sequenceno)
+	      from storebbs
+	     where sbbs_sequenceno <![CDATA[<]]> #searchMaxSeqNum#
+		   and sbbs_sequenceno <![CDATA[>=]]> #searchMinSeqNum#
+</select>
+
+<!-- updateArticle 쿼리문 start  -->	
+	<update id="updateArticle">
+		update storebbs
+		set sbbs_title = #sbbs_title#
+		, sbbs_content = #sbbs_content#
+		where sbbs_artid = #sbbs_artid#
+	</update>
+	
+<!-- deleteArticle 쿼리문 start  -->	
+	<delete id="deleteArticle">
+		delete from storebbs
+		where sbbs_artid =#sbbs_artid#
+	</delete>
+
+
+ 
+ 
+	
+</sqlMap>

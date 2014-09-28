@@ -1,0 +1,5 @@
+# MySQL
+database.driverClass=oracle.jdbc.driver.OracleDriver
+database.url=jdbc:oracle:thin:@192.168.0.15:1521:orcl
+database.username=peach
+database.password=peachtiger

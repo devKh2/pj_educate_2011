@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="mbbs">
+
+	<select id="count" resultClass="int">
+		SELECT COUNT(mbbs_artid)
+		FROM mainbbs
+				<dynamic prepend="where">
+	         		 <isEqual property="searchkind" compareValue="total_search">
+	         		 	mbbs_title like '%'||#search#||'%'
+	         		 	or cu_id like '%'||#search#||'%'
+	         		 	or mbbs_content like '%'||#search#||'%'
+	         		 </isEqual>
+	         		 <isEqual property="searchkind" compareValue="writer_search">
+	         		 	cu_id like '%'||#search#||'%'
+	         		 </isEqual>
+	         		 <isEqual property="searchkind" compareValue="content_search">
+	         		 	mbbs_content like '%'||#search#||'%'
+	         		 </isEqual>
+	         		 <isEqual property="searchkind" compareValue="title_search">
+	         		 	mbbs_title like '%'||#search#||'%'
+	         		 </isEqual>
+	         	  </dynamic>
+	</select>
+	
+	
+	<!-- 리스트를 가져오는 쿼리문 입니다. start-->	
+	
+	<resultMap id="listMap" class="model.MBBS_Article">
+		<result property="mbbs_artid" 				column="mbbs_artid"/>
+		<result property="mbbs_groupid" 			column="mbbs_groupid"/>
+		<result property="mbbs_regdate"	 			column="mbbs_regdate"/>
+		<result property="mbbs_count" 				column="mbbs_count"/>
+		<result property="mbbs_title"	 			column="mbbs_title"/>
+		<result property="cu_id" 					column="cu_id"/>
+		<result property="mbbs_arttype"				column="mbbs_arttype"/>
+		<result property="mbbs_picpath"				column="mbbs_picpath"/>
+		<result property="mbbs_picnum"				column="mbbs_picnum"/>
+		<result property="mbbs_SequenceNo" 			column="mbbs_sequenceno"/>
+		<result property="elpasedTime" 				column="is_new"/>
+	</resultMap>
+	
+	<select id="list" resultMap="listMap">
+		SELECT mbbs_artid                                                			 ,
+		       mbbs_groupid                                                	  	     ,
+		       mbbs_sequenceno                                               		 ,
+		       TO_CHAR(mbbs_regdate,'YYYY/MM/DD') mbbs_regdate						 ,
+		       mbbs_count                                                 			 ,
+		       cu_id                                                				 ,                                              			
+		       resize_title(mbbs_title)      AS mbbs_title                           ,
+		       fn_get_new(mbbs_regdate) AS is_new									 ,
+		       mbbs_arttype															 ,
+		       mbbs_picpath,
+		       mbbs_picnum
+		FROM   ( SELECT ROWNUM             RNUM,
+		               mbbs.mbbs_artid              ,
+		               mbbs.mbbs_groupid    		   ,
+		               mbbs.mbbs_sequenceno         ,
+		               mbbs.mbbs_regdate            ,
+		               mbbs.mbbs_count              ,
+		               mbbs.cu_id             	   ,
+		               mbbs.mbbs_title			   ,
+		               mbbs.mbbs_arttype			   ,
+		               pic.picpath as mbbs_picpath,
+		               mbbs.mbbs_picnum
+		       		FROM    ( SELECT  * FROM mainbbs
+		               <dynamic prepend="where">
+		         		 <isEqual property="searchkind" compareValue="total_search">
+		         		 	mbbs_title like '%'||#search#||'%'
+		         		 	or cu_id like '%'||#search#||'%'
+		         		 	or mbbs_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="writer_search">
+		         		 	cu_id like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="content_search">
+		         		 	mbbs_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="title_search">
+		         		 	mbbs_title like '%'||#search#||'%'
+		         		 </isEqual>
+		         	  </dynamic>
+		         	  ORDER BY mbbs_sequenceno ASC
+		     			)mbbs, picture pic where mbbs.mbbs_picnum = pic.pic_seq
+		     			and ROWNUM <![CDATA[<=]]> #endRow#
+		     			 )
+						WHERE  RNUM  <![CDATA[>=]]> #firstRow#
+	 </select>
+	 
+	 
+	 <select id="search_count" resultClass="int">
+		SELECT 	COUNT(mbbs_artid)
+		FROM 	mainbbs
+		WHERE	mbbs_title like '%' || #keyWord# || '%'
+      	OR 		mbbs_content like '%' || #keyWord# || '%'
+	</select>
+	
+	<select id="search_list" resultClass="model.MBBS_Article">
+		SELECT mbbs_artid                                      ,
+		       mbbs_groupid                                    ,
+		       mbbs_sequenceno                                 ,
+		       TO_CHAR(mbbs_regdate,'YYYY/MM/DD') mbbs_regdate ,
+		       mbbs_count                                      ,
+		       cu_id                                           ,
+		       resize_title(mbbs_title) AS mbbs_title          ,
+		       resize_content(mbbs_content) as mbbs_content    ,		
+		       fn_get_new(mbbs_regdate) AS is_new              ,
+		       mbbs_arttype                                    ,
+		       mbbs_picpath                                    ,
+		       mbbs_picnum
+		FROM   ( SELECT ROWNUM RNUM               ,
+		               mbbs.mbbs_artid            ,
+		               mbbs.mbbs_groupid          ,
+		               mbbs.mbbs_sequenceno       ,
+		               mbbs.mbbs_regdate          ,
+		               mbbs.mbbs_count            ,
+		               mbbs.cu_id                 ,
+		               mbbs.mbbs_title            ,
+		               mbbs.mbbs_content  		  ,
+		               mbbs.mbbs_arttype          ,
+		               pic.picpath AS mbbs_picpath,
+		               mbbs.mbbs_picnum
+		       FROM    ( SELECT  *
+		               FROM     mainbbs
+		               WHERE    mbbs_title LIKE '%'|| #keyWord#|| '%'
+		               OR       mbbs_content LIKE '%'|| #keyWord#|| '%'
+		               ORDER BY mbbs_sequenceno ASC
+		               )
+		               mbbs, picture pic
+		       WHERE   mbbs.mbbs_picnum = pic.pic_seq
+		       AND     ROWNUM  <![CDATA[<=]]> #endRow#
+		       )
+		WHERE  RNUM <![CDATA[>=]]> #firstRow#
+	 </select>
+	 
+	  <!-- groupid_sequence 에서 그룹 번호를 가져오는 쿼리문 start -->	
+ 
+	 <select id="selectIdSequence" resultClass="int">
+	 	SELECT	 next_value 
+	 	FROM	 groupid_sequence 
+		WHERE 	 sequence_name like '%'||#sequenceName#||'%'
+		FOR update
+	 </select>
+	 
+	 <!-- groupid_sequence 에서 그룹 번호를 변경시키는 쿼리문 start -->	
+	 <update id="updateIdSequence">
+	 	UPDATE groupid_sequence
+	 		SET next_value = #id#
+	 	WHERE sequence_name like '%'||#sequenceName#||'%'
+	 </update>
+	 
+	 <!-- Article을  입력시키는 쿼리문 start -->		
+ <insert id="insertArticle">
+<selectKey keyProperty="mbbs_artid" resultClass="int">
+   SELECT mbbs_artid.nextval From dual
+</selectKey> 	
+		insert into mainbbs(  mbbs_artid
+		                    , mbbs_groupid
+		                    , mbbs_arttype
+		                    , mbbs_count
+		                    , mbbs_title
+		                    , mbbs_content
+		                    , mbbs_picnum
+		                    , mbbs_sequenceno
+		                    , cu_id)
+        values ( #mbbs_artid#
+                ,#mbbs_groupid#
+                ,#mbbs_arttype#
+                ,1
+                ,#mbbs_title#
+                ,#mbbs_content#
+                ,#mbbs_picnum#
+                ,#mbbs_SequenceNo#
+                ,#cu_id#)
+ </insert>
+ 
+ <!-- 레코드 1개를 가져오는 쿼리문 입니다. start-->	
+
+	<resultMap id = "selectByIdResultMap" class = "model.MBBS_Article">  
+	  	<result property ="mbbs_content"   		    column="mbbs_content"/>
+	 	<result property ="mbbs_artid" 				column="mbbs_artid"/>
+		<result property ="mbbs_groupid" 				column="mbbs_groupid"/>
+		<result property ="mbbs_regdate"	 			column="mbbs_regdate"/>
+		<result property ="mbbs_count" 				column="mbbs_count"/>
+		<result property ="mbbs_title"	 				column="mbbs_title"/>
+		<result property ="cu_id" 					column="cu_id"/>
+		<result property ="mbbs_picpath"				column="mbbs_picpath"/>
+		<result property ="mbbs_picnum"				column="mbbs_picnum"/>
+		<result property ="mbbs_SequenceNo" 			column="mbbs_sequenceno"/>
+ 	</resultMap>
+ 	
+ <select id = "selectById" resultMap = "selectByIdResultMap">
+     select  mbbs_artid , 
+		     mbbs_groupid ,
+		     mbbs_sequenceno, 
+		     to_char(mbbs.mbbs_regdate, 'YYYY/MM/DD HH24:mi:ss')  mbbs_regdate, 
+		     mbbs_count, 
+		     cu_id,
+		     mbbs_title, 
+		     mbbs_content,
+		     pic.picpath as mbbs_picpath,
+		     mbbs_picnum
+     from mainbbs mbbs, picture pic
+     where mbbs.mbbs_artid= #artId# and mbbs.mbbs_picnum = pic.pic_seq
+ </select>
+ 
+ <!-- count를 1씩 증가시키는 쿼리문 start -->	
+ <update id="increaseReadCount">
+			update mainbbs 
+			set mbbs_count = mbbs_count + 1
+			where mbbs_artid = #mbbs_artid#
+ </update>
+ 
+  <!-- selectLastSequenceNumber 쿼리문 start  -->
+ <select id ="selectLastSequenceNumber" resultClass="string">
+		select min(mbbs_sequenceno)
+	      from mainbbs
+	     where mbbs_sequenceno <![CDATA[<]]> #searchMaxSeqNum#
+		   and mbbs_sequenceno <![CDATA[>=]]> #searchMinSeqNum#
+</select>
+
+<!-- updateArticle 쿼리문 start  -->	
+	<update id="updateArticle">
+		update mainbbs
+		set mbbs_title = #mbbs_title#
+		, mbbs_content = #mbbs_content#
+		where mbbs_artid = #mbbs_artid#
+	</update>
+	
+<!-- deleteArticle 쿼리문 start  -->	
+	<delete id="deleteArticle">
+		delete from mainbbs
+		where mbbs_artid =#mbbs_artid#
+	</delete>
+	
+<select id="random3_mbbs_list" resultClass="model.MBBS_Article">
+      SELECT  	 MBBS_ARTID                                                    ,
+		         TO_CHAR(mbbs_regdate,'YYYY/MM/DD') mbbs_regdate       ,
+		         cu_id                                                     ,                                                 
+		         resize_title(mbbs_title)      AS mbbs_title   ,
+		         resize_content(mbbs_content) as mbbs_content,
+		         fn_get_new(mbbs_regdate) AS is_new          ,
+		         MBBS_ARTTYPE                
+      FROM( SELECT  * FROM MAINBBS
+	         ORDER BY DBMS_RANDOM.VALUE()
+	         )
+      WHERE  MBBS_ARTTYPE LIKE '문의'
+      AND ROWNUM <![CDATA[<]]> 3 + 1 ORDER BY DBMS_RANDOM.VALUE()
+ </select>
+
+ 
+ 
+	
+</sqlMap>

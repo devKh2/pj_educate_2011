@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="order">
+
+<select id="getOrdersDetailList" resultClass="model.OrderModel">
+SELECT od.orderdetail_seq AS orderdetail_num,
+       me.menu_name       AS menu_name      ,
+       st.st_name         AS st_name        ,
+       od.quantity        AS quantity       ,
+       me.menu_price      AS menu_price     ,
+       od.order_time      AS order_time     ,
+       od.order_status    AS order_status
+FROM   order_detail od                 ,
+       store st                        ,
+       (SELECT me.menu_num   AS menu_num ,
+               me.menu_name  AS menu_name,
+               me.menu_price AS menu_price
+       FROM    menu me ,
+               store st,
+               order_detail od
+       WHERE   od.menu_num    = me.menu_num
+       AND     me.st_num    = od.st_num
+       AND     st.st_num    = od.st_num
+       AND     od.order_num =  #num#
+       )
+       me
+WHERE  od.st_num    = st.st_num
+AND    od.menu_num  = me.menu_num
+AND    od.order_num = #num#
+</select>
+
+<select id="getOrdersList" resultClass="model.OrderRequest" parameterClass="model.SearchParam">
+	SELECT order_inf,
+		   to_char(order_time,'YYYY/MM/DD HH24:mi:ss') as order_time,
+		   order_name,
+		   st_name,
+		   state,
+		   delivery_destination,
+		   price,
+		   order_num
+	  FROM (
+	SELECT rownum rnum,
+		   od.order_num as order_num,
+		   od.order_num
+	              || '(주문번호)' || '<![CDATA[<br/>]]>▼ '
+	              || st.st_name
+	              ||
+	       CASE
+	              WHEN oo.cn_st = 1
+	              THEN ''
+	              WHEN oo.cn_st > 1
+	              THEN ' 외 '
+	                            || oo.cn_st
+	                            || '건'
+	       END AS order_inf        ,
+	       ot.order_time           ,
+	       cu.cu_name AS order_name,
+	       st.st_name
+	              ||
+	       CASE
+	              WHEN oo.cn_st = 1
+	              THEN ''
+	              WHEN oo.cn_st > 1
+	              THEN ' 외 '
+	                            || oo.cn_st
+	                            || '건'
+	       END            AS st_name,
+	       od.order_state AS state  ,
+	       od.delivery_destination  ,
+	       oo.price
+	FROM   orders od                                             ,
+	       order_detail ot                                       ,
+	       store st                                              ,
+	       customer cu                                           ,
+	       ( SELECT  ott.order_num                               ,
+	                COUNT(DISTINCT ott.st_num)        AS cn_st          ,
+	                MAX(ott.orderdetail_seq)          AS orderdetail_seq,
+	                SUM(me.menu_price * ott.quantity) AS price
+	       FROM     order_detail ott,
+	                menu me
+	       WHERE    ott.menu_num = me.menu_num
+	         AND    ott.st_num = me.st_num
+	       GROUP BY ott.order_num
+	       )
+	       oo
+	WHERE  od.order_num       = ot.order_num
+	AND    od.order_num       = oo.order_num
+	AND    ot.orderdetail_seq = oo.orderdetail_seq
+	AND    ot.st_num          = st.st_num
+	AND    od.cu_id           = cu.cu_id
+	<dynamic prepend="and" >
+  		<isEqual property = "sc" compareValue="1">
+  			cu.cu_name like '%' || #kw# || '%'
+  		</isEqual>
+  		<isEqual property = "sc" compareValue="2">
+  			od.cu_id like '%' || #kw# || '%'
+  		</isEqual>
+  		</dynamic>
+  		<dynamic prepend="and" >
+  		<isNotEqual property="state" compareValue="0">
+  			od.order_state = #state# 
+  		</isNotEqual> 
+  		</dynamic>
+    AND rownum <![CDATA[<=]]> #endRow#
+    ORDER BY order_num DESC
+    )
+    WHERE rnum <![CDATA[>=]]> #firstRow#
+</select>
+
+<select id="getOrdersCount" resultClass="int" parameterClass="model.SearchParam">
+	SELECT count(*)
+	  FROM orders od, customer cu
+	 WHERE od.cu_id = cu.cu_id
+	   <dynamic prepend="and" >
+  		<isEqual property = "sc" compareValue="1">
+  			cu.cu_name like '%' || #kw# || '%'
+  		</isEqual>
+  		<isEqual property = "sc" compareValue="2">
+  			od.cu_id like '%' || #kw# || '%'
+  		</isEqual>
+  		</dynamic>
+  		<dynamic prepend="and" >
+  		<isNotEqual property="state" compareValue="0">
+  			od.order_state = #state# 
+  		</isNotEqual> 
+  		</dynamic>
+</select>
+
+<select id="getUserOrdersCount" resultClass="int" parameterClass="string">
+			select count(*) 
+			from orders od, customer cu 
+			where od.cu_id = cu.cu_id 
+			and od.cu_id =#id#
+</select>
+
+<select id="getUserOrdersList" resultClass="model.OrderRequest" parameterClass="model.SearchParam">
+	SELECT order_inf,
+		   to_char(order_time,'YYYY/MM/DD HH24:mi:ss') as order_time,
+		   order_name,
+		   st_name,
+		   state,
+		   delivery_destination,
+		   price,
+		   order_num
+	  FROM (
+	SELECT rownum rnum,
+		   od.order_num as order_num,
+		   od.order_num
+	              || '(주문번호)' || '<![CDATA[<br/>]]>▼ '
+	              || st.st_name
+	              ||
+	       CASE
+	              WHEN oo.cn_st = 1
+	              THEN ''
+	              WHEN oo.cn_st > 1
+	              THEN ' 외 '
+	                            || oo.cn_st
+	                            || '건'
+	       END AS order_inf        ,
+	       ot.order_time           ,
+	       cu.cu_name AS order_name,
+	       st.st_name
+	              ||
+	       CASE
+	              WHEN oo.cn_st = 1
+	              THEN ''
+	              WHEN oo.cn_st > 1
+	              THEN ' 외 '
+	                            || oo.cn_st
+	                            || '건'
+	       END            AS st_name,
+	       od.order_state AS state  ,
+	       od.delivery_destination  ,
+	       oo.price
+	FROM   orders od                                             ,
+	       order_detail ot                                       ,
+	       store st                                              ,
+	       customer cu                                           ,
+	       ( SELECT  ott.order_num                               ,
+	                COUNT(DISTINCT ott.st_num)        AS cn_st          ,
+	                MAX(ott.orderdetail_seq)          AS orderdetail_seq,
+	                SUM(me.menu_price * ott.quantity) AS price
+	       FROM     order_detail ott,
+	                menu me
+	       WHERE    ott.menu_num = me.menu_num
+	         AND    ott.st_num = me.st_num
+	       GROUP BY ott.order_num
+	       )
+	       oo
+	WHERE  od.order_num       = ot.order_num
+	AND    od.order_num       = oo.order_num
+	AND    ot.orderdetail_seq = oo.orderdetail_seq
+	AND    ot.st_num          = st.st_num
+	AND    od.cu_id           = cu.cu_id
+	and od.cu_id =#kw#
+    AND rownum <![CDATA[<=]]> #endRow#
+    )
+    WHERE rnum <![CDATA[>=]]> #firstRow#
+</select>
+
+<insert id="orderAdd" parameterClass="map">
+		<selectKey keyProperty="id" resultClass="int">
+		select ORDERS_SEQ.nextval from dual
+		</selectKey>
+		insert 
+		into orders(
+					order_num,
+					cu_id,
+					order_time,
+					order_comments,
+					DELIVERY_DESTINATION,
+					ORDER_STATE) 
+			values (#id#,
+					#user_id#,
+					sysdate,
+					#comments#,
+					#address#,
+					#state#)
+</insert>
+
+<insert id="orderdetailAdd" parameterClass="map" >
+	<selectKey keyProperty="id" resultClass="int" >
+		select ORDERDETAIL_SEQ.nextval from dual
+		</selectKey>
+		insert into order_detail(
+				ORDERDETAIL_SEQ
+				,ORDER_NUM
+				,MENU_NUM
+				,ST_NUM
+				,QUANTITY
+				,SALE_NUM
+				,ORDER_STATUS
+				) 
+				values (
+						#id#
+						,#ordernum#
+						,#menunum#
+						,#stnum#
+						,#quantity#
+						,#salenum#
+						,#orderstatus#
+						)
+</insert>
+<select id="getordernumlist" resultClass="string">
+	select order_num 
+	from orders
+	where cu_id=#id#
+</select>
+<resultMap class="model.OrderModel" id="orderMap">
+ <result column="order_num"  property="order_num" />
+ <result column="st_name"    property="st_name"   />
+ <result column="menu_name"  property="menu_name" />
+ <result column="quantity"   property="quantity"  />
+ <result column="ordersatus" property="ordersatus"/>
+ <result column="ordertime" property="ordertime" nullValue="없음"/>
+ <result column="menu_price" property="menu_price"/>
+ <result column="pic_path" property="pic_path"/>
+ <result column="order_comments" property="order_comments"/>
+</resultMap>
+
+
+<select id="getOrderList" resultMap="orderMap" parameterClass="string">
+	select 
+		  od.order_num as order_num,
+		  st.st_name as st_name,
+		  me.menu_name as menu_name,
+		  od.quantity as quantity,
+		  to_char(ods.order_time,'YY.MM.DD hh:mi') as ordertime,
+		  od.order_status as ordersatus,  
+		  me.menu_price as menu_price,
+		  pic.picpath as pic_path,
+		  ods.ORDER_COMMENTS as order_comments
+	from order_detail od,menu me,store st,orders ods,picture pic
+	where od.order_num =#ordernum# and
+			me.menu_num=od.menu_num and
+			st.st_num=od.st_num and
+			ods.order_num=#ordernum# and
+			pic.pic_seq=me.menu_picnum
+			order by ods.order_time desc
+</select>
+<insert id="addCart" parameterClass="map">
+	insert into cart(
+			cu_id,
+			ST_NUM,
+			MENU_NUM,
+			QUENTITY,
+			PUTTIME,
+			MENU_NAME,
+			MENU_PRICE)
+	values(#userid#,#stnum#,#menunum#,#quentity#,sysdate,#menuname#,#price#)
+</insert>
+<update id="updateCart" parameterClass="map">
+	update cart
+	set QUENTITY=#quentity#
+	where 
+			cu_id=#userid# 
+			and 
+			st_num=#stnum# 
+			and 
+			menu_num=#menunum#
+</update>
+<select id="existCart" parameterClass="map" resultClass="model.Cart">
+select 
+		cu_id as cu_id,
+		ST_NUM as st_num,
+		MENU_NUM as menu_num,
+		QUENTITY as quentity,
+		PUTTIME 
+from cart 
+where 
+		cu_id=#userid# 
+		and 
+		st_num=#stnum# 
+		and 
+		menu_num=#menunum#
+</select>
+<resultMap class="model.Cart" id="CartMap">
+	<result property="cu_id" column="cu_id"/>
+	<result property="st_num" column="ST_NUM"/>
+	<result property="menu_num" column="MENU_NUM"/>
+	<result property="quentity" column="QUENTITY"/>
+	<result property="puttime" column="PUTTIME"/>
+	<result property="menuname" column="MENU_NAME"/>
+	<result property="price" column="MENU_PRICE"/>
+	<result property="storename" column="st_name"/>
+</resultMap>
+<select id="getCartList" resultMap="CartMap">
+		select 
+			ca.cu_id
+			,ca.ST_NUM
+			,ca.MENU_NUM
+			,ca.QUENTITY
+			,ca.MENU_NAME
+			,ca.MENU_PRICE
+			,to_char(ca.PUTTIME,'YY.MM.DD HH:mm:ss') as PUTTIME
+			,st.st_name
+		from cart ca,store st
+		where ca.cu_id=#id# and
+			st.st_num=ca.st_num
+		order by PUTTIME desc
+</select>
+<delete id="deleteCart" parameterClass="map">
+    delete 
+    from cart 
+    where 
+    	cu_id=#userid#
+    	and 
+    	st_num=#stnum#
+    	and 
+    	menu_num=#menunum#
+</delete>
+</sqlMap>

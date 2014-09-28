@@ -1,0 +1,65 @@
+#header_rest{display:inline-block; position:relative; z-index:1; width:100%; }
+
+/***** header ¿µ¿ª *****/
+.gnavi{ font-size:11px; margin-top:10px; letter-spacing: -1px;}
+.gnavi .btn{float:right;margin-top:13px; margin-right: 10px;}
+.gnavi .btn img{border: 0; width: 50px;}
+.gnavi ul{float:right; position:relative; padding:2px 0 0 0;}
+.gnavi ul li{float:left; padding:0 6px 0 5px; list-style-type: none;}
+.gnavi ul li last{background:none;}
+.gnavi ul li a{color:#585858;}
+.gnavi ul li a:hover{color:#e02500; text-decoration:none;}
+.gnavi ul li img{}
+
+
+.input {  font-family: "µ¸¿ò", "sans-serif"; font-size: 12px; color: #6b6d70; width:90px; height: 15px; padding:2px 2px 2px 2px; border: 1px #bebebe solid;}
+.input_psw {  font-family: "µ¸¿ò", "sans-serif"; font-size: 12px; color: #6b6d70; width:90px; height: 15px; padding:2px 2px 2px 2px; border: 1px #bebebe solid;}
+/* ·Î±×ÀÎ ·Î±×¾Æ¿ô */	
+.Login_01 { font-family: "µ¸¿ò", "sans-serif"; font-size: 11px; color: #6079a8; letter-spacing: -1px}
+	.Login_01 a:link { color: #6079a8; text-decoration: none}
+	.Login_01 a:active { color: #6079a8; text-decoration: none}
+	.Login_01 a:visited { color: #6079a8; text-decoration: none}
+	.Login_01 a:hover { color: #6079a8; text-decoration: underline}	
+	
+.Login_02 { font-family: "µ¸¿ò", "sans-serif"; font-size: 12px; color: #2f3743; letter-spacing: -1px}
+	.Login_02 a:link { color: #2f3743; text-decoration: none}
+	.Login_02 a:active { color: #2f3743; text-decoration: none}
+	.Login_02 a:visited { color: #2f3743; text-decoration: none}
+	.Login_02 a:hover { color: #2f3743; text-decoration: underline}	
+	
+.Logout_01 { font-family: "µ¸¿ò", "sans-serif"; font-size: 11px; color: #848689; letter-spacing: -1px}
+	.Logout_01 a:link { color: #848689; text-decoration: none}
+	.Logout_01 a:active { color: #848689; text-decoration: none}
+	.Logout_01 a:visited { color: #848689; text-decoration: none}
+	.Logout_01 a:hover { color: #848689; text-decoration: underline}
+	
+.Logout_02 { font-family: "µ¸¿ò", "sans-serif"; font-size: 11px; color: #2f3743; letter-spacing: -1px}
+	.Logout_02 a:link { color: #2f3743; text-decoration: none}
+	.Logout_02 a:active { color: #2f3743; text-decoration: none}
+	.Logout_02 a:visited { color: #2f3743; text-decoration: none}
+	.Logout_02 a:hover { color: #2f3743; text-decoration: underline}
+
+.sct { font-family: "µ¸¿ò", "sans-serif"; font-size: 11px; color: #e8e8e8;  padding-right: 5px; padding-left: 5px;}/* ±¸ºÐ¼± */
+.sct_01 { font-family: "µ¸¿ò", "sans-serif"; font-size: 11px; color: #d4d5d7;  padding-right: 5px; padding-left: 5px;}/* ±¸ºÐ¼± */
+
+/***** footer ¿µ¿ª ******/
+.fLogo{float:left; margin:16px 0 0 0;}
+
+.fNavi{float:right; margin:0 22px 0 0;}
+.fNavi01{background-color: white;}
+.fNavi01 ul li{float:left; padding:0 10px 0 10px; list-style-type: none;}
+.fNavi01 ul li a{color:#777777; text-decoration:none;}
+.fNavi01 ul li a:hover{color:#FF3333; text-decoration:underline;}
+.fNavi02{margin-top:10px; background:url('/images/nvIMG/img_mnavi_div.gif') no-repeat left top; font-size:11px;}
+.fNavi02 ul li{float:left; background:url('/images/nvIMG/img_mnavi_div.gif') no-repeat right top; padding:0 10px 0 10px; list-style-type: none;}
+.fNavi02 ul li a{color:#777777; text-decoration:none;}
+.fNavi02 ul li a:hover{color:#FF3333; text-decoration:underline;}
+.copyright{float:left; display:block; padding:0 0 20px 0; width:100%; text-align:center;}
+
+.btTop{float:right; margin:30px 0 0 0; padding:0 0 0 15px;}
+
+.fLink{float:right; margin:30px -70px 0 0; _margin:-20px 0 0 0;}
+.fLink ul li{float:left; padding:0 10px 0 0; vertical-align:bottom;}
+.fLink ul li .menupan{padding:3px 10px 0 0;}
+
+

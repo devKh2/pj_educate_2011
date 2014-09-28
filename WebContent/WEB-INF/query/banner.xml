@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="banner">
+
+	<select id = "count" resultClass = "int">
+		select count(ban_artid)
+			from banner
+	</select>
+	
+	<select id = "list" resultClass ="model.Banner">
+		SELECT  ban_artid ban_artid,
+				ban_title ban_title,
+				ban_position ban_position,
+				ban_picnum ban_picNum,
+				TO_CHAR(ban_startDate, 'YY/MM/DD HH24:mi') ban_startDate,
+               	TO_CHAR(ban_endDate, 'YY/MM/DD HH24:mi') ban_endDate,
+				ban_situation ban_situation,
+                TO_CHAR(ban_registDate, 'YYYY/MM/DD') ban_registDate,
+                ban_picpath,
+                ban_linkAddr
+		FROM   ( 
+		   		   SELECT rownum rnum,
+		                  ban_artid,
+		                  ban_title,
+		                  ban_position,
+		                  ban_picnum,
+		                  ban_startDate,
+                  		  ban_endDate, 
+                  		  ban_situation,
+                  		  ban_registDate,
+                  		  pic.picpath ban_picpath,
+                  		  ban_linkAddr
+		          	FROM ( 
+		           			SELECT  *
+                    		FROM  banner
+		                    where ban_title like '%' || #search# || '%' 
+                    		ORDER BY ban_artid DESC
+		                   )ban,
+		                   picture pic
+		          where rownum <![CDATA[<=]]> #endRow# 
+		          		and ban.ban_picNum = pic.pic_seq 
+		   	 )
+		where rnum <![CDATA[>=]]> #firstRow#
+		order by ban_artid desc	 
+	</select>
+	
+	<insert id="insertBanner" parameterClass="model.Banner">
+		<selectKey keyProperty="ban_artid" resultClass="int">
+		select banner_seq.nextval from dual
+		</selectKey>
+		insert into banner 
+				values (#ban_artid#,
+						#ban_position#, 
+                        #ban_title#, 
+                        #ban_picNum#, 
+                        to_timestamp(#ban_startDate#, 'yy/mm/dd hh24:mi'),
+                        to_timestamp(#ban_endDate#, 'yy/mm/dd hh24:mi'),
+                        '대기중',
+                        sysdate,
+                        #ban_linkAddr#
+                        )
+	</insert>
+	
+	<delete id="deleteBanner">
+		DELETE banner
+		WHERE ban_artid = #ban_artid#	
+	</delete>
+	
+	<update id="ban_situationUpdate1" >
+		update banner 
+			set ban_situation = '대기중'      
+		where TO_CHAR(ban_startdate, 'yy/mm/dd hh24:mi') <![CDATA[>]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+	
+	<update id="ban_situationUpdate2" >
+		update banner 
+			set ban_situation = '실행중'      
+		where   TO_CHAR(ban_startdate, 'yy/mm/dd hh24:mi') <![CDATA[<]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+    		AND TO_CHAR(ban_endDate, 'yy/mm/dd hh24:mi') <![CDATA[>]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+		
+		
+	<update id="ban_situationUpdate3">
+		update banner 
+			set ban_situation = '완료'      
+		where  TO_CHAR(ban_endDate, 'yy/mm/dd hh24:mi') <![CDATA[<]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+	
+	<select id="presentBanner1" resultClass="model.Banner">
+		SELECT  ban_picpath,
+				ban_linkAddr
+		FROM   ( 
+		   		   SELECT rownum rnum,
+		                  ban_artid,
+		                  ban_title,
+		                  ban_position,
+		                  ban_picnum,
+		                  ban_startDate,
+	                      ban_endDate,
+	                      ban_situation,
+	                      ban_registDate,
+	                      pic.picpath ban_picpath,
+	                      ban_linkAddr
+		          	FROM ( 
+		           			SELECT  *
+                    		FROM  banner
+		                    where ban_position = 'center' and ban_situation = '실행중'
+                    		ORDER BY ban_artid DESC
+		                   )ban,
+		                   picture pic
+		          where ban.ban_picNum = pic.pic_seq 
+		   	 )
+	</select>
+	
+	<select id="presentBanner2" resultClass="model.Banner">
+		SELECT  ban_picpath,
+				ban_linkAddr
+		FROM   ( 
+		   		   SELECT rownum rnum,
+		                  ban_artid,
+		                  ban_title,
+		                  ban_position,
+		                  ban_picnum,
+		                  ban_startDate,
+	                      ban_endDate,
+	                      ban_situation,
+	                      ban_registDate,
+	                      pic.picpath ban_picpath,
+	                      ban_linkAddr
+		          	FROM ( 
+		           			SELECT  *
+                    		FROM  banner
+		                    where ban_position = 'right' and ban_situation = '실행중'
+                    		ORDER BY ban_artid DESC
+		                   )ban,
+		                   picture pic
+		          where ban.ban_picNum = pic.pic_seq 
+		   	 )
+	</select>
+	
+	<!-- 
+	<select  id = "isExist" resultClass = "int">
+		select count(ban_artid)
+		  from(
+		        select *
+		        from banner
+		        where ban_position = #ban_position#
+		      )
+		  where ( ( (ban_situation = '실행중') and ( (to_char(ban_endDate,   'yy/mm/dd hh24:mi') ) <![CDATA[>]]> (to_char(#sd#, 'yy/mm/dd hh24:mi') ) ) ) 
+				        and
+				  ( (ban_situation = '대기중') and ( (to_char(ban_startDate, 'yy/mm/dd hh24:mi') ) <![CDATA[<]]> (to_char(#ed#, 'yy/mm/dd hh24:mi') ) ) ) )
+				        or
+				( ( (ban_situation = '대기중') and ( (to_char(ban_endDate,   'yy/mm/dd hh24:mi') ) <![CDATA[>]]> (to_char(#sd#, 'yy/mm/dd hh24:mi') ) ) )
+				        and
+				  ( (ban_situation = '대기중') and ( (to_char(ban_startDate, 'yy/mm/dd hh24:mi') ) <![CDATA[<]]> (to_char(#ed#, 'yy/mm/dd hh24:mi') ) ) ) )
+	</select>
+	 -->
+	 <select id = "isEnd1" resultClass = "int">
+	 	select count(*)
+	 	from banner
+	 </select>
+	 
+	 <select id = "isEnd2" resultClass = "int">
+	 	select count(*)
+	 	from banner
+	 	where ban_situation = '완료'
+	 </select>
+	 
+	 <select id = "isWait" resultClass = "int">
+	 	select count(*)
+	 	from banner
+	 	where ban_situation = '대기중'
+	 </select>
+	 
+	 <select id = "isWait2" resultClass = "int">
+	 
+	 </select>
+	 
+	 <select id = "isExist1" resultClass = "int">
+	 	  select count(ban.id)
+		         
+		  from(   
+		        select  ban_artid id,
+		                ban_position ,
+		                ban_title,
+		                ban_picnum,
+		                (to_char(ban_startDate, 'yy/mm/dd hh24:mi')) ban_startDate,
+		                (to_char(ban_endDate, 'yy/mm/dd hh24:mi')) ban_endDate ,
+		                ban_situation ,
+		                ban_registdate,
+		                ban_linkaddr
+		        from(
+		              select *
+		              from banner
+		              where ban_position = #ban_position#
+		            ) 
+		        where (ban_situation = '실행중')
+		      )ban
+		  where  ban_endDate  <![CDATA[<]]> (to_char(#sd#, 'yy/mm/dd hh24:mi'))
+	 </select>
+	 
+	 <select id = "isExist2" resultClass = "int">
+	 		  select count(ban.id)
+			         
+			  from(   
+			        select  ban_artid id,
+			                ban_position ,
+			                ban_title,
+			                ban_picnum,
+			                (to_char(ban_startDate, 'yy/mm/dd hh24:mi')) ban_startDate,
+			                (to_char(ban_endDate, 'yy/mm/dd hh24:mi')) ban_endDate ,
+			                ban_situation ,
+			                ban_registdate,
+			                ban_linkaddr
+			        from(
+			              select *
+			              from banner
+			              where ban_position = #ban_position#
+			            ) 
+			        where (ban_situation = '대기중')
+			      )ban
+			  where (to_char(#ed#, 'yy/mm/dd hh24:mi')) <![CDATA[<]]> ban_startDate 
+	 </select>
+	 
+	 <select id = "isExist3" resultClass = "int">
+		 	 select count(ban.id)
+			         
+			  from(   
+			        select  ban_artid id,
+			                ban_position ,
+			                ban_title,
+			                ban_picnum,
+			                (to_char(ban_startDate, 'yy/mm/dd hh24:mi')) ban_startDate,
+			                (to_char(ban_endDate, 'yy/mm/dd hh24:mi')) ban_endDate ,
+			                ban_situation ,
+			                ban_registdate,
+			                ban_linkaddr
+			        from(
+			              select *
+			              from banner
+			              where ban_position = #ban_position#
+			            ) 
+			        where (ban_situation = '대기중')
+			      )ban
+			  where ban_endDate <![CDATA[<]]> (to_char(#sd#, 'yy/mm/dd hh24:mi'))
+	 </select>
+	 
+	 <select id = "isExist4" resultClass = "int">
+		  select count(ban.id)
+		         
+		  from(   
+		        select  ban_artid id,
+		                ban_position ,
+		                ban_title,
+		                ban_picnum,
+		                (to_char(ban_startDate, 'yy/mm/dd hh24:mi')) ban_startDate,
+		                (to_char(ban_endDate, 'yy/mm/dd hh24:mi')) ban_endDate ,
+		                ban_situation ,
+		                ban_registdate,
+		                ban_linkaddr
+		        from(
+		              select *
+		              from banner
+		              where ban_position = #ban_position#
+		            ) 
+		        where (ban_situation = '대기중')
+		      )ban
+		  where (to_char(#ed#, 'yy/mm/dd hh24:mi')) <![CDATA[<]]> ban_startDate  
+	 </select>
+	 
+
+
+</sqlMap>

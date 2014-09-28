@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="nbbs">
+
+	<select id="count" resultClass="int">
+		SELECT COUNT(notice_artid)
+		FROM notice
+				<dynamic prepend="where">
+	         		 <isEqual property="searchkind" compareValue="total_search">
+	         		 	notice_title like '%'||#search#||'%'
+	         		 	or notice_content like '%'||#search#||'%'
+	         		 </isEqual>
+	         		 <isEqual property="searchkind" compareValue="content_search">
+	         		 	notice_content like '%'||#search#||'%'
+	         		 </isEqual>
+	         		 <isEqual property="searchkind" compareValue="title_search">
+	         		 	notice_title like '%'||#search#||'%'
+	         		 </isEqual>
+	         	  </dynamic>
+	</select>
+	
+	
+	<!-- 리스트를 가져오는 쿼리문 입니다. start-->	
+	
+	<resultMap id="listMap" class="model.NBBS_Article">
+		<result property="notice_artid" 				column="notice_artid"/>
+		<result property="notice_regdate"	 			column="notice_regdate"/>
+		<result property="notice_count" 				column="notice_count"/>
+		<result property="notice_title"	 			column="notice_title"/>
+		<result property="admin_id" 					column="admin_id"/>
+		<result property="elpasedTime" 				column="is_new"/>
+	</resultMap>
+	
+	<select id="list" resultMap="listMap">
+		SELECT notice_artid                                                			 ,
+		       TO_CHAR(notice_regdate,'YYYY/MM/DD') notice_regdate					 ,
+		       notice_count                                                 			 ,
+		       admin_id                                                				 ,                                              			
+		       resize_title(notice_title)      AS notice_title                       ,
+		       fn_get_new(notice_regdate) AS is_new									 
+		FROM   ( SELECT ROWNUM             RNUM,
+		               notice_artid              ,
+		               notice_regdate            ,
+		               notice_count              ,
+		               admin_id            	   ,
+		               notice_title			   
+		       		FROM    ( SELECT  * FROM notice
+		               <dynamic prepend="where">
+		         		 <isEqual property="searchkind" compareValue="total_search">
+		         		 	notice_title like '%'||#search#||'%'
+		         		 	or notice_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="content_search">
+		         		 	notice_content like '%'||#search#||'%'
+		         		 </isEqual>
+		         		 <isEqual property="searchkind" compareValue="title_search">
+		         		 	notice_title like '%'||#search#||'%'
+		         		 </isEqual>
+		         	  </dynamic>
+		               ORDER BY notice_artid DESC
+		     			)WHERE ROWNUM <![CDATA[<=]]> #endRow#
+		     			 )
+						WHERE  RNUM  <![CDATA[>=]]> #firstRow#
+	 </select>
+
+	 <!-- Article을  입력시키는 쿼리문 start -->		
+ <insert id="insertArticle">
+<selectKey keyProperty="notice_artid" resultClass="int">
+   SELECT notice_artid.nextval From dual
+</selectKey> 	
+		insert into notice(  notice_artid
+		                    , notice_count
+		                    , notice_title
+		                    , notice_content
+		                    , admin_id)
+        values ( #notice_artid#
+                ,1
+                ,#notice_title#
+                ,#notice_content#
+                ,#admin_id#)
+ </insert>
+ 
+ <!-- 레코드 1개를 가져오는 쿼리문 입니다. start-->	
+
+	<resultMap id = "selectByIdResultMap" class = "model.NBBS_Article">  
+	  	<result property ="notice_content"   		    column="notice_content"/>
+	 	<result property ="notice_artid" 				column="notice_artid"/>
+		<result property ="notice_regdate"	 			column="notice_regdate"/>
+		<result property ="notice_count" 				column="notice_count"/>
+		<result property ="notice_title"	 			column="notice_title"/>
+		<result property ="admin_id" 					column="admin_id"/>
+ 	</resultMap>
+ 	
+ <select id = "selectById" resultMap = "selectByIdResultMap">
+     select  notice_artid , 
+		     to_char(notice_regdate, 'YYYY/MM/DD HH24:mi:ss') notice_regdate, 
+		     notice_count, 
+		     admin_id,
+		     notice_title, 
+		     notice_content
+     from notice 
+     where notice_artid = #notice_artid#
+ </select>
+ 
+ <!-- count를 1씩 증가시키는 쿼리문 start -->	
+ <update id="increaseReadCount">
+			update notice 
+			set notice_count = notice_count + 1
+			where notice_artid = #notice_artid#
+ </update>
+ 
+
+<!-- updateArticle 쿼리문 start  -->	
+	<update id="updateArticle">
+		update notice
+		set notice_title = #notice_title#
+		, notice_content = #notice_content#
+		where notice_artid = #notice_artid#
+	</update>
+	
+<!-- deleteArticle 쿼리문 start  -->	
+	<delete id="deleteArticle">
+		delete from notice
+		where notice_artid =#notice_artid#
+	</delete>
+
+</sqlMap>

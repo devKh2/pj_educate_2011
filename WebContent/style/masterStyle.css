@@ -1,0 +1,251 @@
+/* Global */
+BODY	{color : #666666; font-size: 12px; font-family: Dotum; margin: 0px;}
+TABLE	{border-spacing : 0; empty-cells : show;}
+TD		{font-size: 12px; font-family: Dotum;}
+IMG		{border-bottom : 0px; border-left : 0px; border-top : 0px; border-right: 0px; border: none; vertical-align:middle;}
+FORM	{display : inline;}
+
+/* Link */
+A:link		{text-decoration: none; color: #636363;} 
+A:visited	{text-decoration: none; color: #636363;}
+A:hover		{text-decoration: none; color: #000000;}
+A:active	{text-decoration: underline;}
+
+/* List Table */
+.list_tb {
+	border-top : #3F8DD5 2px solid;
+	border-bottom : #3F8DD5 1px solid;
+	font-size : 12px;
+	text-align : center;
+	border-collapse : collapse;
+	margin-bottom : 10px;
+}
+
+.list_tb TH {
+	background : url("/peach/images/master/table_th_bg.gif") repeat-x left top; 
+	border-left : 1px solid #DCDCDC; 
+	border-right : 1px solid #DCDCDC;
+	height : 37px;
+}
+
+.list_tb TD {
+	border : #E5E5E5 1px solid;
+}
+
+.list_tb caption {
+	text-align : left;
+	caption-side: top;
+	font-weight : bold;
+}
+
+.list2_tb {
+	border-top : #3F8DD5 2px solid;
+	border-bottom : #3F8DD5 1px solid;
+	font-size : 12px;
+	text-align : left;
+	border-collapse : collapse;
+	margin-bottom : 10px;
+}
+
+.list2_tb TH {
+	font-weight : normal;
+	border : 1px solid #DCDCDC;
+	height : 30px;
+	padding-left : 10px;
+	background-color : #FAFAFA;
+}
+
+.list2_tb TD {
+	border : #E5E5E5 1px solid;
+	padding : 5px;
+}
+
+.list2_tb caption {
+	text-align : left;
+	caption-side: top;
+	font-weight : bold;
+}
+
+.bdr_none TD { border : none; }
+
+/* Table */
+.table_coll
+{
+	border-color : #DDDDDD;
+	border-collapse : collapse;
+	border-style: solid;
+	border-width: 1px 1px 1px 1px;
+}
+
+.table_coll_nonepx
+{
+	border-color : #000000;
+	border-collapse : collapse;
+	border-style: solid;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+
+.table_rows {
+	font-size : 12px;
+	text-align : center;
+}
+
+.table_rows TD
+{
+	border-color : #DDDDDD;
+	border-style : solid;
+	border-width : 1px;
+	text-align : left;
+	padding-left : 5px;
+}
+
+.table_rows TH
+{
+	font-weight : normal;
+	border-color : #DDDDDD;
+	border-style : solid;
+	border-width : 1px;
+	background : none;
+	height : 30px;
+	background-color: #EEEEEE;
+}
+
+/* InputBox */
+.box {
+	font-size: 12px;
+	border: 1px solid #999999;
+	background-color: white;
+}
+
+.box_d {
+	font-size: 12px;
+	border: 1px solid #666666;
+	background-color: #DDDDDD;
+}
+
+.box_login {
+	width: 135px;
+	height: 24px;
+	font-size: 14px;
+	border: 1px solid #3F8DD5;
+	padding-top : 4px;
+	padding-left : 5px;
+}
+
+.nonbox {
+	font-size: 12px;
+	border: 0px solid #000000;
+	background-color: white;
+}
+
+/* Radio Button */
+.radio {
+	font-size: 12px;
+	border: 0px solid #000000;
+	background-color: white;
+}
+
+/* Button */
+.button {
+	background-color: #3109C4;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+.button_pink {
+	background-color: #FF00FF;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+.b_input {
+	font-size: 12px;
+	border: 1px solid #CCCCCC;
+}
+
+.b_style {
+	color: #4D3D72;
+	border-color: #8058C0;
+	background-color: #E9E0FE;
+	border: 1px solid #8058C0;
+	font-size: 11px;
+	height: 19px;
+	cursor: pointer;
+}
+.b_style2 {
+	color: #843f61;
+	border-color: #E7BAD0;
+	background-color: #F9EDF3;
+	border: 1px solid #D79BB8;
+	font-size: 11px;
+	height: 19px;
+	cursor: pointer;
+}
+
+.b_style3 {
+	color: #202020;
+	border-color: #606060;
+	background-color: #A9DDD3;
+	border: 1px solid #90A7A3;
+	font-size: 11px;
+	height: 19px;
+	cursor: pointer;
+}
+
+.b_style4 {
+	color: #202020;
+	border-color: #606060;
+	background-color: #666666;
+	border: 1px solid #90A7A3;
+	font-size: 11px;
+	color: #FFFFFF;
+	font-weight: bold;
+	height: 19px;
+	cursor: pointer;
+}
+
+.box_s {
+	border-right: #FFFFFF 1px solid;
+	border-top: #999999 1px solid;
+	padding-left: 3px;
+	font-size: 11px;
+	border-left: #999999 1px solid;
+	color: #666666;
+	border-bottom: #FFFFFF 1px solid;
+	background-color: #F1F1F1
+}
+
+/* Text */
+.text {
+	font-size: 12px;
+	border: 1px solid #000000;
+}
+
+.stext {
+	font-size: 11px;
+}
+
+/* ETC */
+.help {
+	font-size: 11px;
+	color: #73A47A;
+}
+
+.select {
+	font-size: 12px;
+	border: 0px solid #000000;
+}
+
+.select_d {
+	font-size: 12px;
+	line-height: 14px;
+}
+
+.graph_img {
+	vertical-align: baseline;
+}

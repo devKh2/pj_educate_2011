@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- bean 생성 -->
+	
+	<bean id="masterGuestController" class="controller.MasterGuestController">
+		<property name="ebbs_ListService" ref="ebbs_listService"/>
+		<property name="mbbs_ListService" ref="mbbs_listService"/>
+		<property name="nbbs_ListService" ref="nbbs_listService"/>
+		<property name="sbbs_ListService" ref="sbbs_listService"/> 
+	</bean>
+	<bean id="mainController" class="controller.MainController">
+		<property name="popupService" ref = "popupService"/>
+		<property name="bannerService" ref = "bannerService"/>
+	</bean>
+	
+	<bean id="mainContentController" class="controller.MainContentController">
+		<property name="storeService" ref="storeService"/>
+		<property name="menuService" ref="menuService" />
+		<property name="bannerService" ref ="bannerService"/>
+		<property name="ebbs_listService" ref ="ebbs_listService"/>
+		<property name="mbbs_listService" ref ="mbbs_listService"/>
+	</bean>
+	
+	<bean id="blogController" class="controller.BlogController">
+		<property name="storeService" ref="storeService" />
+		<property name="menuService" ref="menuService"/>
+		<property name="fileService" ref="fileService"/>
+	</bean>
+	
+	<bean id="searchController" class="controller.SearchController">
+		<property name="storeService" ref="storeService"/>
+		<property name="menuService" ref="menuService" />
+		<property name="mbbs_listService" ref="mbbs_listService" />
+	</bean>
+
+	<bean id="masterController" class="controller.MasterController">
+		<property name="masterService" ref="masterService" />
+	</bean>
+
+	<bean id="masterMenuController" class="controller.MasterMenuController">
+		<property name="menuService" ref="menuService" />
+		<property name="storeService" ref="storeService"/>
+		<property name="fileService" ref="fileService"/>
+	</bean>
+	
+	<bean id="masterStoreController" class="controller.MasterStoreController">
+		<property name="storeService" ref="storeService"/>
+		<property name="fileService" ref="fileService"/>
+		<property name="idpwSearchService" ref = "idpwSearchService"/>
+		<property name="emailAddrListService" ref = "emailAddrListService"/>
+	</bean>
+	
+	<bean id="masterMemberController" class="controller.MasterMemberController">
+		<property name="memberService" ref = "memberService"/>
+	</bean>
+	
+	<bean id="masterSaleController" class="controller.MasterSaleController">
+		<property name="orderService" ref = "orderService"/>
+		<property name="statsService" ref = "statsService"/>
+	</bean>
+
+	<bean id="orderController" class="controller.OrderController">
+		<property name="menuService" ref="menuService" />
+		<property name="orderService" ref="orderService" />
+		<property name="storeService" ref="storeService"/>
+	</bean>	
+	
+	<bean id="postController" class="controller.PostController">
+		<property name="postService" ref="postService" />
+	</bean>
+	
+	<!-- 현호 controller-->
+	<bean id = "joinController" class = "controller.JoinController">
+		<property name="joinService" ref="joinService" />
+	</bean>
+	
+	<bean id = "iDController" class = "controller.IDController">
+		<property name="joinService" ref = "joinService"/>
+	</bean>
+	
+	<bean id = "idSearchController" class = "controller.IdSearchController">
+		<property name="idpwSearchService" ref = "idpwSearchService"/>
+	</bean>
+	
+	<bean id = "pwSearchController" class = "controller.PwSearchController">
+		<property name="idpwSearchService" ref = "idpwSearchService"/>
+	</bean>
+	
+	<bean id = "joinAuthController" class= "controller.JoinAuthController">
+		<property name="joinAuthService" ref = "joinAuthService"/>
+	</bean>
+	
+	<bean id = "memberModifiedController" class = "controller.MemberModifiedController">
+		<property name="joinService" ref="joinService" />
+	</bean>
+	
+	<bean id = "loginController" class = "controller.LoginController">
+		<property name = "joinService" ref = "joinService"/>
+	</bean>
+	
+	<bean id = "popup_bannerController" class = "controller.Popup_BannerController">	
+		<property name="popupService" ref = "popupService"/>
+		<property name="fileService" ref = "fileService"/>
+		<property name="bannerService" ref = "bannerService"/>
+	</bean>
+	
+	<bean id = "masterCustomerController" class = "controller.MasterCustomerController">
+		<property name="emailAddrListService" ref = "emailAddrListService"/>
+	</bean>
+	
+	<bean id="memberController" class="controller.MemberController">
+		<property name="statsService" ref="statsService"/>
+	</bean>
+	
+	<!-- 민웅형 -->
+	<bean class="controller.bbs.mbbs.MBBS_WriteController">
+		<property name="mbbs_WriteService" ref="mbbs_WriteService" />
+		<property name="fileService" ref="fileService" />
+	</bean>
+	
+	<bean class="controller.bbs.mbbs.MBBS_ListController">
+		<property name="mbbs_listService" ref="mbbs_listService" />
+	</bean>
+	
+	<bean class="controller.bbs.mbbs.MBBS_ReadController">
+		<property name="mbbs_ReadService" ref="mbbs_ReadService" />
+	</bean>
+	
+	<bean class="controller.bbs.mbbs.MBBS_ReplyController">
+		<property name="mbbs_WriteService" ref="mbbs_WriteService" />
+	</bean>
+	
+	<bean class="controller.bbs.mbbs.MBBS_UpdateController">
+		<property name="mbbs_updateService" ref="mbbs_updateService" />
+	</bean>
+	
+	<bean class="controller.bbs.mbbs.MBBS_DeleteController">
+		<property name="mbbs_deleteService" ref="mbbs_deleteService" />
+	</bean>
+	<!-- SBBS 민웅 -->
+	
+	<bean class="controller.bbs.sbbs.SBBS_WriteController">
+		<property name="sbbs_WriteService" ref="sbbs_WriteService" />
+		<property name="fileService" ref="fileService" />
+	</bean>
+	
+	<bean class="controller.bbs.sbbs.SBBS_ListController">
+		<property name="sbbs_listService" ref="sbbs_listService" />
+	</bean>
+	
+	<bean class="controller.bbs.sbbs.SBBS_ReadController">
+		<property name="sbbs_ReadService" ref="sbbs_ReadService" />
+	</bean>
+	
+	<bean class="controller.bbs.sbbs.SBBS_ReplyController">
+		<property name="sbbs_WriteService" ref="sbbs_WriteService" />
+	</bean>
+	
+	<bean class="controller.bbs.sbbs.SBBS_UpdateController">
+		<property name="sbbs_updateService" ref="sbbs_updateService" />
+	</bean>
+	
+	<bean class="controller.bbs.sbbs.SBBS_DeleteController">
+		<property name="sbbs_deleteService" ref="sbbs_deleteService" />
+	</bean>
+	 <!-- ebbs 민웅 -->
+	
+	<bean class="controller.bbs.ebbs.EBBS_WriteController">
+		<property name="ebbs_WriteService" ref="ebbs_WriteService" />
+	</bean>
+	
+	<bean class="controller.bbs.ebbs.EBBS_ListController">
+		<property name="ebbs_listService" ref="ebbs_listService" />
+	</bean>
+	
+	<bean class="controller.bbs.ebbs.EBBS_DeleteController">
+		<property name="ebbs_deleteService" ref="ebbs_deleteService" />
+	</bean>
+	<!-- nbbs 민웅 -->
+	
+	<bean class="controller.bbs.nbbs.NBBS_DeleteController">
+		<property name="nbbs_deleteService" ref="nbbs_deleteService" />
+	</bean>
+	
+	<bean class="controller.bbs.nbbs.NBBS_ListController">
+		<property name="nbbs_listService" ref="nbbs_listService" />
+	</bean>
+	
+	<bean class="controller.bbs.nbbs.NBBS_ReadController">
+		<property name="nbbs_ReadService" ref="nbbs_ReadService" />
+	</bean>
+	
+	<bean class="controller.bbs.nbbs.NBBS_UpdateController">
+		<property name="nbbs_updateService" ref="nbbs_updateService" />
+	</bean>
+	
+	<bean class="controller.bbs.nbbs.NBBS_WriteController">
+		<property name="nbbs_WriteService" ref="nbbs_WriteService" />
+	</bean>
+	
+	<!-- bean 끝 -->
+
+
+	<!-- 서비스 객체에 dao,dataSource setter injection -->
+	<!--서비스 시작 -->
+	<bean id="storeService" class="service.StoreServiceImpl">
+		<property name="storeDao" ref="storeDao" />    
+	</bean>
+	
+	<bean id="masterService" class="service.MasterServiceImpl">
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+
+	<bean id="menuService" class="service.MenuServiceImpl">
+		<property name="menuDao" ref="menuDao" />
+	</bean>
+	
+	<bean id="orderService" class="service.OrderServiceImpl">
+		<property name="orderDao" ref="orderDao" />
+	</bean>
+	
+	<bean id="fileService" class="service.FileServiceImpl">
+		<property name="pictureDao" ref="pictureDao" />
+	</bean>
+	
+	<bean id="postService" class="service.PostServiceImpl">
+		<property name="postDao" ref="postDao" />
+	</bean>
+	
+	<bean id="memberService" class="service.MemberServiceImpl">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+	
+	<!-- 현호 service -->
+	
+	<bean id="joinService" class="service.JoinServiceImpl">
+		<property name="memberDao" ref="memberDao" />
+	</bean>
+	
+	<bean id = "idpwSearchService" class = "service.IdPwSearchServiceImpl">
+		<property name="memberDao" ref = "memberDao"/>
+	</bean>
+
+	<bean id = "joinAuthService" class = "service.JoinAuthServiceImpl">
+		<property name="joinAuthDao" ref = "joinAuthDao"/>
+	</bean>
+	
+	<bean id="statsService" class="service.StatsServiceImpl">
+		<property name="statsDao" ref="statsDao"/>
+	</bean>
+	
+	<bean id = "emailAddrListService" class = "service.EmailAddrListServiceImpl">
+		<property name="emailAddrListDao" ref = "emailAddrListDao"/>
+	</bean>
+	
+	<bean id = "popupService" class = "service.PopupServiceImpl">
+		<property name="popupDao" ref = "popupDao"/>
+	</bean>
+	<bean id = "bannerService" class = "service.BannerServiceImpl">
+		<property name="bannerDao" ref = "bannerDao"/>
+	</bean>
+	
+	<!-- 민웅 Service -->
+	
+	<bean id="mbbs_listService" class="service.bbs.mbbs.MBBS_ListServiceImpl">
+		<property name="mbbs_ArticleDao" ref="mbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="mbbs_WriteService" class="service.bbs.mbbs.MBBS_WriteServiceImpl">
+		<property name="mbbs_ArticleDao" ref="mbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="mbbs_ReadService" class="service.bbs.mbbs.MBBS_ReadServiceImpl">
+		<property name="mbbs_ArticleDao" ref="mbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="mbbs_updateService" class="service.bbs.mbbs.MBBS_UpdateServiceImpl">
+		<property name="mbbs_ArticleDao" ref="mbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="mbbs_deleteService" class="service.bbs.mbbs.MBBS_DeleteServiceImpl">
+		<property name="mbbs_ArticleDao" ref="mbbs_ArticleDao" />
+	</bean>
+	 <!-- Service sbbs 민웅 -->
+	 <!-- 민웅 Service -->
+	
+	<bean id="sbbs_listService" class="service.bbs.sbbs.SBBS_ListServiceImpl">
+		<property name="sbbs_ArticleDao" ref="sbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="sbbs_WriteService" class="service.bbs.sbbs.SBBS_WriteServiceImpl">
+		<property name="sbbs_ArticleDao" ref="sbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="sbbs_ReadService" class="service.bbs.sbbs.SBBS_ReadServiceImpl">
+		<property name="sbbs_ArticleDao" ref="sbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="sbbs_updateService" class="service.bbs.sbbs.SBBS_UpdateServiceImpl">
+		<property name="sbbs_ArticleDao" ref="sbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="sbbs_deleteService" class="service.bbs.sbbs.SBBS_DeleteServiceImpl">
+		<property name="sbbs_ArticleDao" ref="sbbs_ArticleDao" />
+	</bean>
+	 <!-- 민웅 ebbs Service -->
+	
+	<bean id="ebbs_listService" class="service.bbs.ebbs.EBBS_ListServiceImpl">
+		<property name="ebbs_ArticleDao" ref="ebbs_ArticleDao" />
+	</bean>
+	
+	<bean id="ebbs_WriteService" class="service.bbs.ebbs.EBBS_WriteServiceImpl">
+		<property name="ebbs_ArticleDao" ref="ebbs_ArticleDao" />
+	</bean>
+	
+	<bean id="ebbs_deleteService" class="service.bbs.ebbs.EBBS_DeleteServiceImpl">
+		<property name="ebbs_ArticleDao" ref="ebbs_ArticleDao" />
+	</bean>
+	 <!-- 민웅 nbbs Service -->
+	
+	<bean id="nbbs_deleteService" class="service.bbs.nbbs.NBBS_DeleteServiceImpl">
+		<property name="nbbs_ArticleDao" ref="nbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="nbbs_listService" class="service.bbs.nbbs.NBBS_ListServiceImpl">
+		<property name="nbbs_ArticleDao" ref="nbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="nbbs_ReadService" class="service.bbs.nbbs.NBBS_ReadServiceImpl">
+		<property name="nbbs_ArticleDao" ref="nbbs_ArticleDao" />
+	</bean>
+	<bean id="nbbs_updateService" class="service.bbs.nbbs.NBBS_UpdateServiceImpl">
+		<property name="nbbs_ArticleDao" ref="nbbs_ArticleDao" />
+	</bean>
+	
+	<bean id="nbbs_WriteService" class="service.bbs.nbbs.NBBS_WriteServiceImpl">
+		<property name="nbbs_ArticleDao" ref="nbbs_ArticleDao" />
+	</bean>
+	
+	<!--서비스 끝 -->
+
+
+
+	<!-- dao -->
+	<bean id="storeDao" class="dao.StoreDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="adminDao" class="dao.AdminDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="menuDao" class="dao.MenuDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="orderDao" class="dao.OrderDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="pictureDao" class="dao.PictureDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="postDao" class="dao.PostDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 현호Dao -->
+	
+	<bean id="memberDao" class="dao.MemberDaoImpl" >
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+			
+	<bean id = "joinAuthDao" class= "dao.JoinAuthDaoImpl">
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "statsDao" class = "dao.StatsDaoImpl">
+		<property name = "sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "emailAddrListDao" class= "dao.EmailAddrListDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "popupDao" class = "dao.PopupDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<bean id = "bannerDao" class = "dao.BannerDaoImpl">
+		<property name="sqlMapClient" ref = "sqlMapClient"/>
+	</bean>
+	
+	<!-- 민웅 Dao -->
+	
+	<bean id="mbbs_ArticleDao" class="dao.MBBS_ArticleDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="sbbs_ArticleDao" class="dao.SBBS_ArticleDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="ebbs_ArticleDao" class="dao.EBBS_ArticleDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<bean id="nbbs_ArticleDao" class="dao.NBBS_ArticleDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- dao 끝-->
+	
+	
+	
+	<!-- multipart -->
+	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- <property name="maxUploadSize" value = "102400"></property> -->
+	</bean>
+	<!-- multipart 끝 -->
+	
+	<!-- ibatis 등록 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="WEB-INF/config/SqlMapConfig.xml" />
+	</bean>
+	<context:property-placeholder location="classpath:/database.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${database.driverClass}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+	<!-- ibatis 설정 끝 -->
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" /> <!-- /WEB-INF/view/ 이 경로에 자원이있음 -->
+		<property name="suffix" value=".jsp" />  <!-- sayWhat(suffix).jsp 가 응답을 처리할 애다 -->
+	</bean>
+	<!-- 벨리데이션 메시지 설정 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages.masterMenu</value>
+				<value>messages.order</value>
+			</list>
+		</property>
+	</bean>
+</beans>

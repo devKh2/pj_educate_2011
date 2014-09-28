@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="post">
+	<select id="count" resultClass="int">
+		select count(zipcode)
+		from zipcode
+		where dong like '%' || #searchDong# || '%'
+	</select>
+
+	<select id="list" resultClass="model.Post">
+		SELECT *
+		FROM zipcode
+		where dong like '%' || #searchDong# || '%'
+		ORDER BY dong DESC
+	</select>
+	<resultMap id="postMap"  class="model.Post">
+		<result property="zipcode" 	column="zipcode" />
+		<result property="sido" 	column="sido" />
+		<result property="gugun" 	column="gugun" />
+		<result property="dong" 	column="dong" />
+		<result property="bunji" 	column="bunji" />
+	</resultMap>
+</sqlMap>

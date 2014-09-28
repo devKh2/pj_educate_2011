@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="popup">
+
+	<select id = "count" resultClass = "int">
+		select count(pop_artId)
+			from popup
+	</select>
+	
+	<select id = "list" resultClass ="model.Popup">
+		SELECT  pop_artid pop_artid,
+		        pop_title pop_title,
+		        pop_position pop_position,
+		        pop_picnum pop_picNum,
+		        TO_CHAR(pop_startDate, 'YY/MM/DD HH24:mi') pop_startDate,
+		        TO_CHAR(pop_endDate, 'YY/MM/DD HH24:mi') pop_endDate,
+		        pop_situation pop_situation,
+		        TO_CHAR(pop_registDate, 'YYYY/MM/DD') pop_registDate,
+		        pop_picpath,
+		        pop_linkAddr
+		FROM   ( 
+		        SELECT  rownum rnum,
+		                pop_artid,
+		                pop_title,
+		                pop_position,
+		                pop_picnum,
+		                pop_startDate,
+		                pop_endDate,
+		                pop_situation,
+		                pop_registDate,
+		                pic.picpath pop_picpath,
+		                pop_linkAddr
+		        FROM   ( 
+		                SELECT  *
+		                  FROM   popup
+		                where pop_title like '%' || #search# || '%' 
+		                ORDER BY pop_artid DESC
+		                )pop,
+		                picture pic
+		        where rownum <![CDATA[<=]]> #endRow# 
+		                and pop.pop_picNum = pic.pic_seq
+		        )
+		where rnum <![CDATA[>=]]> #firstRow#
+		order by pop_artid desc	
+	</select>
+
+	<insert id="insertPopup" parameterClass="model.Popup">
+		<selectKey keyProperty="pop_artid" resultClass="int">
+		select popup_seq.nextval from dual
+		</selectKey>
+		insert into popup  
+				values (#pop_artid#,
+						#pop_position#, 
+                        #pop_title#, 
+                        #pop_picNum#, 
+                        to_timestamp(#pop_startDate#, 'yy/mm/dd hh24:mi'),
+                        to_timestamp(#pop_endDate#, 'yy/mm/dd hh24:mi'),
+                        '대기중',
+                        sysdate,
+                        #pop_linkAddr#
+                        )
+	</insert>
+
+	
+	<delete id="deletePopup1">
+		delete picture
+  		where pic_seq = (
+	                    select pop_picnum
+	                    from popup
+	                    where pop_artid = #pop_artid#
+	                     )
+	</delete>
+	
+	<delete id="deletePopup2">
+		DELETE popup
+		WHERE pop_artid = #pop_artid#	
+	</delete>
+	
+	<update id="pop_situationUpdate1" >
+		update popup 
+			set pop_situation = '대기중'      
+		where TO_CHAR(pop_startdate, 'yy/mm/dd hh24:mi') <![CDATA[>]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+	
+	<update id="pop_situationUpdate2" >
+		update popup 
+			set pop_situation = '실행중'      
+		where   TO_CHAR(pop_startdate, 'yy/mm/dd hh24:mi') <![CDATA[<]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+    		AND TO_CHAR(pop_enddate, 'yy/mm/dd hh24:mi') <![CDATA[>]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+		
+		
+	<update id="pop_situationUpdate3">
+		update popup 
+			set pop_situation = '완료'      
+		where  TO_CHAR(pop_enddate, 'yy/mm/dd hh24:mi') <![CDATA[<]]> TO_CHAR( sysdate, 'yy/mm/dd hh24:mi')
+	</update>
+	
+	<select id="presentPopup1" resultClass="model.Popup">
+		SELECT  pop_picpath,
+				pop_linkAddr
+		FROM   ( 
+		   		   SELECT rownum rnum,
+		                  pop_artid,
+		                  pop_title,
+		                  pop_position,
+		                  pop_picnum,
+		                  pop_startDate,
+	                      pop_endDate,
+	                      pop_situation,
+	                      pop_registDate,
+	                      pic.picpath pop_picpath,
+	                      pop_linkAddr
+		          	FROM ( 
+		           			SELECT  *
+                    		FROM  popup
+		                    where pop_position = 'first' and pop_situation = '실행중'
+                    		ORDER BY pop_artid DESC
+		                   )pop,
+		                   picture pic
+		          where pop.pop_picNum = pic.pic_seq 
+		          )
+	</select>
+	
+	<select id="presentPopup2" resultClass="model.Popup">
+		SELECT  pop_picpath,
+				pop_linkAddr
+		FROM   ( 
+		   		   SELECT rownum rnum,
+		                  pop_artid,
+		                  pop_title,
+		                  pop_position,
+		                  pop_picnum,
+		                  pop_startDate,
+	                      pop_endDate,
+	                      pop_situation,
+	                      pop_registDate,
+	                      pic.picpath pop_picpath,
+	                      pop_linkAddr
+		          	FROM ( 
+		           			SELECT  *
+                    		FROM  popup
+		                    where pop_position = 'second' and pop_situation = '실행중'
+                    		ORDER BY pop_artid DESC
+		                   )pop,
+		                   picture pic
+		          where pop.pop_picNum = pic.pic_seq 
+		          )	
+	</select>
+	<!-- 
+	<select  id = "isExist" resultClass = "int">
+		select count(pop_artId)
+		from(
+		        select *
+		        from popup
+		        where pop_position = #pop_position#
+		      )
+		where ( ( (pop_situation = '실행중') and ( (to_char(pop_endDate,   'yy/mm/dd hh24:mi') ) <![CDATA[>]]> (to_char(#sd#, 'yy/mm/dd hh24:mi') ) ) ) 
+		        and
+		      	( (pop_situation = '대기중') and ( (to_char(pop_startDate, 'yy/mm/dd hh24:mi') ) <![CDATA[<]]> (to_char(#ed#, 'yy/mm/dd hh24:mi') ) ) ) )
+		        or
+		      ( ( (pop_situation = '대기중') and ( (to_char(pop_endDate,   'yy/mm/dd hh24:mi') ) <![CDATA[>]]> (to_char(#sd#, 'yy/mm/dd hh24:mi') ) ) )
+		        and
+		        ( (pop_situation = '대기중') and ( (to_char(pop_startDate, 'yy/mm/dd hh24:mi') ) <![CDATA[<]]> (to_char(#ed#, 'yy/mm/dd hh24:mi') ) ) ) ) 
+	</select>
+	 -->
+	 
+	 <select id = "isEnd1" resultClass = "int">
+	 	select count(*)
+	 	from popup
+	 </select>
+	 
+	 <select id = "isEnd2" resultClass = "int">
+	 	select count(*)
+	 	from popup
+	 	where pop_situation = '완료'
+	 </select>
+	 
+	 <select id = "isWait" resultClass = "int">
+	 	select count(*)
+	 	from popup
+	 	where pop_situation = '대기중'
+	 </select>
+	 
+	 <select id = "isWait2" resultClass = "int">
+	 
+	 </select>
+	 
+	 <select id = "isExist1" resultClass = "int">
+	 	  select count(ban.id)
+		         
+		  from(   
+		        select  pop_artid id,
+		                pop_position ,
+		                pop_title,
+		                pop_picnum,
+		                (to_char(pop_startDate, 'yy/mm/dd hh24:mi')) pop_startDate,
+		                (to_char(pop_endDate, 'yy/mm/dd hh24:mi')) pop_endDate ,
+		                pop_situation ,
+		                pop_registdate,
+		                pop_linkaddr
+		        from(
+		              select *
+		              from popup
+		              where pop_position = #pop_position#
+		            ) 
+		        where (pop_situation = '실행중')
+		      )ban
+		  where  pop_endDate  <![CDATA[<]]> (to_char(#sd#, 'yy/mm/dd hh24:mi'))
+	 </select>
+	 
+	 <select id = "isExist2" resultClass = "int">
+	 		  select count(ban.id)
+			         
+			  from(   
+			        select  pop_artid id,
+			                pop_position ,
+			                pop_title,
+			                pop_picnum,
+			                (to_char(pop_startDate, 'yy/mm/dd hh24:mi')) pop_startDate,
+			                (to_char(pop_endDate, 'yy/mm/dd hh24:mi')) pop_endDate ,
+			                pop_situation ,
+			                pop_registdate,
+			                pop_linkaddr
+			        from(
+			              select *
+			              from popup
+			              where pop_position = #pop_position#
+			            ) 
+			        where (pop_situation = '대기중')
+			      )ban
+			  where (to_char(#ed#, 'yy/mm/dd hh24:mi')) <![CDATA[<]]> pop_startDate 
+	 </select>
+	 
+	 <select id = "isExist3" resultClass = "int">
+		 	 select count(ban.id)
+			         
+			  from(   
+			        select  pop_artid id,
+			                pop_position ,
+			                pop_title,
+			                pop_picnum,
+			                (to_char(pop_startDate, 'yy/mm/dd hh24:mi')) pop_startDate,
+			                (to_char(pop_endDate, 'yy/mm/dd hh24:mi')) pop_endDate ,
+			                pop_situation ,
+			                pop_registdate,
+			                pop_linkaddr
+			        from(
+			              select *
+			              from popup
+			              where pop_position = #pop_position#
+			            ) 
+			        where (pop_situation = '대기중')
+			      )ban
+			  where pop_endDate <![CDATA[<]]> (to_char(#sd#, 'yy/mm/dd hh24:mi'))
+	 </select>
+	 
+	 <select id = "isExist4" resultClass = "int">
+		  select count(ban.id)
+		         
+		  from(   
+		        select  pop_artid id,
+		                pop_position ,
+		                pop_title,
+		                pop_picnum,
+		                (to_char(pop_startDate, 'yy/mm/dd hh24:mi')) pop_startDate,
+		                (to_char(pop_endDate, 'yy/mm/dd hh24:mi')) pop_endDate ,
+		                pop_situation ,
+		                pop_registdate,
+		                pop_linkaddr
+		        from(
+		              select *
+		              from popup
+		              where pop_position = #pop_position#
+		            ) 
+		        where (pop_situation = '대기중')
+		      )ban
+		  where (to_char(#ed#, 'yy/mm/dd hh24:mi')) <![CDATA[<]]> pop_startDate  
+	 </select>
+	 
+</sqlMap>

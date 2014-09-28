@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	padding: 0;
+ 	font: small /1.6em 굴림체;
+}
+ 
+#wrapper {
+	  width:1000px;
+	  position:relative;
+	  left:50%;                     /* 처음 있던 자리를 기준으로 50%의 오른쪽에
+                                        있게 되는 것인가?*/
+      margin-left:-500px;                /* wrapper의 가로길이만큼 다시 당기면
+	                                   가운데 위치에 오게 된다.*/
+	  }
+#header	{
+	}
+.Htop table{width:980px;}
+	
+.logo{
+	 width:130px; padding:10px;
+
+	}
+
+#header h1 {
+	  margin:1em;
+	  }
+ 
+#content {
+	  margin-top: 1em;
+	  width:1000px;
+	  }
+ 
+#footer{
+	margin-top: 1em;
+	clear:both; 
+	display:inline-block; 
+	width:100%; 
+	}
+	
+
+	  

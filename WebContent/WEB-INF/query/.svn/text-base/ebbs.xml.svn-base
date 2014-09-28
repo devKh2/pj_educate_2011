@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ebbs">
+
+	<select id="count" resultClass="int">
+		SELECT COUNT(ebbs_artid)
+		FROM ( SELECT * FROM evaluation
+		<dynamic prepend="where">
+				<isNotEmpty>
+					st_num = #stnum#
+				</isNotEmpty>
+		</dynamic>
+			)
+	</select>
+	
+	<!-- 리스트를 가져오는 쿼리문 입니다. start-->	
+	
+	<resultMap id="listMap" class="model.EBBS_Article">
+		<result property="ebbs_artid" 				column="ebbs_artid"/>
+		<result property="ebbs_regdate"	 			column="ebbs_regdate"/>
+		<result property="ebbs_title"	 			column="ebbs_title"/>
+		<result property="cu_id" 					column="cu_id"/>
+		<result property="ebbs_score"				column="ebbs_score"/>
+		<result property="elpasedTime" 				column="is_new"/>
+		<result property="st_num" 				column="st_num"/>
+	</resultMap>
+	
+	<select id="list" resultMap="listMap">
+		SELECT ebbs_artid                                                			 ,
+		       TO_CHAR(ebbs_regdate,'YYYY/MM/DD') ebbs_regdate						 ,
+		       cu_id                                                				 ,                                              			
+		       resize_title(ebbs_title)      AS ebbs_title                           ,
+		       ebbs_score ,
+		       fn_get_new(ebbs_regdate) AS is_new,
+		       st_num									 
+		FROM   ( SELECT ROWNUM             RNUM,
+		               ebbs_artid              ,
+		               ebbs_regdate            ,
+		               cu_id             	   ,
+		               ebbs_score ,
+		               ebbs_title,
+		               st_num			   
+		       		FROM    (	SELECT * FROM evaluation 
+				<dynamic prepend="where">
+		       		<isNotEmpty>
+						st_num=#stnum#
+					</isNotEmpty>
+				</dynamic>
+		               ORDER BY ebbs_artid DESC
+		     			)where ROWNUM <![CDATA[<=]]> #endRow#
+		     			 )
+						WHERE  RNUM  <![CDATA[>=]]> #firstRow#
+	 </select>
+	
+	 <!-- Article을  입력시키는 쿼리문 start -->		
+ <insert id="insertArticle">
+<selectKey keyProperty="ebbs_artid" resultClass="int">
+   SELECT ebbs_artid.nextval From dual
+</selectKey> 	
+		insert into evaluation(   ebbs_artid
+								, st_num
+		                    	, ebbs_title
+		                    	, ebbs_score
+		                    	, cu_id)	
+        values ( #ebbs_artid#
+                ,#st_num#
+                ,#ebbs_title#
+                ,#ebbs_score#
+                ,#cu_id#)
+ </insert>
+ 
+ 
+ 	
+
+ 
+ <!-- count를 1씩 증가시키는 쿼리문 start -->	
+ <update id="increaseReadCount">
+			
+ </update>
+
+
+<!-- updateArticle 쿼리문 start  -->	
+	<update id="updateArticle">
+		update evaluation
+		set ebbs_title = #ebbs_title#
+		, ebbs_score = #ebbs_score#
+		where ebbs_artid = #ebbs_artid#
+	</update>
+
+<!-- deleteArticle 쿼리문 start  -->	
+	<delete id="deleteArticle">
+		delete from evaluation
+		where ebbs_artid =#ebbs_artid#
+	</delete>
+	
+<!-- id_search 쿼리문 -->
+	<select id="id_search" resultClass="int" parameterClass="map">
+		SELECT COUNT(ebbs_artid)
+		FROM evaluation 
+		WHERE cu_id =#user_id#
+		and st_num=#st_num#
+	</select>
+	
+<!-- 한 가게에서 랜덤으로 4개만 가져오는 쿼리  -->
+	
+  	<!-- random_4_list 입니다. 쿼리 구문-->
+	<select id="random_4_list" resultClass="model.Random4_EBBS">
+		SELECT evalue.ebbs_title as ebbs_title,
+			   evalue.ebbs_score as ebbs_score,
+			   evalue.ebbs_artid as ebbs_artid,
+			   st.st_name as st_name, 
+			   st.st_num  as st_num,
+			   pic.picpath as picpath
+		FROM (SELECT * FROM evaluation ORDER BY DBMS_RANDOM.VALUE()) evalue ,store st , picture pic 
+		WHERE evalue.st_num = st.st_num 
+			  AND st.st_picnum = pic.pic_seq 
+			  AND evalue.st_num = (SELECT st_num FROM (SELECT * FROM evaluation ORDER BY DBMS_RANDOM.VALUE()) 
+			  					   WHERE ROWNUM <![CDATA[<]]> 1 + 1)
+  			  AND ROWNUM <![CDATA[<]]> 4 + 1 ORDER BY DBMS_RANDOM.VALUE()
+	</select>
+
+</sqlMap>

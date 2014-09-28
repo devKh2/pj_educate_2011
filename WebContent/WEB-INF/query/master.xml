@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="master">
+
+	<update id="update">
+		UPDATE admin
+		   SET admin_id = #id#,
+		   	   admin_name = #name#,
+		   	   admin_email = #email#,
+		   	   admin_ph = #ph#,
+		   	   admin_emailrev = #emailrev#,
+		   	   home_name = #home_name#,
+		   	   home_title = #home_title#
+		   	   <isNotNull property="pw">
+		   	   	,admin_pw = #pw#
+		   	   </isNotNull>
+		 WHERE admin_id = #id#
+	</update>
+
+	<select id="getAdmin" resultClass="model.Admin" >
+		SELECT admin_id id,
+			   admin_name name,
+			   admin_email eMail,
+			   admin_ph ph,
+			   admin_emailrev emailrev,
+			   home_name,
+			   home_title,
+			   to_char(con_time, 'YYYY/MM/DD HH24:mi:ss') as time
+		  FROM ADMIN
+		 WHERE admin_id = 'admin'
+	</select>
+	
+	<insert id="insertPic" parameterClass="model.PictureModel">
+		INSERT INTO picture
+					(pic_seq,
+					picpath,
+					table_num,
+					user_picname,
+					server_picname)
+			 VALUES (pic_seq.NEXTVAL, #picpath#, #table_num#, #user_picname#, #server_picname#)
+				
+	</insert>
+	
+	<update id="pictureUpdate" parameterClass="model.PictureModel">
+		UPDATE PICTURE 
+		SET 
+			PICPATH = #picpath#,
+			table_num=  #table_num#,    
+			user_picname= #user_picname#,
+			server_picname= #server_picname#
+		WHERE pic_seq=#seq#
+	</update>
+	
+	<select id="pictureExist" parameterClass="int" resultClass="string">
+		select picpath from picture 
+  		where pic_seq=#seq#
+	</select>
+	
+	<select id = "getMaxseq" resultClass="int">
+		SELECT max(pic_seq)
+		  FROM picture
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="email">
+
+	<select id="getCustomAddrlist" resultClass="model.EmailListModel">
+		select cu_name name,
+       			cu_email emailaddr
+		from customer
+	</select>
+	
+	<select id="getStoreAddrlist" resultClass="model.EmailListModel">
+		select st_name name,
+		       st_email emailaddr
+		from store
+	</select>
+</sqlMap>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="user">
+	<select  id = "isExist" resultClass = "string">
+		select cu_id 
+			from customer 
+		where cu_id = #id#
+	</select>
+	
+	<select id = "isNameResidentExist" resultClass = "string">
+		select cu_name
+			from customer
+		where cu_name = #name#
+			AND res_num = #preResidentNum# || #tailResidentNum#
+	</select>
+	
+	<select id ="login" resultClass="model.Member">
+	  	select 	RES_NUM residentNum,
+				CU_NAME userName,
+				CU_ID id,
+				CU_PW pw,
+				CU_HP phone,
+				CU_EMAIL email,
+				CU_POST preAddress,
+				CU_DETAILADDR tailAddress				  
+			from customer  
+		where cu_id = #id#
+		 AND cu_pw = #pw#
+	</select>
+	
+	<select id="idsearch" resultClass="model.SearchMember">
+		select 	cu_id,
+				cu_pw,
+				cu_name
+			from customer
+		where cu_name = #name#
+			AND res_num = #preResidentNum# || #tailResidentNum#
+	</select>
+	
+	<resultMap id = "idpwSearch" class = "model.Member">
+		<result property="id" 		column = "cu_id"/>
+		<result property="pw" 		column = "cu_pw"/>
+		<result property="userName" column = "cu_name"/>
+	</resultMap>
+	
+	<select id="pwsearch"  resultClass="model.Member" parameterClass="map">
+		select 	cu_id,
+				cu_pw,
+				cu_name
+			from customer
+		where cu_name = #name#
+			AND res_num = #preResidentNum# || #tailResidentNum#
+	</select>
+	
+	<insert id="join" parameterClass="model.JoinRequest">
+	<selectKey keyProperty="id" resultClass="int">
+		select cu_num.nextval from dual 
+	</selectKey>
+		insert into customer (
+							CU_NUM
+							,RES_NUM
+							,CU_NAME
+							,CU_ID
+							,CU_PW
+							,CU_HP
+							,CU_EMAIL
+							,CU_POST
+							,CU_DETAILADDR
+							,CU_JOINDATE
+		)
+		values (cu_num.nextval,
+				#preResident# || #tailResident#,  
+				#userName#, 
+				#userID#, 
+				#userPW#, 
+				#cellNumber#, 
+				#preEmail# || '@' || #tailEmail#, 
+				#preAddress#, 
+				#tailAddress#, 
+				sysdate
+				)
+	</insert>
+	
+	<update id="modified">
+			update customer
+		  		set   cu_pw = #userPW#,
+				      cu_email = #preEmail# || '@' || #tailEmail#,
+				      cu_hp = #cellNumber#,
+				      cu_post = #preAddress#,
+				      cu_detailaddr = #tailAddress#
+			where cu_id = #userID#
+	</update> 
+	
+	
+	<resultMap id="UserMap" class ="model.Member">
+		<result property = "id" 		column = "cu_id"/>
+		<result property = "pw" 		column = "cu_pw"/>
+		<result property = "userName" 	column = "cu_name"/>			
+	</resultMap>
+	
+	<!-- 관리자 로그인처리 -->
+	<select id ="admin_login" resultClass="model.Member">
+		 select 	
+				ADMIN_NAME userName,
+				admin_id id,
+				admin_pw pw,
+				ADMIN_PH phone,
+				ADMIN_EMAIL email			  
+		from admin  
+		where admin_id = #id# 
+			AND admin_pw = #pw#
+	</select>
+	
+	<select id="getMemberCount" resultClass="int">
+		SELECT COUNT(*)
+		FROM customer
+		WHERE
+		cu_id like '%' || #keyWord# || '%'
+	</select>
+	
+	<select id = "getMemberList" resultClass="model.Member">
+		SELECT cu_id as id    ,   
+	       cu_num as num   ,   
+	       cu_name as userName ,     
+	       cu_hp as phone,        
+	       cu_email as email  ,  
+	       cu_post as preAddress ,    
+	       cu_detailaddr as tailAddress,
+	       to_char(cu_joindate,'YYYY/MM/DD HH24:mi:ss') as joinDate  
+	FROM   ( SELECT rownum rnum     ,
+	               cu_id     ,   
+	               cu_num    ,   
+	               cu_name ,     
+	               cu_hp,        
+	               cu_email   ,  
+	               cu_post  ,    
+	               cu_detailaddr,
+	               cu_joindate   
+	       FROM    (SELECT  cu_id     ,
+	                        cu_num    ,
+	                        cu_name ,
+	                        cu_hp,
+	                        cu_email   ,
+	                        cu_post  ,
+	                        cu_detailaddr,
+	                        cu_joindate
+	               FROM     customer
+	               WHERE    cu_id LIKE '%' || #keyWord# || '%'
+	               )
+	       WHERE   rownum <![CDATA[<=]]> #endRow#
+	       )
+	WHERE  rnum <![CDATA[>=]]> #firstRow# 
+	ORDER BY cu_num DESC
+	</select>
+
+	<select id="idsearchlist" resultClass="model.SearchMember">
+		select 	cu_id,
+				cu_name,
+				cu_pw
+			from customer
+		where cu_id like '%' || #name# || '%'
+	</select>
+
+	<delete id="delete">
+		DELETE FROM customer
+		 WHERE cu_id = #id#
+	</delete>
+	
+	<select id="getFavoriteSite" resultClass="string" parameterClass="string">
+		select st_num from favorite_store where cu_id=#id#
+	</select>
+	
+	<select id="isExistingFavoriteSite" resultClass="string" parameterClass="map">
+		select st_num 
+		from favorite_store 
+		where 
+			cu_id=#id# and 
+			st_num=#st_num#
+	</select>
+	
+	<insert id="setFavoriteSite" parameterClass="map">
+		INSERT 
+		INTO FAVORITE_STORE (CU_ID, ST_NUM) 
+		VALUES (#id#, #st_num#)
+	</insert>
+	
+		<!-- 가게주인 로그인처리 -->
+	<select id ="store_login" resultClass="model.Member">
+		select 	
+				st_name userName,
+				st_id id,
+				st_pw pw,
+				st_ph phone,
+				st_email email			  
+		from store  
+		where store_id = #id# 
+			AND store_pw = #pw#
+			</select>
+	
+	<!-- 가게주인 인지 알아보는 단계 -->
+<select id ="store_login_search" resultClass="model.Member">
+	SELECT 
+    	owner_id id,
+    	st_num 
+  	FROM store
+  	WHERE owner_id =#id#
+ </select>
+
+</sqlMap>

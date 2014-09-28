@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<!-- Always ensure to use the correct XML header as above! -->
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"/>
+	<sqlMap resource="../query/store.xml"/>
+	<sqlMap resource="../query/master.xml"/>
+	<sqlMap resource="../query/menu.xml"/>
+	<sqlMap resource="../query/order.xml"/>
+	<sqlMap resource="../query/sale.xml"/>
+	<sqlMap resource="../query/post.xml"/>
+	<sqlMap resource="../query/user.xml"/>
+	<sqlMap resource="../query/auth.xml"/>
+	<sqlMap resource="../query/stats.xml"/>
+	<sqlMap resource="../query/email.xml"/>
+	<sqlMap resource="../query/popup.xml"/>
+	<sqlMap resource="../query/banner.xml"/>
+	  <sqlMap resource="../query/sbbs.xml" /> 
+  <sqlMap resource="../query/ebbs.xml" /> 
+  <sqlMap resource="../query/nbbs.xml" />
+  <sqlMap resource="../query/mbbs.xml" />  
+</sqlMapConfig>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="stats">	
+	<select id="count" resultClass="int">
+		select 	count(st_name)
+          from  (   select    st_name,
+                              st_num,
+                              menu_num,
+                              menu_price,
+                              menu_name,
+                              orderdetail_seq,
+                              quantity,
+                              ordertime
+                      from (
+                           select store.st_name st_name,
+                                  store.st_num st_num,
+                                  order_detail.menu_num menu_num,
+                                  menu.menu_price menu_price,
+                                  menu.menu_name menu_name,
+                                  order_detail.orderdetail_seq orderdetail_seq,
+                                  order_detail.quantity quantity,
+                                  order_detail.order_time ordertime
+                            from menu, order_detail, store
+                          where menu.menu_num = order_detail.menu_num
+                                and store.st_num = order_detail.st_num
+                                and store.st_num = menu.st_num
+                          order by orderdetail_seq 
+                        )
+                )
+		  where  to_char(ordertime, 'YYYY/MM/DD') like '%' || #date# || '%'
+		  
+	</select>
+	
+	
+	
+	<select id="list" resultClass="model.DayOfStats_Total">
+		select    st_name,
+		          st_num,
+		          sum ( menu_price * quantity) profit
+		   from  (   select    st_name,
+		                       st_num,
+		                       menu_num,
+		                       menu_price,
+		                       menu_name,
+		                       orderdetail_seq,
+		                       quantity,
+		                       ordertime
+		                  from (
+		                           select store.st_name st_name,
+		                                  store.st_num st_num,
+		                                  order_detail.menu_num menu_num,
+		                                  menu.menu_price menu_price,
+		                                  menu.menu_name menu_name,
+		                                  order_detail.orderdetail_seq orderdetail_seq,
+		                                  order_detail.quantity quantity,
+		                                  order_detail.order_time ordertime
+		                               from  menu, order_detail, store
+		                            where menu.menu_num = order_detail.menu_num
+		                                  and store.st_num = order_detail.st_num
+		                                  and store.st_num = menu.st_num
+		                            order by orderdetail_seq 
+		                        )
+		             <dynamic prepend = "where">
+		             	<isNotEmpty property = "st_name">
+		             		st_name = #st_name#
+		             	</isNotEmpty>   
+		             </dynamic>
+		            )
+		where  to_char(ordertime, 'YYYY/MM/DD') like '%' || #date# || '%'
+		group by st_name, st_num
+		
+	</select>
+	
+	
+	<select id="eachStorelistcount" resultClass="int">
+		    select  count(menu_num)
+            from  (             select    st_name,
+                                          st_num,
+                                          menu_num,
+                                          menu_price,
+                                          menu_name,
+                                          orderdetail_seq,
+                                          quantity,
+                                          ordertime
+                                  from (
+                                       select store.st_name st_name,
+                                              store.st_num st_num,
+                                              order_detail.menu_num menu_num,
+                                              menu.menu_price menu_price,
+                                              menu.menu_name menu_name,
+                                              order_detail.orderdetail_seq orderdetail_seq,
+                                              order_detail.quantity quantity,
+                                              order_detail.order_time ordertime
+                                        from menu, order_detail, store
+                                      where menu.menu_num = order_detail.menu_num
+                                            and store.st_num = order_detail.st_num
+                                            and store.st_num = menu.st_num
+                                      order by orderdetail_seq 
+                                    ) 
+                              where st_num = #st_num# 
+                            )
+                      where  to_char(ordertime, 'YYYY/MM/DD') like '%' || #date# || '%'
+                      order by menu_num
+	</select>
+	
+	<!--  -->
+	<select id="eachStorelist" resultClass="model.DayOfStats_Total">
+	
+	        select  menu_num,
+                    menu_name,
+                    menu_price,
+                    quantity,
+                    menu_price * quantity total,
+                    ordertime
+            from  (             select    st_name,
+                                          st_num,
+                                          menu_num,
+                                          menu_price,
+                                          menu_name,
+                                          orderdetail_seq,
+                                          quantity,
+                                          ordertime
+                                  from (
+                                       select store.st_name st_name,
+                                              store.st_num st_num,
+                                              order_detail.menu_num menu_num,
+                                              menu.menu_price menu_price,
+                                              menu.menu_name menu_name,
+                                              order_detail.orderdetail_seq orderdetail_seq,
+                                              order_detail.quantity quantity,
+                                              order_detail.order_time ordertime
+                                        from menu, order_detail, store
+                                      where menu.menu_num = order_detail.menu_num
+                                            and store.st_num = order_detail.st_num
+                                            and store.st_num = menu.st_num
+                                      order by orderdetail_seq 
+                                    ) 
+                              where st_num = #st_num#
+                            )
+                where  to_char(ordertime, 'YYYY/MM/DD') like '%' || #date# || '%'
+                group by menu_num, quantity, menu_name, menu_price, menu_price * quantity, ordertime
+                order by menu_num
+	</select>
+	
+	
+	<!-- 월별통계  -->
+	<select id="yearCount" resultClass="int">
+		  select count(st_name)
+	      from(
+	                select    st_name,
+	                              st_num,
+	                              sum ( menu_price * quantity) profit
+	                       from  (   select    st_name,
+	                                           st_num,
+	                                           menu_num,
+	                                           menu_price,
+	                                           menu_name,
+	                                           orderdetail_seq,
+	                                           quantity,
+	                                           ordertime
+	                                      from (
+	                                               select store.st_name st_name,
+	                                                      store.st_num st_num,
+	                                                      order_detail.menu_num menu_num,
+	                                                      menu.menu_price menu_price,
+	                                                      menu.menu_name menu_name,
+	                                                      order_detail.orderdetail_seq orderdetail_seq,
+	                                                      order_detail.quantity quantity,
+	                                                      order_detail.order_time ordertime
+	                                                   from  menu, order_detail, store
+	                                                where menu.menu_num = order_detail.menu_num
+	                                                      and store.st_num = order_detail.st_num
+	                                                      and store.st_num = menu.st_num
+	                                                order by orderdetail_seq 
+	                                            )
+	                                  where	to_char(ordertime, 'YY') = #date#
+	                                )
+	                    group by st_name, st_num
+	              )
+	</select>
+	
+	<select id="yearList" resultClass="model.DayOfStats_Total">
+		select    st_name,
+			      st_num,
+			      sum ( menu_price * quantity) profit
+			   from  (   select    st_name,
+			                       st_num,
+			                       menu_num,
+			                       menu_price,
+			                       menu_name,
+			                       orderdetail_seq,
+			                       quantity,
+			                       ordertime
+			                  from (
+			                           select store.st_name st_name,
+			                                  store.st_num st_num,
+			                                  order_detail.menu_num menu_num,
+			                                  menu.menu_price menu_price,
+			                                  menu.menu_name menu_name,
+			                                  order_detail.orderdetail_seq orderdetail_seq,
+			                                  order_detail.quantity quantity,
+			                                  order_detail.order_time ordertime
+			                               from  menu, order_detail, store
+			                            where menu.menu_num = order_detail.menu_num
+			                                  and store.st_num = order_detail.st_num
+			                                  and store.st_num = menu.st_num
+			                            order by orderdetail_seq 
+			                        )
+	                  where	to_char(ordertime, 'YY') = #date#
+			            )
+			<dynamic prepend = "where">
+		    	<isNotEmpty property = "st_name">
+		        	st_name = #st_name#
+		        </isNotEmpty>   
+		    </dynamic>
+			group by st_name, st_num
+	</select>
+	
+	<select id="yearEachStorelistcount" resultClass="int">
+		select count(monthly)     
+	    from(select
+	                st_num,
+	                st_name,
+	                substr(ordertime, 1, 5) monthly,
+	                sum (profit) totalProfit 
+	          from (
+	                    select    st_name,
+	                              st_num,
+	                              sum ( menu_price * quantity) profit,
+	                              ordertime
+	                   from  (   select    st_name,
+	                                       st_num,
+	                                       menu_num,
+	                                       menu_price,
+	                                       menu_name,
+	                                       orderdetail_seq,
+	                                       quantity,
+	                                       ordertime
+	                                  from (
+	                                           select store.st_name st_name,
+	                                                  store.st_num st_num,
+	                                                  order_detail.menu_num menu_num,
+	                                                  menu.menu_price menu_price,
+	                                                  menu.menu_name menu_name,
+	                                                  order_detail.orderdetail_seq orderdetail_seq,
+	                                                  order_detail.quantity quantity,
+	                                                  order_detail.order_time ordertime
+	                                               from  menu, order_detail, store
+	                                            where menu.menu_num = order_detail.menu_num
+	                                                  and store.st_num = order_detail.st_num
+	                                                  and store.st_num = menu.st_num
+	                                            order by orderdetail_seq 
+	                                        )
+	                                where to_char(ordertime, 'YY') = #date#            
+	                            )
+	                where st_num = #st_num#
+	                group by st_name, st_num, ordertime
+	                order by ordertime 
+	              ) 
+	              group by st_num, st_name, substr(ordertime, 1,5)
+	              order by monthly
+	            )
+	</select>
+	
+	<select id="yearEachStorelist" resultClass="model.DayOfStats_Total">
+		
+		select
+                st_num,
+                st_name,
+                substr(ordertime, 1, 5) monthly,
+                sum (profit) totalProfit 
+          from (
+                    select    st_name,
+                              st_num,
+                              sum ( menu_price * quantity) profit,
+                              ordertime
+                   from  (   select    st_name,
+                                       st_num,
+                                       menu_num,
+                                       menu_price,
+                                       menu_name,
+                                       orderdetail_seq,
+                                       quantity,
+                                       ordertime
+                                  from (
+                                           select store.st_name st_name,
+                                                  store.st_num st_num,
+                                                  order_detail.menu_num menu_num,
+                                                  menu.menu_price menu_price,
+                                                  menu.menu_name menu_name,
+                                                  order_detail.orderdetail_seq orderdetail_seq,
+                                                  order_detail.quantity quantity,
+                                                  order_detail.order_time ordertime
+                                               from  menu, order_detail, store
+                                            where menu.menu_num = order_detail.menu_num
+                                                  and store.st_num = order_detail.st_num
+                                                  and store.st_num = menu.st_num
+                                            order by orderdetail_seq 
+                                        )
+                                where to_char(ordertime, 'YY') = #date#            
+                            )
+                where st_num = #st_num#
+                group by st_name, st_num, ordertime
+                order by ordertime 
+              ) 
+              group by st_num, st_name, substr(ordertime, 1,5)
+              order by monthly
+	</select>
+	
+
+
+	
+</sqlMap>

@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="menu">
+<resultMap id="listMap" class="model.MenuModel">
+		<result column="ST_NUM"                  property="st_num" />
+		<result column="ST_NAME"                  property="st_name" />
+		<result column="MENU_NUM"                 property="menu_num" />
+		<result column="MENU_COMMENT"          nullValue="해당 정보가 없습니다." property="menu_comment" />
+		<result column="MENU_PRICE"              nullValue="0" property="menu_price" />
+		<result column="MENU_NAME"               nullValue="" property="menu_name" />
+		<result column="MENU_PICPATH"              nullValue="" property="menu_picpath" />
+	</resultMap>
+<select id="menulist_s" resultMap="listMap">
+	select 
+			st_num,
+			st_name,
+			menu_num,
+			menu_comment,
+			menu_price,
+			menu_name,
+			menu_picpath
+	FROM (
+  		SELECT 
+  			rownum rnum,
+  			st.st_num as st_num,
+  			st.st_name as st_name,
+			menu.MENU_NUM,
+			menu.MENU_COMMENT,
+			menu.MENU_PRICE,
+			menu.MENU_NAME,
+			pic.picpath as MENU_PICPATH
+		FROM (
+          	SELECT * FROM menu WHERE menu_name like '%' || #keyWord# || '%'
+      	)menu, store st, picture pic
+     	WHERE rownum <![CDATA[<=]]> #endRow#
+      	and menu.st_num = st.st_num
+      	and menu.menu_picnum = pic.pic_seq
+     )
+  	 WHERE rnum <![CDATA[>=]]> #firstRow#
+  	 ORDER BY 
+		<isEqual property="sort_type" compareValue="default">
+			st_num desc  
+		</isEqual>
+		<isEqual property="sort_type" compareValue="desc">
+			menu_price desc
+		</isEqual>
+		<isEqual property="sort_type" compareValue="asc">
+			menu_price asc
+		</isEqual>
+</select>
+
+<select id="menulist_v" resultMap="listMap">
+	SELECT st_num      ,
+	       st_name     ,
+	       menu_num    ,
+	       menu_comment,
+	       menu_price  ,
+	       menu_name   ,
+	       menu_picpath
+	FROM   ( SELECT rownum rnum     ,
+	               menu.st_num      ,
+	               menu.st_name     ,
+	               menu.MENU_NUM    ,
+	               menu.MENU_COMMENT,
+	               menu.MENU_PRICE  ,
+	               menu.MENU_NAME   ,
+	               pic.picpath AS MENU_PICPATH
+	       FROM    (SELECT  me.st_num     ,
+	                        st.st_name    ,
+	                        me.menu_price ,
+	                        me.menu_picnum,
+	                        me.menu_num   ,
+	                        me.menu_name  ,
+	                        me.menu_comment
+	               FROM     menu me, 
+	                        ( SELECT *
+	                        FROM    store
+	                        WHERE   st_name = #keyWord#
+	                        )
+	                        st
+	               WHERE    me.st_num = st.st_num
+	               )
+	               menu,
+	               picture pic
+	       WHERE   rownum <![CDATA[<=]]> #endRow#
+	       AND     menu.menu_picnum = pic.pic_seq
+	       )
+	WHERE  rnum <![CDATA[>=]]> #firstRow# 
+	ORDER BY st_num DESC
+</select>	
+
+<select id="menulist_s_s" resultMap="listMap">
+	SELECT st_num      ,
+	       st_name     ,
+	       menu_num    ,
+	       menu_comment,
+	       menu_price  ,
+	       menu_name   ,
+	       menu_picpath
+	FROM   ( SELECT rownum rnum     ,
+	               menu.st_num      ,
+	               menu.st_name     ,
+	               menu.MENU_NUM    ,
+	               menu.MENU_COMMENT,
+	               menu.MENU_PRICE  ,
+	               menu.MENU_NAME   ,
+	               pic.picpath AS MENU_PICPATH
+	       FROM    (SELECT  me.st_num     ,
+	                        st.st_name    ,
+	                        me.menu_price ,
+	                        me.menu_picnum,
+	                        me.menu_num   ,
+	                        me.menu_name  ,
+	                        me.menu_comment
+	               FROM     menu me, 
+	                        ( SELECT *
+	                        FROM    store
+	                        WHERE   st_name LIKE '%' || #keyWord# || '%'
+	                        )
+	                        st
+	               WHERE    me.st_num = st.st_num
+	               )
+	               menu,
+	               picture pic
+	       WHERE   rownum <![CDATA[<=]]> #endRow#
+	       AND     menu.menu_picnum = pic.pic_seq
+	       )
+	WHERE  rnum <![CDATA[>=]]> #firstRow# 
+	ORDER BY st_num DESC
+</select>	
+	
+
+<select id="one" resultMap="listMap" parameterClass="map">
+	SELECT me.st_num as st_num,
+		   st.st_name as st_name,
+		   me.MENU_NUM as menu_num,
+		   me.MENU_COMMENT as menu_comment,
+		   me.MENU_PRICE as menu_price,
+		   me.MENU_NAME as menu_name,
+		   me.MENU_PICPATH as menu_picpath
+	  FROM (
+			SELECT menu.st_num,
+				   menu.MENU_NUM,
+				   menu.MENU_COMMENT,
+				   menu.MENU_PRICE,
+				   menu.MENU_NAME,
+				   pic.picpath as MENU_PICPATH
+			  FROM menu,picture pic
+      		 WHERE menu.menu_num=#menunum# 
+      		   AND menu.st_num=#stnum#
+      		   AND menu_picnum=pic.pic_seq	  
+	  		)me, store st
+	  WHERE me.st_num = st.st_num 
+	
+      
+</select>
+
+	<select id="menuCount_s" resultClass="int">
+		SELECT COUNT(*)
+		FROM menu
+		WHERE
+		menu_name like '%' || #keyWord# || '%'
+	</select>
+	
+	<select id="menuCount_s_s" resultClass="int">
+		SELECT count (*)
+  		  FROM menu me, 
+  		       (
+  		       SELECT * 
+  		         FROM store 
+  		        WHERE st_name LIKE '%' || #keyWord# || '%'
+  		       ) st
+ 		 WHERE me.st_num = st.st_num
+	</select>
+<select id="menuCount_v" resultClass="int">
+		SELECT count (*)
+  		  FROM menu me, 
+  		       (
+  		       SELECT * 
+  		         FROM store 
+  		        WHERE st_name = #keyWord#
+  		       ) st
+ 		 WHERE me.st_num = st.st_num
+</select>
+
+
+<select id="menuCount" resultClass="Int">
+	SELECT count(*)
+	  FROM menu
+</select>
+
+<select id = "menuSelect" resultClass = "model.MenuModel">
+	SELECT st_name,
+		   st_num,
+		   menu_num,
+		   menu_name,
+		   menu_price,
+		   menu_comment,
+		   menu_picpath
+	  FROM (
+	  		SELECT rownum rnum,
+	  			   st.st_name as st_name,
+	  			   me.st_num,
+	  			   me.menu_num,
+	  			   me.menu_name,
+	  			   me.menu_price,
+	  			   resize_title(me.menu_comment) as menu_comment,
+	  			   pic.picpath as menu_picpath
+	  		  FROM (
+	  		  		SELECT *
+	  		  		  FROM menu
+	  		  		) me, store st, picture pic
+	  		 WHERE rownum <![CDATA[<=]]> #endRow#
+	  		   AND me.st_num = st.st_num
+	  		   AND me.menu_picnum = pic.pic_seq
+	  		)
+	 WHERE rnum <![CDATA[>=]]> #firstRow#
+	 ORDER BY st_num desc
+		   
+</select>
+
+
+<select id="getRandomMenu" resultClass="model.MenuModel">
+SELECT   menu.MENU_NUM     ,
+         menu.MENU_COMMENT ,
+         menu.MENU_PRICE   ,
+         menu.MENU_NAME    ,
+         menu.ST_NUM	   ,
+         pic.picpath AS MENU_PICPATH
+FROM     (SELECT  *
+         FROM     menu
+         ORDER BY DBMS_RANDOM.VALUE()
+         )
+         menu, picture pic, store st
+WHERE    menu.menu_picnum=pic.pic_seq
+AND		 menu.st_num = st.st_num 
+AND      ROWNUM     <![CDATA[<]]>  6 + 1
+ORDER BY DBMS_RANDOM.VALUE()
+</select>
+
+<select id="getTopMenu" resultClass="model.MenuModel">
+ SELECT   st_num      ,
+          St_Name     ,
+          St_Sido     ,
+          st_gugun    ,
+          menu_name   ,
+          menu_picpath,
+          SUM(res) AS top
+ FROM     ( SELECT  St_Num     ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-7, 'DD') from dual)
+          GROUP BY St_Num   ,
+                   st_name  ,
+                   St_Sido  ,
+                   ST_GUGUN ,
+                   menu_num ,
+                   menu_name,
+                   ordertime,
+                   menu_picpath
+          
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-6, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+                   
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-5, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+                   
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-4, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+                   
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-3, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+                   
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-2, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+                   
+          UNION
+          
+          SELECT   St_Num      ,
+                   st_name     ,
+                   St_Sido     ,
+                   ST_GUGUN    ,
+                   menu_num    ,
+                   menu_name   ,
+                   ordertime   ,
+                   menu_picpath,
+                   SUM(menu_price * quantity) AS res
+          FROM     ( SELECT  store.st_name                     st_name        ,
+                            Store.St_Num                       St_Num         ,
+                            Store.St_Sido                      St_Sido        ,
+                            Store.st_gugun                     st_gugun       ,
+                            order_detail.menu_num              menu_num       ,
+                            menu.menu_price                    menu_price     ,
+                            menu.menu_name                     menu_name      ,
+                            order_detail.orderdetail_seq       orderdetail_seq,
+                            order_detail.quantity              quantity       ,
+                            order_detail.order_time            ordertime      ,
+                            pic.picpath                  AS    menu_picpath
+                   FROM     menu        ,
+                            order_detail,
+                            store       ,
+                            picture pic
+                   WHERE    menu.menu_num    = order_detail.menu_num
+                   AND      store.st_num     = order_detail.st_num
+                   AND      store.st_num     = menu.st_num
+                   AND      menu.menu_picnum = pic.pic_seq
+                   ORDER BY orderdetail_seq
+                   )
+          WHERE    to_char(ordertime, 'YY/MM/DD') = (select TRUNC(SYSDATE-1, 'DD') from dual)
+          GROUP BY St_Num    ,
+                   st_name   ,
+                   St_Sido   ,
+                   ST_GUGUN  ,
+                   menu_num  ,
+                   menu_name ,
+                   ordertime ,
+                   menu_picpath
+          )
+ GROUP BY st_num   ,
+          St_Name  ,
+          St_Sido  ,
+          st_gugun ,
+          menu_name,
+          menu_picpath
+ ORDER BY top DESC
+</select>
+
+<insert id="menuAdd" parameterClass="model.MenuModel">
+	INSERT INTO menu
+		  (st_num,
+		   menu_num,
+		   menu_comment,
+		   menu_name,
+		   menu_price,
+		   menu_picnum)
+	VALUES (#st_num#,
+		   (
+		   	SELECT menu_seq
+		   	  FROM store
+		   	 WHERE st_num = #st_num#
+		   ),
+		   #menu_comment#,
+		   #menu_name#,
+		   #menu_price#,
+		   #menu_picnum#)
+
+</insert>
+<update id = "upsert" parameterClass="model.MenuModel">
+	MERGE
+	INTO         menu me
+	USING        ( SELECT #st_num#  st_num,
+	                     #menu_num# menu_num
+	             FROM    dual
+	             ) mm
+	ON (             me.st_num   = mm.st_num
+	             AND me.menu_num = mm.menu_num
+	             )
+	WHEN MATCHED THEN
+	UPDATE
+	SET              me.menu_price   = #menu_price#  ,
+	                 me.menu_name    = #menu_name#   ,
+	                 me.menu_comment = #menu_comment#,
+	                 me.menu_picnum  = #menu_picnum#
+	WHEN NOT MATCHED THEN
+	INSERT
+	       (
+	              me.st_num      ,
+	              me.menu_num    ,
+	              me.menu_comment,
+	              me.menu_name   ,
+	              me.menu_price  ,
+	              me.menu_picnum
+	       )
+	       VALUES
+	       (
+	              #st_num#,
+	              ( SELECT menu_seq
+	              	  FROM store
+	                 WHERE st_num = #st_num#
+	              )
+	              ,
+	              #menu_comment#,
+	              #menu_name#   ,
+	              #menu_price#  ,
+	              #menu_picnum#
+	       )
+</update>
+<update id="menuSeqIncrese">
+	UPDATE store
+	   SET menu_seq = menu_seq+1
+	 WHERE st_num = #st_num#
+</update>
+
+<delete id="menuDelete">
+	DELETE FROM menu
+	 WHERE st_num = #st_num#
+	   AND menu_name = #menu_name#
+</delete>
+
+</sqlMap>
